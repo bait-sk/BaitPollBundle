@@ -40,12 +40,12 @@ abstract class Poll
     protected $endAt;
 
     /**
-     * @var Boolean
+     * @var boolean
      */
     protected $isVisible;
 
     /**
-     * @var Boolean
+     * @var boolean
      */
     protected $votesVisible;
 
