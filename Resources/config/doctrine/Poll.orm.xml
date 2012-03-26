@@ -5,11 +5,11 @@
     http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Bait\PollBundle\Entity\Poll">
         <field name="title" type="string" column="title" length="255" />
-        <field name="createdBy" type="string" column="createdBy" length="255" />
-        <field name="createdAt" type="datetime" column="createdAt" />
-        <field name="startAt" type="datetime" column="startAt" />
-        <field name="endAt" type="datetime" column="endAt" nullable="true" />
-        <field name="isVisible" type="boolean" column="isVisible" />
-        <field name="votesVisible" type="boolean" column="votesVisible" />
+        <field name="createdBy" type="string" column="created_by" length="255" />
+        <field name="createdAt" type="datetime" column="created_at" />
+        <field name="startAt" type="datetime" column="start_at" />
+        <field name="endAt" type="datetime" column="end_at" nullable="true" />
+        <field name="isVisible" type="boolean" column="is_visible" />
+        <field name="votesVisible" type="boolean" column="votes_visible" />
     </mapped-superclass>
 </doctrine-mapping>
