@@ -63,6 +63,7 @@ abstract class Poll
     {
         $this->setVisible(true);
         $this->setVotesVisible(true);
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -113,18 +114,6 @@ abstract class Poll
     public function getCreatedBy()
     {
         return $this->createdBy;
-    }
-
-    /**
-     * Sets date of creation of poll.
-     *
-     * @param datetime $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
