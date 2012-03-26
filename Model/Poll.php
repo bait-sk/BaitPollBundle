@@ -27,7 +27,7 @@ abstract class Poll
     /**
      * @var \DateTime
      */
-    protected $addedAt;
+    protected $createdAt;
 
     /**
      * @var \DateTime
@@ -108,11 +108,11 @@ abstract class Poll
     /**
      * Sets date of creation of poll.
      *
-     * @param datetime $addedAt
+     * @param datetime $createdAt
      */
-    public function setAddedAt(\DateTime $addedAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
-        $this->addedAt = $addedAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -122,9 +122,9 @@ abstract class Poll
      *
      * @return datetime
      */
-    public function getAddedAt()
+    public function getCreatedAt()
     {
-        return $this->addedAt;
+        return $this->createdAt;
     }
 
     /**

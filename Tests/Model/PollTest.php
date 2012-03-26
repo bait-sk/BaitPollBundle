@@ -32,19 +32,19 @@ class PollTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException ErrorException
      */
-    public function testAddedAtDataType()
+    public function testCreatedAtDataType()
     {
-        $this->poll->setAddedAt('1991-08-27');
+        $this->poll->setCreatedAt('1991-08-27');
     }
 
-    public function testAddedAt()
+    public function testCreatedAt()
     {
-        $this->assertNull($this->poll->getAddedAt());
+        $this->assertNull($this->poll->getCreatedAt());
 
         $date = new \DateTime('1991-08-27');
 
-        $this->poll->setAddedAt($date);
-        $this->assertEquals($date, $this->poll->getAddedAt());
+        $this->poll->setCreatedAt($date);
+        $this->assertEquals($date, $this->poll->getCreatedAt());
     }
 
     /**

@@ -6,7 +6,7 @@
     <mapped-superclass name="Bait\PollBundle\Entity\Poll">
         <field name="title" type="string" column="title" length="255" />
         <field name="createdBy" type="string" column="createdBy" length="255" />
-        <field name="addedAt" type="datetime" column="addedAt" />
+        <field name="createdAt" type="datetime" column="createdAt" />
         <field name="startAt" type="datetime" column="startAt" />
         <field name="endAt" type="datetime" column="endAt" nullable="true" />
         <field name="isVisible" type="boolean" column="isVisible" />
