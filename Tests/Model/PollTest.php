@@ -1,0 +1,93 @@
+<?php
+
+namespace Bait\PollBundle\Tests\Model;
+
+use Bait\PollBundle\Model\Poll;
+
+class PollTest extends \PHPUnit_Framework_TestCase
+{
+    protected $poll;
+
+    protected function setUp()
+    {
+        $this->poll = $this->getMockForAbstractClass('Bait\PollBundle\Model\Poll');
+    }
+
+    public function testCreatedBy()
+    {
+        $this->assertNull($this->poll->getCreatedBy());
+
+        $this->poll->setCreatedBy('stewie');
+        $this->assertEquals('stewie', $this->poll->getCreatedBy());
+    }
+
+    /**
+     * @expectedException ErrorException
+     */
+    public function testAddedAtDataType()
+    {
+        $this->poll->setAddedAt('1991-08-27');
+    }
+
+    public function testAddedAt()
+    {
+        $this->assertNull($this->poll->getAddedAt());
+
+        $date = new \DateTime('1991-08-27');
+
+        $this->poll->setAddedAt($date);
+        $this->assertEquals($date, $this->poll->getAddedAt());
+    }
+
+    /**
+     * @expectedException ErrorException
+     */
+    public function testStartAtDataType()
+    {
+        $this->poll->setStartAt('1991-08-27');
+    }
+
+    public function testStartAt()
+    {
+        $this->assertNull($this->poll->getStartAt());
+
+        $date = new \DateTime('1991-08-27');
+
+        $this->poll->setStartAt($date);
+        $this->assertEquals($date, $this->poll->getStartAt());
+    }
+
+    /**
+     * @expectedException ErrorException
+     */
+    public function testEndAtDataType()
+    {
+        $this->poll->setEndAt('1991-08-27');
+    }
+
+    public function testEndAt()
+    {
+        $this->assertNull($this->poll->getEndAt());
+
+        $date = new \DateTime('1991-08-27');
+
+        $this->poll->setEndAt($date);
+        $this->assertEquals($date, $this->poll->getEndAt());
+    }
+
+    public function testIsVisible()
+    {
+        $this->assertTrue($this->poll->isVisible());
+
+        $this->poll->setVisible(false);
+        $this->assertFalse($this->poll->isVisible());
+    }
+
+    public function testIsVotesVisible()
+    {
+        $this->assertTrue($this->poll->isVotesVisible());
+
+        $this->poll->setVotesVisible(false);
+        $this->assertFalse($this->poll->isVotesVisible());
+    }
+}
