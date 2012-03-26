@@ -96,12 +96,12 @@ class PollTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($date, $this->poll->getEndAt());
     }
 
-    public function testIsVisible()
+    public function testIsActive()
     {
-        $this->assertTrue($this->poll->isVisible());
+        $this->assertTrue($this->poll->isActive());
 
-        $this->poll->setVisible(false);
-        $this->assertFalse($this->poll->isVisible());
+        $this->poll->setActive(false);
+        $this->assertFalse($this->poll->isActive());
     }
 
     public function testIsVotesVisible()

@@ -52,7 +52,7 @@ abstract class Poll
     /**
      * @var boolean
      */
-    protected $isVisible;
+    protected $isActive;
 
     /**
      * @var boolean
@@ -61,7 +61,7 @@ abstract class Poll
 
     public function __construct()
     {
-        $this->setVisible(true);
+        $this->setActive(true);
         $this->setVotesVisible(true);
         $this->createdAt = new \DateTime();
     }
@@ -217,11 +217,11 @@ abstract class Poll
     /**
      * Sets visibility of poll.
      *
-     * @param boolean $isVisible
+     * @param boolean $isActive
      */
-    public function setVisible($isVisible)
+    public function setActive($isActive)
     {
-        $this->isVisible = (boolean) $isVisible;
+        $this->isActive = (boolean) $isActive;
 
         return $this;
     }
@@ -231,9 +231,9 @@ abstract class Poll
      *
      * @return boolean
      */
-    public function isVisible()
+    public function isActive()
     {
-        return $this->isVisible;
+        return $this->isActive;
     }
 
     /**

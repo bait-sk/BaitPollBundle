@@ -11,7 +11,7 @@
         <field name="modifiedAt" type="datetime" column="modified_at" />
         <field name="startAt" type="datetime" column="start_at" />
         <field name="endAt" type="datetime" column="end_at" nullable="true" />
-        <field name="isVisible" type="boolean" column="is_visible" />
+        <field name="isActive" type="boolean" column="is_active" />
         <field name="votesVisible" type="boolean" column="votes_visible" />
     </mapped-superclass>
 </doctrine-mapping>
