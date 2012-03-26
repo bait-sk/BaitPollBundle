@@ -7,6 +7,8 @@
         <field name="title" type="string" column="title" length="255" />
         <field name="createdBy" type="string" column="created_by" length="255" />
         <field name="createdAt" type="datetime" column="created_at" />
+        <field name="modifiedBy" type="string" column="modified_by" length="255" />
+        <field name="modifiedAt" type="datetime" column="modified_at" />
         <field name="startAt" type="datetime" column="start_at" />
         <field name="endAt" type="datetime" column="end_at" nullable="true" />
         <field name="isVisible" type="boolean" column="is_visible" />

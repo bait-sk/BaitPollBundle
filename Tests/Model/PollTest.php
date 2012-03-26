@@ -47,6 +47,32 @@ class PollTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($date, $this->poll->getCreatedAt());
     }
 
+    public function testModifiedBy()
+    {
+        $this->assertNull($this->poll->getModifiedBy());
+
+        $this->poll->setModifiedBy('stewie');
+        $this->assertEquals('stewie', $this->poll->getModifiedBy());
+    }
+
+    /**
+     * @expectedException ErrorException
+     */
+    public function testModifiedAtDataType()
+    {
+        $this->poll->setCreatedAt('1991-08-27');
+    }
+
+    public function testModifiedAt()
+    {
+        $this->assertNull($this->poll->getModifiedAt());
+
+        $date = new \DateTime('1991-08-27');
+
+        $this->poll->setModifiedAt($date);
+        $this->assertEquals($date, $this->poll->getModifiedAt());
+    }
+
     /**
      * @expectedException ErrorException
      */
