@@ -1,0 +1,194 @@
+<?php
+
+namespace Bait\PollBundle\Model;
+
+/**
+ * Base "poll" object
+ *
+ * @author Ondrej Slintak <ondrowan@gmail.com>
+ */
+abstract class Poll
+{
+    /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
+     * @var FOS\UserBundle\Model\User
+     */
+    protected $createdBy;
+
+    /**
+     * @var \DateTime
+     */
+    protected $addedAt;
+
+    /**
+     * @var \DateTime
+     */
+    protected $startAt;
+
+    /**
+     * @var \DateTime
+     */
+    protected $endAt;
+
+    /**
+     * @var Boolean
+     */
+    protected $isVisible;
+
+    /**
+     * @var Boolean
+     */
+    protected $votesVisible;
+
+    public function __construct()
+    {
+        $this->setVisible(true);
+        $this->setVotesVisible(true);
+    }
+
+    /**
+     * Returns unique id of poll.
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Sets owner of poll.
+     *
+     * @param mixed $createdBy
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Gets owner of poll.
+     *
+     * @return mixed
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Sets date of creation of poll.
+     *
+     * @param datetime $addedAt
+     */
+    public function setAddedAt(\DateTime $addedAt)
+    {
+        $this->addedAt = $addedAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets date of creation of poll.
+     *
+     * @return datetime
+     */
+    public function getAddedAt()
+    {
+        return $this->addedAt;
+    }
+
+    /**
+     * Sets start date of poll.
+     *
+     * @param datetime $startAt
+     */
+    public function setStartAt(\DateTime $startAt)
+    {
+        $this->startAt = $startAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets start date of poll.
+     *
+     * @return datetime
+     */
+    public function getStartAt()
+    {
+        return $this->startAt;
+    }
+
+    /**
+     * Sets end date of poll.
+     *
+     * @param datetime $endAt
+     */
+    public function setEndAt(\DateTime $endAt)
+    {
+        $this->endAt = $endAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets end date of poll.
+     *
+     * @return datetime
+     */
+    public function getEndAt()
+    {
+        return $this->endAt;
+    }
+
+    /**
+     * Sets visibility of poll.
+     *
+     * @param boolean $isVisible
+     */
+    public function setVisible($isVisible)
+    {
+        $this->isVisible = (boolean) $isVisible;
+
+        return $this;
+    }
+
+    /**
+     * Gets visbility of poll.
+     *
+     * @return boolean
+     */
+    public function isVisible()
+    {
+        return $this->isVisible;
+    }
+
+    /**
+     * Sets visibility of votes after user voted.
+     *
+     * @param boolean $votesVisible
+     */
+    public function setVotesVisible($votesVisible)
+    {
+        $this->votesVisible = (boolean) $votesVisible;
+
+        return $this;
+    }
+
+    /**
+     * Gets visibility of votes after user voted.
+     *
+     * @return boolean
+     */
+    public function isVotesVisible()
+    {
+        return $this->votesVisible;
+    }
+}
