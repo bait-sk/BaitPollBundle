@@ -15,6 +15,11 @@ abstract class Poll
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $title;
+
+    /**
      * @var FOS\UserBundle\Model\User
      */
     protected $createdBy;
@@ -58,6 +63,24 @@ abstract class Poll
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Sets title of poll.
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets title of poll.
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**

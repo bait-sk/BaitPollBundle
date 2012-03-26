@@ -13,6 +13,14 @@ class PollTest extends \PHPUnit_Framework_TestCase
         $this->poll = $this->getMockForAbstractClass('Bait\PollBundle\Model\Poll');
     }
 
+    public function testTitle()
+    {
+        $this->assertNull($this->poll->getTitle());
+
+        $this->poll->setTitle('Poll #1');
+        $this->assertEquals('Poll #1', $this->poll->getTitle());
+    }
+
     public function testCreatedBy()
     {
         $this->assertNull($this->poll->getCreatedBy());
