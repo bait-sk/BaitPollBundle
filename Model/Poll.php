@@ -20,7 +20,7 @@ abstract class Poll
     protected $title;
 
     /**
-     * @var FOS\UserBundle\Model\User
+     * @var string
      */
     protected $createdBy;
 
