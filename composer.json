@@ -1,0 +1,29 @@
+{
+    "name": "bait/poll-bundle",
+    "type": "symfony-bundle",
+    "description": "Poll Bundle adds support for various forms of polls for Symfony2 applications",
+    "keywords": ["poll", "competition"],
+    "homepage": "http://github.com/bait-sk/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ondrej Slintak",
+            "email": "ondrowan@gmail.com"
+        },
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/symfony": "2.*",
+    },
+    "recommend": {
+        "doctrine/doctrine-bundle": "*",
+    },
+    "suggest": {
+        "doctrine/orm": "2.2.*",
+        "friendsofsymfony/user-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": { "Bait\\PollBundle": "" }
+    },
+    "target-dir": "Bait/PollBundle"
+}
