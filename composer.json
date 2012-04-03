@@ -9,14 +9,14 @@
         {
             "name": "Ondrej Slintak",
             "email": "ondrowan@gmail.com"
-        },
+        }
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/symfony": "2.*",
+        "symfony/symfony": "2.*"
     },
     "recommend": {
-        "doctrine/doctrine-bundle": "*",
+        "doctrine/doctrine-bundle": "*"
     },
     "suggest": {
         "doctrine/orm": "2.2.*",
