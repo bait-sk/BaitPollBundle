@@ -2,8 +2,6 @@
 
 namespace Bait\PollBundle\Tests\Model;
 
-use Bait\PollBundle\Model\Poll;
-
 class PollTest extends \PHPUnit_Framework_TestCase
 {
     protected $poll;
