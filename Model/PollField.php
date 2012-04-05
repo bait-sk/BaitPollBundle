@@ -31,7 +31,7 @@ abstract class PollField
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->setCreatedAt(new \DateTime());
     }
 
     /**
@@ -60,6 +60,18 @@ abstract class PollField
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Sets date of creation of poll question.
+     *
+     * @return PollField
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**

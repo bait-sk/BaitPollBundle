@@ -22,5 +22,10 @@ class PollFieldTest extends \PHPUnit_Framework_TestCase
     public function testCreatedAt()
     {
         $this->assertEquals(new \DateTime(), $this->pollQuestion->getCreatedAt());
+
+        $date = new \DateTime('1991-08-27');
+
+        $this->pollQuestion->setCreatedAt($date);
+        $this->assertEquals($date, $this->pollQuestion->getCreatedAt());
     }
 }
