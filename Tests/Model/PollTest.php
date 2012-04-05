@@ -19,9 +19,9 @@ class PollTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Poll #1', $this->poll->getTitle());
     }
 
-    public function testCreatedBy()
+    public function testAuthor()
     {
-        $this->assertEquals('anonymous', $this->poll->getCreatedBy());
+        $this->assertEquals('anonymous', $this->poll->getAuthorName());
     }
 
     /**
