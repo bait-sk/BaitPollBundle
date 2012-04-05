@@ -32,16 +32,6 @@ abstract class Poll implements PollInterface
     /**
      * @var \DateTime
      */
-    protected $modifiedBy;
-
-    /**
-     * @var \DateTime
-     */
-    protected $modifiedAt;
-
-    /**
-     * @var \DateTime
-     */
     protected $startAt;
 
     /**
@@ -134,54 +124,6 @@ abstract class Poll implements PollInterface
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Sets who modified the poll.
-     *
-     * @param mixed $modifiedBy
-     *
-     * @return Poll
-     */
-    public function setModifiedBy($modifiedBy)
-    {
-        $this->modifiedBy = $modifiedBy;
-
-        return $this;
-    }
-
-    /**
-     * Gets who modified the poll.
-     *
-     * @return mixed
-     */
-    public function getModifiedBy()
-    {
-        return $this->modifiedBy;
-    }
-
-    /**
-     * Sets date of modification of poll.
-     *
-     * @param \DateTime $modifiedAt
-     *
-     * @return Poll
-     */
-    public function setModifiedAt(\DateTime $modifiedAt)
-    {
-        $this->modifiedAt = $modifiedAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets date of modification of poll.
-     *
-     * @return \DateTime
-     */
-    public function getModifiedAt()
-    {
-        return $this->modifiedAt;
     }
 
     /**
