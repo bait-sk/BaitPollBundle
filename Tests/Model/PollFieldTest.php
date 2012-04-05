@@ -4,28 +4,28 @@ namespace Bait\PollBundle\Tests\Model;
 
 class PollFieldTest extends \PHPUnit_Framework_TestCase
 {
-    protected $pollQuestion;
+    protected $pollField;
 
     protected function setUp()
     {
-        $this->pollQuestion = $this->getMockForAbstractClass('Bait\PollBundle\Model\PollField');
+        $this->pollField = $this->getMockForAbstractClass('Bait\PollBundle\Model\PollField');
     }
 
     public function testTitle()
     {
-        $this->assertNull($this->pollQuestion->getTitle());
+        $this->assertNull($this->pollField->getTitle());
 
-        $this->pollQuestion->setTitle('Poll #1');
-        $this->assertEquals('Poll #1', $this->pollQuestion->getTitle());
+        $this->pollField->setTitle('Poll #1');
+        $this->assertEquals('Poll #1', $this->pollField->getTitle());
     }
 
     public function testCreatedAt()
     {
-        $this->assertEquals(new \DateTime(), $this->pollQuestion->getCreatedAt());
+        $this->assertEquals(new \DateTime(), $this->pollField->getCreatedAt());
 
         $date = new \DateTime('1991-08-27');
 
-        $this->pollQuestion->setCreatedAt($date);
-        $this->assertEquals($date, $this->pollQuestion->getCreatedAt());
+        $this->pollField->setCreatedAt($date);
+        $this->assertEquals($date, $this->pollField->getCreatedAt());
     }
 }

@@ -3,7 +3,7 @@
 namespace Bait\PollBundle\Model;
 
 /**
- * Base PollQuestion object
+ * Base PollField object
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
@@ -35,7 +35,7 @@ abstract class PollField
     }
 
     /**
-     * Returns unique id of poll question.
+     * Returns unique id of poll field.
      *
      * @return mixed
      */
@@ -45,7 +45,7 @@ abstract class PollField
     }
 
     /**
-     * Sets title of poll question.
+     * Sets title of poll field.
      */
     public function setTitle($title)
     {
@@ -55,7 +55,7 @@ abstract class PollField
     }
 
     /**
-     * Gets title of poll question.
+     * Gets title of poll field.
      */
     public function getTitle()
     {
@@ -63,7 +63,7 @@ abstract class PollField
     }
 
     /**
-     * Sets date of creation of poll question.
+     * Sets date of creation of poll field.
      *
      * @return PollField
      */
@@ -75,7 +75,7 @@ abstract class PollField
     }
 
     /**
-     * Gets date of creation of poll question.
+     * Gets date of creation of poll field.
      *
      * @return \DateTime
      */
@@ -85,7 +85,7 @@ abstract class PollField
     }
 
     /**
-     * Sets whether poll question is active or not.
+     * Sets whether poll field is active or not.
      *
      * @param boolean $isActive
      */
@@ -97,7 +97,7 @@ abstract class PollField
     }
 
     /**
-     * Gets whether poll question is active or not.
+     * Gets whether poll field is active or not.
      *
      * @return boolean
      */
