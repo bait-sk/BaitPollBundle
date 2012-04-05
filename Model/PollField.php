@@ -41,6 +41,10 @@ abstract class PollField
 
     /**
      * Sets title of poll field.
+     *
+     * @param string $title
+     *
+     * @return PollField
      */
     public function setTitle($title)
     {
