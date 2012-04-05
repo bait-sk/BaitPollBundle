@@ -1,14 +1,14 @@
 <?php
 
-namespace Bait\PollBundle\Entity;
+namespace Bait\PollFieldBundle\Entity;
 
-use Bait\PollBundle\Model\Poll as AbstractUser;
+use Bait\PollFieldBundle\Model\PollField as PollFieldModel;
 
 /**
- * Base Poll Doctrine 2 entity
+ * Base PollField ORM entity
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-abstract class Poll extends AbstractUser
+abstract class PollField extends PollFieldModel
 {
 }
