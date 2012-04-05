@@ -21,10 +21,7 @@ class PollTest extends \PHPUnit_Framework_TestCase
 
     public function testCreatedBy()
     {
-        $this->assertNull($this->poll->getCreatedBy());
-
-        $this->poll->setCreatedBy('stewie');
-        $this->assertEquals('stewie', $this->poll->getCreatedBy());
+        $this->assertEquals('anonymous', $this->poll->getCreatedBy());
     }
 
     /**

@@ -20,11 +20,6 @@ abstract class Poll implements PollInterface
     protected $title;
 
     /**
-     * @var string
-     */
-    protected $createdBy;
-
-    /**
      * @var \DateTime
      */
     protected $createdAt;
@@ -87,25 +82,11 @@ abstract class Poll implements PollInterface
     }
 
     /**
-     * Sets owner of poll.
-     *
-     * @param mixed $createdBy
-     *
-     * @return Poll
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getCreatedBy()
     {
-        return $this->createdBy;
+        return 'anonymous';
     }
 
     /**
