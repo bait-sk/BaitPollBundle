@@ -60,6 +60,8 @@ abstract class PollField
     /**
      * Sets date of creation of poll field.
      *
+     * @param \DateTime $createdAt
+     *
      * @return PollField
      */
     public function setCreatedAt(\DateTime $createdAt)
