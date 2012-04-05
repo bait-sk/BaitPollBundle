@@ -7,7 +7,7 @@ namespace Bait\PollBundle\Model;
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-abstract class Poll
+abstract class Poll implements PollInterface
 {
     /**
      * @var mixed
@@ -63,13 +63,11 @@ abstract class Poll
     {
         $this->setActive(true);
         $this->setVotesVisible(true);
-        $this->createdAt = new \DateTime();
+        $this->setCreatedAt(new \DateTime());
     }
 
     /**
-     * Returns unique id of poll.
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -107,9 +105,7 @@ abstract class Poll
     }
 
     /**
-     * Gets owner of poll.
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getCreatedBy()
     {
@@ -117,9 +113,17 @@ abstract class Poll
     }
 
     /**
-     * Gets date of creation of poll.
-     *
-     * @return datetime
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {
