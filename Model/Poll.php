@@ -77,6 +77,8 @@ abstract class Poll implements PollInterface
     /**
      * Sets title of poll.
      *
+     * @param string $title
+     *
      * @return Poll
      */
     public function setTitle($title)
@@ -161,7 +163,7 @@ abstract class Poll implements PollInterface
     /**
      * Sets date of modification of poll.
      *
-     * @param datetime $modifiedAt
+     * @param \DateTime $modifiedAt
      *
      * @return Poll
      */
@@ -175,7 +177,7 @@ abstract class Poll implements PollInterface
     /**
      * Gets date of modification of poll.
      *
-     * @return datetime
+     * @return \DateTime
      */
     public function getModifiedAt()
     {
@@ -185,7 +187,7 @@ abstract class Poll implements PollInterface
     /**
      * Sets start date of poll.
      *
-     * @param datetime $startAt
+     * @param \DateTime $startAt
      *
      * @return Poll
      */
@@ -199,7 +201,7 @@ abstract class Poll implements PollInterface
     /**
      * Gets start date of poll.
      *
-     * @return datetime
+     * @return \DateTime
      */
     public function getStartAt()
     {
@@ -209,7 +211,7 @@ abstract class Poll implements PollInterface
     /**
      * Sets end date of poll.
      *
-     * @param datetime $endAt
+     * @param \DateTime $endAt
      *
      * @return Poll
      */
@@ -223,7 +225,7 @@ abstract class Poll implements PollInterface
     /**
      * Gets end date of poll.
      *
-     * @return datetime
+     * @return \DateTime
      */
     public function getEndAt()
     {
