@@ -76,6 +76,8 @@ abstract class Poll implements PollInterface
 
     /**
      * Sets title of poll.
+     *
+     * @return Poll
      */
     public function setTitle($title)
     {
@@ -96,6 +98,8 @@ abstract class Poll implements PollInterface
      * Sets owner of poll.
      *
      * @param mixed $createdBy
+     *
+     * @return Poll
      */
     public function setCreatedBy($createdBy)
     {
@@ -134,6 +138,8 @@ abstract class Poll implements PollInterface
      * Sets who modified the poll.
      *
      * @param mixed $modifiedBy
+     *
+     * @return Poll
      */
     public function setModifiedBy($modifiedBy)
     {
@@ -156,6 +162,8 @@ abstract class Poll implements PollInterface
      * Sets date of modification of poll.
      *
      * @param datetime $modifiedAt
+     *
+     * @return Poll
      */
     public function setModifiedAt(\DateTime $modifiedAt)
     {
@@ -178,6 +186,8 @@ abstract class Poll implements PollInterface
      * Sets start date of poll.
      *
      * @param datetime $startAt
+     *
+     * @return Poll
      */
     public function setStartAt(\DateTime $startAt)
     {
@@ -200,6 +210,8 @@ abstract class Poll implements PollInterface
      * Sets end date of poll.
      *
      * @param datetime $endAt
+     *
+     * @return Poll
      */
     public function setEndAt(\DateTime $endAt)
     {
@@ -222,6 +234,8 @@ abstract class Poll implements PollInterface
      * Sets visibility of poll.
      *
      * @param boolean $isActive
+     *
+     * @return Poll
      */
     public function setActive($isActive)
     {
@@ -244,6 +258,8 @@ abstract class Poll implements PollInterface
      * Sets visibility of votes after user voted.
      *
      * @param boolean $votesVisible
+     *
+     * @return Poll
      */
     public function setVotesVisible($votesVisible)
     {
