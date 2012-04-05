@@ -17,11 +17,11 @@ interface PollInterface
     function getId();
 
     /**
-     * Gets owner of poll.
+     * Gets author of poll.
      *
      * @return string
      */
-    function getCreatedBy();
+    function getAuthor();
 
     /**
      * Gets date of creation of poll.

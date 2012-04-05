@@ -84,7 +84,7 @@ abstract class Poll implements PollInterface
     /**
      * {@inheritdoc}
      */
-    public function getCreatedBy()
+    public function getAuthorName()
     {
         return 'anonymous';
     }
