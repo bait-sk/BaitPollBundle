@@ -32,7 +32,7 @@ class PollTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreatedAtDataType()
     {
-        $this->poll->setModifiedAt('1991-08-27');
+        $this->poll->setCreatedAt('1991-08-27');
     }
 
     public function testCreatedAt()
