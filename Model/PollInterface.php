@@ -34,6 +34,8 @@ interface PollInterface
      * Sets date of creation of poll.
      *
      * @param \DateTime $datetime
+     *
+     * @return Poll
      */
     function setCreatedAt(\DateTime $datetime);
 }
