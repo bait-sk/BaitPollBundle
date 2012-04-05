@@ -24,11 +24,6 @@ abstract class PollField
      */
     protected $createdAt;
 
-    /**
-     * @var boolean
-     */
-    protected $isActive;
-
     public function __construct()
     {
         $this->setCreatedAt(new \DateTime());
@@ -82,27 +77,5 @@ abstract class PollField
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Sets whether poll field is active or not.
-     *
-     * @param boolean $isActive
-     */
-    public function setActive($isActive)
-    {
-        $this->isActive = (boolean) $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Gets whether poll field is active or not.
-     *
-     * @return boolean
-     */
-    public function isActive()
-    {
-        return $this->isActive;
     }
 }
