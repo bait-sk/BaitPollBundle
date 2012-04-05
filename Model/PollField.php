@@ -10,7 +10,7 @@ namespace Bait\PollBundle\Model;
 abstract class PollField
 {
     /**
-     * @var int
+     * @var mixed
      */
     protected $id;
 
@@ -52,7 +52,7 @@ abstract class PollField
     /**
      * Returns unique id of poll question.
      *
-     * @return integer
+     * @return mixed
      */
     public function getId()
     {
