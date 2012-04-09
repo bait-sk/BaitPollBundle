@@ -12,8 +12,19 @@ class PollManager
      *
      * @return PollInterface
      */
-    public function findPollById($id)
+    public function findOneById($id)
     {
-        return $this->findPollBy(array('id' => $id));
+        return $this->findOneBy(array('id' => $id));
     }
+
+    public function findByIds($ids)
+    {
+        return $this->findBy($ids);
+    }
+
+    abstract public function findOneBy($criteria);
+
+    abstract public function findBy($criteria);
+
+    abstract public function findAll();
 }
