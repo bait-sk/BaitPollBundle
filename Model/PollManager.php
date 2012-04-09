@@ -14,6 +14,6 @@ class PollManager
      */
     public function findPollById($id)
     {
-        return $this->findPollById(array('id' => $id));
+        return $this->findPollBy(array('id' => $id));
     }
 }
