@@ -20,9 +20,23 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('bait_poll');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->scalarNode('db_driver')->cannotBeOverwritten()->isRequired->end()
+                ->scalarNode('model_manager_name')->defaultNull()->end()
+
+                ->arrayNode('poll')->isRequired()
+                    ->children()
+                        ->arrayNode('class')->isRequired()->end()
+                    ->end()
+                ->end()
+
+                ->arrayNode('poll_field')->isRequired()
+                    ->children()
+                        ->arrayNode('class')->isRequired()->end()
+                    ->end()
+                ->end()
+            ->end();
 
         return $treeBuilder;
     }
