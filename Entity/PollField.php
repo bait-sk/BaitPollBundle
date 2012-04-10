@@ -2,6 +2,7 @@
 
 namespace Bait\PollBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Bait\PollBundle\Model\PollField as PollFieldModel;
 
 /**
