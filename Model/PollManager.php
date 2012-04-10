@@ -5,7 +5,7 @@ namespace Bait\PollBundle\Model;
 /**
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-class PollManager
+abstract class PollManager
 {
     /**
      * @param string $id
