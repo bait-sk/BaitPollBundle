@@ -1,10 +1,10 @@
 <?php
 
-namespace Bait\PollFieldBundle\Entity;
+namespace Bait\PollBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
-use Bait\PollFieldBundle\Model\PollFieldInterface;
-use Bait\PollFieldBundle\Model\PollFieldManager as BasePollFieldManager;
+use Bait\PollBundle\Model\PollFieldInterface;
+use Bait\PollBundle\Model\PollFieldManager as BasePollFieldManager;
 
 /**
  * @author Ondrej Slintak <ondrowan@gmail.com>

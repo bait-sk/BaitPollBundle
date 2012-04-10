@@ -1,8 +1,8 @@
 <?php
 
-namespace Bait\PollGroupBundle\Entity;
+namespace Bait\PollBundle\Entity;
 
-use Bait\PollGroupBundle\Model\PollGroup as PollGroupModel;
+use Bait\PollBundle\Model\PollGroup as PollGroupModel;
 
 /**
  * Base PollGroup ORM entity
