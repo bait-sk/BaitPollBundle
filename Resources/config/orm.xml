@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="bait_poll.model.poll.class">Bait\PollBundle\Entity\Poll</parameter>
+        <parameter key="bait_poll.model.poll_field.class">Bait\PollBundle\Entity\PollField</parameter>
+
+        <parameter key="bait_poll.manager.thread.default.class">Bait\PollBundle\Entity\PollManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="bait_poll.entity_manager" factory-service="doctrine" factory-method="getEntityManager" class="Doctrine\ORM\EntityManager" public="false">
+            <argument>%bait_poll.model_manager_name%</argument>
+        </service>
+
+        <service id="bait_poll.manager.poll.default" class="%bait_poll.manager.poll.default.class%">
+            <argument type="service" id="bait_poll.entity_manager" />
+            <argument>%bait_poll.model.poll.class%</argument>
+        </service>
+        <service id="bait_poll.manager.poll_field.default" class="%bait_poll.manager.poll_field.default.class%">
+            <argument type="service" id="bait_poll.entity_manager" />
+            <argument>%bait_poll.model.poll_field.class%</argument>
+        </service>
+    </services>
+</container>

@@ -23,6 +23,11 @@ class BaitPollExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
+
+        if (!in_array(strtolower($config['db_driver']), array('orm'))) {
+            throw new \InvalidArgumentException(sprinft('Invalid db driver "%s".', $config['db_driver']));
+        }
+
+        $loader->load(sprintf('%s.xml', $config['db_driver']));
     }
 }

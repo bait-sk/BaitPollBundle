@@ -1,0 +1,30 @@
+<?php
+
+namespace Bait\PollBundle\Model;
+
+/**
+ * @author Ondrej Slintak <ondrowan@gmail.com>
+ */
+class PollManager
+{
+    /**
+     * @param string $id
+     *
+     * @return PollInterface
+     */
+    public function findOneById($id)
+    {
+        return $this->findOneBy(array('id' => $id));
+    }
+
+    public function findByIds($ids)
+    {
+        return $this->findBy($ids);
+    }
+
+    abstract public function findOneBy($criteria);
+
+    abstract public function findBy($criteria);
+
+    abstract public function findAll();
+}
