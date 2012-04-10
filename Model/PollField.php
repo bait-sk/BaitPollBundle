@@ -9,6 +9,11 @@ namespace Bait\PollBundle\Model;
  */
 abstract class PollField
 {
+    const TYPE_INPUT = 'TYPE_INPUT';
+    const TYPE_TEXTFIELD = 'TYPE_TEXTFIELD';
+    const TYPE_RADIO = 'TYPE_RADIO';
+    const TYPE_UPLOAD = 'TYPE_UPLOAD';
+
     /**
      * @var mixed
      */
@@ -23,6 +28,11 @@ abstract class PollField
      * @var \DateTime
      */
     protected $createdAt;
+
+    /**
+     * @var string
+     */
+    protected $type;
 
     public function __construct()
     {
@@ -83,5 +93,29 @@ abstract class PollField
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Sets type of poll field.
+     *
+     * @param string $type
+     *
+     * @return PollField
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets type of poll field.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }
