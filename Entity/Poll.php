@@ -1,14 +1,46 @@
 <?php
 
-namespace Bait\PollFieldBundle\Entity;
+namespace Bait\PollBundle\Entity;
 
-use Bait\PollFieldBundle\Model\PollField as PollFieldModel;
+use Doctrine\ORM\Mapping as ORM;
+use Bait\PollBundle\Model\PollField as PollModel;
 
 /**
- * Base PollField ORM entity
+ * Base Poll ORM entity
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
+ *
+ * @ORM\MappedSuperclass
  */
-abstract class PollField extends PollFieldModel
+abstract class Poll extends PollModel
 {
+    /**
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    protected $createdAt;
+
+    /**
+     * @ORM\Column(name="start_at", type="datetime")
+     */
+    protected $startAt;
+
+    /**
+     * @ORM\Column(name="end_at", type="datetime", nullable=true)
+     */
+    protected $endAt;
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    protected $isActive;
+
+    /**
+     * @ORM\Column(name="votes_visible", type="boolean")
+     */
+    protected $votesVisible;
 }
