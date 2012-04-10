@@ -25,7 +25,7 @@ Add the following to your `deps` file:
 
 ```
 [BaitPollBundle]
-    git=https://ondrowan@github.com/bait-sk/BaitPollBundle.git
+    git=https://github.com/bait-sk/BaitPollBundle.git
     target=bundles/Bait/PollBundle
 ```
 
