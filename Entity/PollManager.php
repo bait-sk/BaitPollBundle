@@ -11,4 +11,32 @@ use Bait\PollBundle\Model\PollManager as BasePollManager;
  */
 class PollManager extends BasePollManager
 {
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    protected $repository;
+
+    /**
+     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @param string $class
+     */
+    public function __construct(EntityManager $entityManager, $class)
+    {
+        $this->repository = $entityManager->getRepository($class);
+    }
+
+    public function findOneBy($criteria)
+    {
+        return $this->repository->findOneBy($criteria);
+    }
+
+    public function findBy($criteria)
+    {
+        return $this->repository->findBy($criteria);
+    }
+
+    public function findAll()
+    {
+        return $this->repository->findAll();
+    }
 }
