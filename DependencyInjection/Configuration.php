@@ -25,15 +25,15 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('db_driver')->cannotBeOverwritten()->isRequired()->end()
                 ->scalarNode('model_manager_name')->defaultNull()->end()
 
-                ->arrayNode('poll')->isRequired()
+                ->arrayNode('poll')
                     ->children()
-                        ->arrayNode('class')->isRequired()->end()
+                        ->arrayNode('class')->end()
                     ->end()
                 ->end()
 
-                ->arrayNode('poll_field')->isRequired()
+                ->arrayNode('poll_field')
                     ->children()
-                        ->arrayNode('class')->isRequired()->end()
+                        ->arrayNode('class')->end()
                     ->end()
                 ->end()
             ->end();
