@@ -32,6 +32,11 @@ class BaitPollExtension extends Extension
 
         $container->setParameter('bait_poll.model_manager_name', $config['model_manager_name']);
 
+        $container->setParameter('bait_poll.form.type', $config['form']['type']);
+        $container->setParameter('bait_poll.form.name', $config['form']['name']);
+
         $container->setParameter('bait_poll.poll.class', $config['poll']['class']);
+
+        $loader->load('form.xml');
     }
 }

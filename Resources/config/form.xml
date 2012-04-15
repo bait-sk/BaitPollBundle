@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="bait_poll.form.default" class="Bait\PollBundle\Form\PollType">
+            <tag name="form.type" alias="bait_poll.form" />
+        </service>
+
+        <service id="bait_poll.form_factory.default" class="Bait\PollBundle\FormFactory\PollFormFactory" public="false">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="bait_poll.manager.poll.default" />
+            <argument>%bait_poll.form.type%</argument>
+            <argument>%bait_poll.form.name%</argument>
+        </service>
+    </services>
+</container>
