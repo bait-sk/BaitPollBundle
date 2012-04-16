@@ -28,4 +28,9 @@ abstract class PollField extends PollFieldModel
      * @ORM\Column(name="is_active", type="boolean")
      */
     protected $isActive;
+
+    /**
+     * @ORM\Column(name="type", type="string")
+     */
+    protected $type;
 }
