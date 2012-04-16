@@ -25,10 +25,11 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('db_driver')->cannotBeOverwritten()->isRequired()->end()
                 ->scalarNode('model_manager_name')->defaultNull()->end()
 
-                ->arrayNode('form')
+                ->arrayNode('form')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('type')->defaultValue('bait_poll.form')->end()
                         ->scalarNode('name')->defaultValue('bait_poll_form')->end()
+                        ->scalarNode('factory')->defaultValue('bait_poll.form_factory.default')->end()
                     ->end()
                 ->end()
 
