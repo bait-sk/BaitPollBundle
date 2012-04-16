@@ -10,7 +10,7 @@ namespace Bait\PollBundle\Model;
 abstract class PollField
 {
     const TYPE_INPUT = 'TYPE_INPUT';
-    const TYPE_TEXTFIELD = 'TYPE_TEXTFIELD';
+    const TYPE_TEXTAREA = 'TYPE_TEXTAREA';
     const TYPE_RADIO = 'TYPE_RADIO';
     const TYPE_UPLOAD = 'TYPE_UPLOAD';
 
