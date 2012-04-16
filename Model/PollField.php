@@ -12,7 +12,7 @@ abstract class PollField
     const TYPE_INPUT = 'TYPE_INPUT';
     const TYPE_TEXTAREA = 'TYPE_TEXTAREA';
     const TYPE_RADIO = 'TYPE_RADIO';
-    const TYPE_UPLOAD = 'TYPE_UPLOAD';
+    const TYPE_FILE = 'TYPE_FILE';
 
     /**
      * @var mixed
