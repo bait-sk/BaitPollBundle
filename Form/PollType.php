@@ -23,7 +23,7 @@ class PollType extends AbstractType
 
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $poll = $this->entityManager->findOneById();
+        $poll = $this->entityManager->findOneById($this->id);
         $pollFields = $poll->getFields();
 
         $options = array();
