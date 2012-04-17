@@ -25,6 +25,16 @@ abstract class PollField
     protected $id;
 
     /**
+     * @var mixed
+     */
+    protected $children;
+
+    /**
+     * @var PollField
+     */
+    protected $parent;
+
+    /**
      * @var string
      */
     protected $title;
@@ -55,6 +65,54 @@ abstract class PollField
     }
 
     /**
+     * Sets all children of poll field.
+     *
+     * @param mixed $children
+     *
+     * @return PollField
+     */
+    public function setChildren($children)
+    {
+        $this->children = $children;
+
+        return $this;
+    }
+
+    /**
+     * Gets all children of poll field.
+     *
+     * @return mixed
+     */
+    public function getChildren()
+    {
+        return $children;
+    }
+
+    /**
+     * Sets parent of poll field.
+     *
+     * @param PollField $parent
+     *
+     * @return PollField
+     */
+    public function setParent($parent)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets parent of poll field.
+     *
+     * @return PollField
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
      * Sets title of poll field.
      *
      * @param string $title
@@ -70,6 +128,8 @@ abstract class PollField
 
     /**
      * Gets title of poll field.
+     *
+     * @return string
      */
     public function getTitle()
     {
