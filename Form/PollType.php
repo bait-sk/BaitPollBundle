@@ -33,7 +33,7 @@ class PollType extends AbstractType
                 case PollField::TYPE_RADIO:
                     $options[] = sprintf('field_%s', $pollField->getId());
                     break;
-                case PollField::TYPE_INPUT:
+                case PollField::TYPE_TEXT:
                     $builder->add(sprintf('field_%s', $pollField->getId()), 'text');
                     break;
                 case PollField::TYPE_TEXTAREA:
