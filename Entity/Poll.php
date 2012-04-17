@@ -43,29 +43,4 @@ abstract class Poll extends PollModel
      * @ORM\Column(name="votes_visible", type="boolean")
      */
     protected $votesVisible;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Bait\PollBundle\Entity\PollField", mappedBy="poll")
-     */
-    protected $fields;
-
-    /**
-     * Add fields
-     *
-     * @param Bait\PollBundle\Entity\PollField $fields
-     */
-    public function addPollField(\Bait\PollBundle\Entity\PollField $fields)
-    {
-        $this->fields[] = $fields;
-    }
-
-    /**
-     * Get fields
-     *
-     * @return Doctrine\Common\Collections\Collection
-     */
-    public function getFields()
-    {
-        return $this->fields;
-    }
 }

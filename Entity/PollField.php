@@ -33,9 +33,4 @@ abstract class PollField extends PollFieldModel
      * @ORM\Column(name="type", type="string")
      */
     protected $type;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Bait\PollBundle\Entity\Poll")
-     */
-    protected $poll;
 }
