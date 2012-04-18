@@ -85,7 +85,7 @@ abstract class PollField
      */
     public function getChildren()
     {
-        return $children;
+        return $this->children;
     }
 
     /**
