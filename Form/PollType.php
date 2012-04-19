@@ -26,28 +26,47 @@ class PollType extends AbstractType
         $pollFields = $this->getFields();
 
         foreach ($pollFields as $pollField) {
-            switch ($pollField->getType()) {
-                case PollField::TYPE_RADIO:
-                    $options[] = sprintf('field_%s', $pollField->getId());
-                    break;
-                case PollField::TYPE_TEXT:
-                    $builder->add(sprintf('field_%s', $pollField->getId()), 'text');
-                    break;
-                case PollField::TYPE_TEXTAREA:
-                    $builder->add(sprintf('field_%s', $pollField->getId()), 'textarea');
-                    break;
-                case PollField::TYPE_FILE:
-                    $builder->add(sprintf('field_%s', $pollField->getId()), 'file');
-                    break;
-                default:
-                    // throw exception
-                    break;
+            if ($pollField->isStandalone()) {
+                if (in_array($pollField->getType(), array('TYPE_RADIO'))) {
+                    $choices = array();
+
+                    foreach ($pollField->getChildren() as $choice) {
+                        $choices[$choice->getId()] = $choice->getTitle();
+                    }
+
+                    $builder->add(
+                        sprintf('option_%s', $pollField->getId()),
+                        'choice',
+                        array(
+                            'label' => $pollField->getTitle(),
+                            'choices' => $choices,
+                        )
+                    );
+                } else {
+                    $builder->add(
+                        sprintf('field_%s', $pollField->getId()),
+                        $this->fieldTypes[$pollField->getType()],
+                        array(
+                            'label' => $pollField->getTitle(),
+                        )
+                    );
+                }
             }
         }
+    }
 
-        if ($options) {
-            $builder->add('choices', 'choice', array('choices' => $options));
-        }
+    public function getDefaultOptions(array $options)
+    {
+        $constraints = new Collection(
+            array(
+                'fields' => array(
+
+                ),
+                'allowExtraFields' => true,
+            )
+        );
+
+        return array('validation_constraint' => $constraints);
     }
 
     public function getName()
