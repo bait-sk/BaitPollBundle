@@ -1,9 +1,3 @@
 bait_poll_show:
     pattern: /show/{id}
     defaults: { _controller: BaitPollBundle:Poll:show }
-
-bait_poll_vote:
-    pattern: /save/{id}
-    defaults: { _controller: BaitPollBundle:Poll:vote }
-    requirements:
-        method: POST
