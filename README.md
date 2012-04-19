@@ -55,3 +55,97 @@ public function registerBundles()
     );
 }
 ```
+
+``` php
+<?php
+
+namespace Acme\DemoBundle\Entity;
+
+use Bait\PollBundle\Entity\Poll as BasePoll;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="poll")
+ */
+class Poll extends BasePoll
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\DemoBundle\Entity\PollField", mappedBy="poll")
+     */
+    protected $fields;
+
+    /**
+     * Add fields
+     *
+     * @param Acme\DemoBundle\Entity\PollField $fields
+     */
+    public function addPollField(\Acme\DemoBundle\Entity\PollField $fields)
+    {
+        $this->fields[] = $fields;
+    }
+
+    /**
+     * Get fields
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getFields()
+    {
+        return $this->fields;
+    }
+
+}
+```
+
+``` php
+<?php
+
+namespace Acme\DemoBundle\Entity;
+
+use Bait\PollBundle\Entity\PollField as BasePollField;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="poll_field")
+ */
+class PollField extends BasePollField
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PollField", mappedBy="parent")
+     */
+    protected $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="PollField", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    protected $parent;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\Poll")
+     */
+    protected $poll;
+}
+```
+
+```
+bait_poll:
+    resource: "@BaitPollBundle/Resources/config/routing.yml"
+    prefix: /poll
+```
