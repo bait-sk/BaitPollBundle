@@ -1,4 +1,4 @@
-<form action="{{ path('bait_poll_vote', { 'id': id }) }}" type="post">
+<form action="{{ path(parentRequest.attributes.get('_route')) }}" method="post">
     {{ form_widget(form) }}
 
     <input type="submit">
