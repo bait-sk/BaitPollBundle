@@ -54,6 +54,11 @@ abstract class PollField
      */
     protected $required;
 
+    /**
+     * @var array
+     */
+    protected $validationConstraints = array();
+
     public function __construct()
     {
         $this->setCreatedAt(new \DateTime());
@@ -222,5 +227,31 @@ abstract class PollField
     public function isRequired()
     {
         return $this->required;
+    }
+
+    /**
+     * Adds validation constraint for the field.
+     *
+     * @param string $validationConstraint
+     *
+     * @return PollField
+     */
+    public function addValidationConstraint($validationConstraint)
+    {
+        if (!in_array($validationConstraint, $this->validationConstraints, true)) {
+            $this->validationConstraints[] = $validationConstraint;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Gets validation constraints of field.
+     *
+     * @return array
+     */
+    public function getValidationConstraints()
+    {
+        return $this->validationConstraints;
     }
 }

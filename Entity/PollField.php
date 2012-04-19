@@ -38,4 +38,9 @@ abstract class PollField extends PollFieldModel
      * @ORM\Column(name="required", type="boolean")
      */
     protected $required;
+
+    /**
+     * @ORM\Column(name="validation_constraints", type="array")
+     */
+    protected $validationConstraints;
 }
