@@ -23,10 +23,7 @@ class PollType extends AbstractType
 
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $poll = $this->entityManager->findOneById($this->id);
-        $pollFields = $poll->getFields();
-
-        $options = array();
+        $pollFields = $this->getFields();
 
         foreach ($pollFields as $pollField) {
             switch ($pollField->getType()) {
@@ -56,5 +53,12 @@ class PollType extends AbstractType
     public function getName()
     {
         return 'bait_poll_form';
+    }
+
+    protected function getFields()
+    {
+        $poll = $this->entityManager->findOneById($this->id);
+
+        return $poll->getFields();
     }
 }
