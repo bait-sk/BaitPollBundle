@@ -4,6 +4,7 @@ namespace Bait\PollBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Validator\Constraints\Collection;
 use Bait\PollBundle\Model\PollManager;
 use Bait\PollBundle\Model\PollField;
 
@@ -11,7 +12,12 @@ class PollType extends AbstractType
 {
     protected $entityManager;
 
-    public function __construct($entityManager)
+    protected $fieldTypes = array(
+        PollField::TYPE_TEXT => 'text',
+        PollField::TYPE_RADIO => 'choice',
+    );
+
+    public function __construct(PollManager $entityManager)
     {
         $this->entityManager = $entityManager;
     }
