@@ -49,6 +49,11 @@ abstract class PollField
      */
     protected $type;
 
+    /**
+     * @var bool
+     */
+    protected $required;
+
     public function __construct()
     {
         $this->setCreatedAt(new \DateTime());
@@ -193,5 +198,29 @@ abstract class PollField
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Sets if field is be required.
+     *
+     * @param bool $required
+     *
+     * @return PollField
+     */
+    public function setRequired($required)
+    {
+        $this->required = $required;
+
+        return $this;
+    }
+
+    /**
+     * Gets if field is required.
+     *
+     * @return string
+     */
+    public function isRequired()
+    {
+        return $this->required;
     }
 }

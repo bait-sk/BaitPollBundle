@@ -33,4 +33,9 @@ abstract class PollField extends PollFieldModel
      * @ORM\Column(name="type", type="string")
      */
     protected $type;
+
+    /**
+     * @ORM\Column(name="required", type="boolean")
+     */
+    protected $required;
 }
