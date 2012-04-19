@@ -13,6 +13,10 @@ class PollController extends Controller
 
         if ($request->getMethod() === 'POST') {
             $form->bindRequest($request);
+
+            if ($form->isValid()) {
+                // to be some logic... some day
+            }
         }
 
         return $this->render('BaitPollBundle:Poll:show.html.twig', array(
