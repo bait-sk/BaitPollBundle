@@ -113,6 +113,17 @@ abstract class PollField
     }
 
     /**
+     * Checks if field has children. This helps to
+     * determine if current field is standalone.
+     *
+     * @return bool
+     */
+    public function isStandalone()
+    {
+        return !$this->getParent();
+    }
+
+    /**
      * Sets title of poll field.
      *
      * @param string $title
