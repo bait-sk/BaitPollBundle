@@ -5,6 +5,8 @@ namespace Bait\PollBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints\Collection;
+use Symfony\Component\Validator\Constraints\MaxLength;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Bait\PollBundle\Model\PollManager;
 use Bait\PollBundle\Model\PollField;
 
@@ -63,16 +65,35 @@ class PollType extends AbstractType
 
     public function getDefaultOptions(array $options)
     {
+        $fields = $this->getFields();
+        $constraints = array();
+
+        foreach ($fields as $field) {
+            $validationConstraints = $field->getValidationConstraints();
+
+            if ($field->isStandalone() && !empty($validationConstraints)) {
+                $constraintCollection = array();
+
+                foreach ($field->getValidationConstraints() as $name => $validationConstraint) {
+                    if ($name === 'maxlength') {
+                        $constraintCollection[] = new MaxLength($validationConstraint);
+                    } else if ($name === 'notblank') {
+                        $constraintCollection[] = new NotBlank();
+                    }
+                }
+
+                $constraints[sprintf('field_%s', $field->getId())] = $constraintCollection;
+            }
+        }
+
         $constraints = new Collection(
             array(
-                'fields' => array(
-
-                ),
+                'fields' => $constraints,
                 'allowExtraFields' => true,
             )
         );
 
-        return array('validation_constraint' => $constraints);
+        return array('validation_constraint' => $constraints, 'fields' => $fields);
     }
 
     public function getName()
