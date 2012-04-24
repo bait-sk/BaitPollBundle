@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\MaxLength;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Bait\PollBundle\Model\PollManager;
+use Bait\PollBundle\Model\PollManagerInterface;
 use Bait\PollBundle\Model\PollField;
 
 class PollType extends AbstractType
@@ -19,7 +19,7 @@ class PollType extends AbstractType
         PollField::TYPE_RADIO => 'choice',
     );
 
-    public function __construct(PollManager $entityManager)
+    public function __construct(PollManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
