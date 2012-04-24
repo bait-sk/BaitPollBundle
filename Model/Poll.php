@@ -3,7 +3,7 @@
 namespace Bait\PollBundle\Model;
 
 /**
- * Base Poll object
+ * Base Poll model
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
