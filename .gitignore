@@ -2,3 +2,6 @@ phpunit.xml
 Tests/autoload.php
 vendor/*
 composer.lock
+
+# OSX users, you are welcome
+.DS_Store
