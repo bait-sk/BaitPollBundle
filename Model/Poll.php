@@ -44,6 +44,11 @@ abstract class Poll implements PollInterface
      */
     protected $votesVisible;
 
+    /**
+     * @var mixed
+     */
+    protected $fields;
+
     public function __construct()
     {
         $this->setActive(true);
