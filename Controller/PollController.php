@@ -10,8 +10,9 @@ class PollController extends Controller
     public function showAction(Request $request, Request $parentRequest, $id)
     {
         $form = $this->container->get('bait_poll.form_factory')->createForm($id);
+        $formName = $form->getName();
 
-        if ($request->getMethod() === 'POST') {
+        if ($request->getMethod() === 'POST' && $request->request->has($formName)) {
             $form->bindRequest($request);
 
             if ($form->isValid()) {
