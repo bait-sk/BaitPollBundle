@@ -8,7 +8,7 @@
         <parameter key="bait_poll.poll.class">Bait\PollBundle\Entity\Poll</parameter>
         <parameter key="bait_poll.poll_field.class">Bait\PollBundle\Entity\PollField</parameter>
 
-        <parameter key="bait_poll.manager.poll.default.class">Bait\PollBundle\Entity\PollManager</parameter>
+        <parameter key="bait_poll.poll.manager.default.class">Bait\PollBundle\Entity\PollManager</parameter>
     </parameters>
 
     <services>
@@ -16,7 +16,7 @@
             <argument>%bait_poll.model_manager_name%</argument>
         </service>
 
-        <service id="bait_poll.manager.poll.default" class="%bait_poll.manager.poll.default.class%">
+        <service id="bait_poll.poll.manager.default" class="%bait_poll.poll.manager.default.class%">
             <argument type="service" id="bait_poll.entity_manager" />
             <argument>%bait_poll.poll.class%</argument>
         </service>
