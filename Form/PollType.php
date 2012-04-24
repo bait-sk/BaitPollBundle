@@ -43,7 +43,7 @@ class PollType extends AbstractType
                     }
 
                     $builder->add(
-                        sprintf('option_%s', $pollField->getId()),
+                        sprintf('field_%s', $pollField->getId()),
                         'choice',
                         array(
                             'label' => $pollField->getTitle(),
