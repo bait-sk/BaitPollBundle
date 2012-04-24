@@ -43,7 +43,7 @@ class PollType extends AbstractType
                     }
 
                     $builder->add(
-                        sprintf('field_%s', $pollField->getId()),
+                        sprintf('field_%d', $pollField->getId()),
                         'choice',
                         array(
                             'label' => $pollField->getTitle(),
@@ -52,7 +52,7 @@ class PollType extends AbstractType
                     );
                 } else {
                     $builder->add(
-                        sprintf('field_%s', $pollField->getId()),
+                        sprintf('field_%d', $pollField->getId()),
                         $this->fieldTypes[$pollField->getType()],
                         array(
                             'label' => $pollField->getTitle(),
@@ -82,7 +82,7 @@ class PollType extends AbstractType
                     }
                 }
 
-                $constraints[sprintf('field_%s', $field->getId())] = $constraintCollection;
+                $constraints[sprintf('field_%d', $field->getId())] = $constraintCollection;
             }
         }
 
