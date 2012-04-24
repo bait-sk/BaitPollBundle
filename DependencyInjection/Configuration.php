@@ -31,15 +31,23 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
-                ->arrayNode('poll')
+                ->arrayNode('poll')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('class')->end()
+                        ->scalarNode('manager')->defaultValue('bait_poll.poll.manager.default')->end()
                     ->end()
                 ->end()
 
                 ->arrayNode('poll_field')
                     ->children()
                         ->scalarNode('class')->end()
+                    ->end()
+                ->end()
+
+                ->arrayNode('vote')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('manager')->defaultValue('bait_poll.vote.manager.default')->end()
                     ->end()
                 ->end()
             ->end();
