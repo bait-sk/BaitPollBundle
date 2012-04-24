@@ -12,7 +12,7 @@ use Bait\PollBundle\Model\PollManager as BasePollManager;
 class PollManager extends BasePollManager
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var \Doctrine\ORM\EntityRepository
      */
     protected $repository;
 
