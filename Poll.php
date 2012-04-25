@@ -31,6 +31,7 @@ class Poll
 
     protected $voteManager;
 
+    protected $fieldClass;
     public function __construct(
         Request $request,
         EngineInterface $engine,
