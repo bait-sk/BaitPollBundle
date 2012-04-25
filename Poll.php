@@ -62,14 +62,14 @@ class Poll
             );
         }
 
-        $form = $this->formFactory->createForm($id);
-        $formName = $form->getName();
+        $this->form = $this->formFactory->createForm($id);
+        $formName = $this->form->getName();
 
         if ($this->request->getMethod() === 'POST' && $this->request->request->has($formName)) {
-            $form->bindRequest($this->request);
+            $this->form->bindRequest($this->request);
 
-            if ($form->isValid()) {
-                $data = $form->getData();
+            if ($this->form->isValid()) {
+                $data = $this->form->getData();
 
                 $votes = array();
 
@@ -87,8 +87,14 @@ class Poll
         }
     }
 
-    public function createView()
+    public function render($template = null)
     {
+        if (!$template) {
+            $template = $this->template;
+        }
 
+        $viewData = array('form' => $this->form->createView(), 'request' => $this->request);
+
+        return $this->engine->render($this->template, $viewData);
     }
 }
