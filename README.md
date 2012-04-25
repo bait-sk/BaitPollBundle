@@ -78,16 +78,16 @@ class Poll extends BasePoll
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Acme\DemoBundle\Entity\PollField", mappedBy="poll")
+     * @ORM\OneToMany(targetEntity="Acme\DemoBundle\Entity\Field", mappedBy="poll")
      */
     protected $fields;
 
     /**
      * Add fields
      *
-     * @param Acme\DemoBundle\Entity\PollField $fields
+     * @param Acme\DemoBundle\Entity\Field $fields
      */
-    public function addPollField(\Acme\DemoBundle\Entity\PollField $fields)
+    public function addField(\Acme\DemoBundle\Entity\Field $fields)
     {
         $this->fields[] = $fields;
     }
@@ -110,14 +110,14 @@ class Poll extends BasePoll
 
 namespace Acme\DemoBundle\Entity;
 
-use Bait\PollBundle\Entity\PollField as BasePollField;
+use Bait\PollBundle\Entity\Field as BaseField;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="poll_field")
  */
-class PollField extends BasePollField
+class Field extends BaseField
 {
     /**
      * @ORM\Id
@@ -127,12 +127,12 @@ class PollField extends BasePollField
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="PollField", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Field", mappedBy="parent")
      */
     protected $children;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PollField", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="Field", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
