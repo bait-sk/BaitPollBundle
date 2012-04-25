@@ -4,7 +4,7 @@ namespace Bait\PollBundle\FormFactory;
 
 use Symfony\Component\Form\FormInterface;
 
-class PollFormFactory
+class PollFormFactory implements PollFormFactoryInterface
 {
     protected $formFactory;
 
