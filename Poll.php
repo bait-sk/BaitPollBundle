@@ -17,21 +17,56 @@ use Bait\PollBundle\Model\VoteManagerInterface;
  */
 class Poll
 {
+    /**
+     * @var Request
+     */
     protected $request;
 
+    /**
+     * @var EngineInterface
+     */
     protected $engine;
 
-    protected $template;
-
+    /**
+     * @var ObjectManager
+     */
     protected $entityManager;
 
+    /**
+     * @var PollFormFactoryInterface
+     */
     protected $formFactory;
 
+    /**
+     * @var PollManagerInterface
+     */
     protected $pollManager;
 
+    /**
+     * @var VoteManagerInterface
+     */
     protected $voteManager;
 
+    /**
+     * @var string
+     */
+    protected $template;
+
+    /**
+     * @var string
+     */
     protected $fieldClass;
+
+    /**
+     * Constructs Poll service.
+     *
+     * @param Request $request Current request
+     * @param EngineInterface $engine Templating engine
+     * @param ObjectManager $entityManager Doctrine's object manager
+     * @param PollFormFactoryInterface $formFactory Poll form factory
+     * @param PollManagerInterface $pollManager Poll manager
+     * @param VoteManagerInterface $voteManager Vote manager
+     */
     public function __construct(
         Request $request,
         EngineInterface $engine,
@@ -53,6 +88,14 @@ class Poll
         $this->fieldClass = $fieldClass;
     }
 
+    /**
+     * Creates form and validates it or saves data in case some data
+     * were already submitted.
+     *
+     * @param mixed $id Id of poll to be created
+     *
+     * @throws NotFoundHttpException
+     */
     public function create($id)
     {
         $poll = $this->pollManager->findOneById($id);
@@ -88,6 +131,13 @@ class Poll
         }
     }
 
+    /**
+     * Renders poll form into given template.
+     *
+     * @param string $template Path to poll template
+     *
+     * @return string
+     */
     public function render($template = null)
     {
         if (!$template) {
