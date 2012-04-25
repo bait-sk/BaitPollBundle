@@ -7,7 +7,7 @@
         <service id="bait_poll.poll" class="Bait\PollBundle\Poll" scope="request">
             <argument type="service" id="request" />
             <argument type="service" id="templating" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="bait_poll.entity_manager" />
             <argument type="service" id="bait_poll.form_factory" />
             <argument type="service" id="bait_poll.poll.manager" />
             <argument type="service" id="bait_poll.vote.manager" />
