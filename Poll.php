@@ -2,6 +2,7 @@
 
 namespace Bait\PollBundle;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Class responsible for poll management.
  *
@@ -30,7 +31,9 @@ class Poll
         $poll = $this->pollManager->findOneById($id);
 
         if (!$poll) {
-            throw new \Exception();
+            throw new NotFoundHttpException(
+                sprintf("Poll with id '%s' was not found.", $id)
+            );
         }
 
         $form = $this->formFactory->createForm($id);
