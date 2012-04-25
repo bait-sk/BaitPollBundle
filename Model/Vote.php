@@ -39,7 +39,7 @@ abstract class Vote implements VoteInterface
         return $this->id;
     }
 
-    public function setField(PollField $field)
+    public function setField(Field $field)
     {
         $this->field = $field;
 

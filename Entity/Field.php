@@ -3,16 +3,16 @@
 namespace Bait\PollBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Bait\PollBundle\Model\PollField as PollFieldModel;
+use Bait\PollBundle\Model\Field as FieldModel;
 
 /**
- * Base PollField ORM entity
+ * Base Field ORM entity
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  *
  * @ORM\MappedSuperclass
  */
-abstract class PollField extends PollFieldModel
+abstract class Field extends FieldModel
 {
     /**
      * @ORM\Column(name="title", type="string", length=255)

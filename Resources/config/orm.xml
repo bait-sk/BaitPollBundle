@@ -6,7 +6,7 @@
 
     <parameters>
         <parameter key="bait_poll.poll.class">Bait\PollBundle\Entity\Poll</parameter>
-        <parameter key="bait_poll.poll_field.class">Bait\PollBundle\Entity\PollField</parameter>
+        <parameter key="bait_poll.field.class">Bait\PollBundle\Entity\Field</parameter>
         <parameter key="bait_poll.vote.class">Bait\PollBundle\Entity\Vote</parameter>
 
         <parameter key="bait_poll.poll.manager.default.class">Bait\PollBundle\Entity\PollManager</parameter>

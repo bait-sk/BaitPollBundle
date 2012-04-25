@@ -12,7 +12,7 @@
             <argument type="service" id="bait_poll.poll.manager" />
             <argument type="service" id="bait_poll.vote.manager" />
             <argument>%bait_poll.form.template%</argument>
-            <argument>%bait_poll.poll_field.class%</argument>
+            <argument>%bait_poll.field.class%</argument>
         </service>
     </services>
 </container>

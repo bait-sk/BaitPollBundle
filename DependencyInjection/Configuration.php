@@ -39,7 +39,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
-                ->arrayNode('poll_field')
+                ->arrayNode('field')
                     ->children()
                         ->scalarNode('class')->end()
                     ->end()

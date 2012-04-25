@@ -8,15 +8,15 @@ use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\MaxLength;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Bait\PollBundle\Model\PollManagerInterface;
-use Bait\PollBundle\Model\PollField;
+use Bait\PollBundle\Model\Field;
 
 class PollType extends AbstractType
 {
     protected $entityManager;
 
     protected $fieldTypes = array(
-        PollField::TYPE_TEXT => 'text',
-        PollField::TYPE_RADIO => 'choice',
+        Field::TYPE_TEXT => 'text',
+        Field::TYPE_RADIO => 'choice',
     );
 
     public function __construct(PollManagerInterface $entityManager)
@@ -31,31 +31,31 @@ class PollType extends AbstractType
 
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $pollFields = $this->getFields();
+        $fields = $this->getFields();
 
-        foreach ($pollFields as $pollField) {
-            if ($pollField->isStandalone()) {
-                if (in_array($pollField->getType(), array('TYPE_RADIO'))) {
+        foreach ($fields as $field) {
+            if ($field->isStandalone()) {
+                if (in_array($field->getType(), array('TYPE_RADIO'))) {
                     $choices = array();
 
-                    foreach ($pollField->getChildren() as $choice) {
+                    foreach ($field->getChildren() as $choice) {
                         $choices[$choice->getId()] = $choice->getTitle();
                     }
 
                     $builder->add(
-                        sprintf('field_%s', $pollField->getId()),
+                        sprintf('field_%s', $field->getId()),
                         'choice',
                         array(
-                            'label' => $pollField->getTitle(),
+                            'label' => $field->getTitle(),
                             'choices' => $choices,
                         )
                     );
                 } else {
                     $builder->add(
-                        sprintf('field_%s', $pollField->getId()),
-                        $this->fieldTypes[$pollField->getType()],
+                        sprintf('field_%s', $field->getId()),
+                        $this->fieldTypes[$field->getType()],
                         array(
-                            'label' => $pollField->getTitle(),
+                            'label' => $field->getTitle(),
                         )
                     );
                 }

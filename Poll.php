@@ -30,7 +30,7 @@ class Poll
     /**
      * @var ObjectManager
      */
-    protected $entityManager;
+    protected $objectManager;
 
     /**
      * @var PollFormFactoryInterface
@@ -62,7 +62,7 @@ class Poll
      *
      * @param Request $request Current request
      * @param EngineInterface $engine Templating engine
-     * @param ObjectManager $entityManager Doctrine's object manager
+     * @param ObjectManager $objectManager Doctrine's object manager
      * @param PollFormFactoryInterface $formFactory Poll form factory
      * @param PollManagerInterface $pollManager Poll manager
      * @param VoteManagerInterface $voteManager Vote manager
@@ -70,7 +70,7 @@ class Poll
     public function __construct(
         Request $request,
         EngineInterface $engine,
-        ObjectManager $entityManager,
+        ObjectManager $objectManager,
         PollFormFactoryInterface $formFactory,
         PollManagerInterface $pollManager,
         VoteManagerInterface $voteManager,
@@ -80,7 +80,7 @@ class Poll
     {
         $this->request = $request;
         $this->engine = $engine;
-        $this->entityManager = $entityManager;
+        $this->objectManager = $objectManager;
         $this->formFactory = $formFactory;
         $this->pollManager = $pollManager;
         $this->voteManager = $voteManager;
@@ -120,7 +120,7 @@ class Poll
                 foreach ($data as $fieldId => $value) {
                     $field = str_replace('field_', '', $fieldId);
 
-                    $field = $this->entityManager->getReference($this->fieldClass, $field);
+                    $field = $this->objectManager->getReference($this->fieldClass, $field);
                     $vote = $this->voteManager->create($field, $value);
 
                     $votes[] = $vote;

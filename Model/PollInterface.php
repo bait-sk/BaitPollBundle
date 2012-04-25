@@ -17,13 +17,6 @@ interface PollInterface
     function getId();
 
     /**
-     * Gets author of poll.
-     *
-     * @return string
-     */
-    function getAuthor();
-
-    /**
      * Gets date of creation of poll.
      *
      * @return \DateTime

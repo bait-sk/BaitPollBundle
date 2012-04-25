@@ -27,7 +27,7 @@ abstract class VoteManager implements VoteManagerInterface
         return $this->findBy(array('poll' => $poll));
     }
 
-    public function create(PollField $field, $value)
+    public function create(Field $field, $value)
     {
         $voteClass = $this->getClass();
 

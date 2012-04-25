@@ -3,11 +3,11 @@
 namespace Bait\PollBundle\Model;
 
 /**
- * Base PollField model
+ * Base Field model
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-abstract class PollField
+abstract class Field implements FieldInterface
 {
     const TYPE_TEXT = 'TYPE_TEXT';
     const TYPE_INTEGER = 'TYPE_INTEGER';
@@ -30,7 +30,7 @@ abstract class PollField
     protected $children;
 
     /**
-     * @var PollField
+     * @var Field
      */
     protected $parent;
 
@@ -79,7 +79,7 @@ abstract class PollField
      *
      * @param mixed $children
      *
-     * @return PollField
+     * @return Field
      */
     public function setChildren($children)
     {
@@ -101,9 +101,9 @@ abstract class PollField
     /**
      * Sets parent of poll field.
      *
-     * @param PollField $parent
+     * @param Field $parent
      *
-     * @return PollField
+     * @return Field
      */
     public function setParent($parent)
     {
@@ -115,7 +115,7 @@ abstract class PollField
     /**
      * Gets parent of poll field.
      *
-     * @return PollField
+     * @return Field
      */
     public function getParent()
     {
@@ -138,7 +138,7 @@ abstract class PollField
      *
      * @param string $title
      *
-     * @return PollField
+     * @return Field
      */
     public function setTitle($title)
     {
@@ -162,7 +162,7 @@ abstract class PollField
      *
      * @param \DateTime $createdAt
      *
-     * @return PollField
+     * @return Field
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
@@ -186,7 +186,7 @@ abstract class PollField
      *
      * @param string $type
      *
-     * @return PollField
+     * @return Field
      */
     public function setType($type)
     {
@@ -210,7 +210,7 @@ abstract class PollField
      *
      * @param bool $required
      *
-     * @return PollField
+     * @return Field
      */
     public function setRequired($required)
     {
@@ -234,7 +234,7 @@ abstract class PollField
      *
      * @param string $validationConstraint
      *
-     * @return PollField
+     * @return Field
      */
     public function addValidationConstraint($validationConstraint)
     {

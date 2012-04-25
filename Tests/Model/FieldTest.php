@@ -2,13 +2,13 @@
 
 namespace Bait\PollBundle\Tests\Model;
 
-class PollFieldTest extends \PHPUnit_Framework_TestCase
+class FieldTest extends \PHPUnit_Framework_TestCase
 {
     protected $pollField;
 
     protected function setUp()
     {
-        $this->pollField = $this->getMockForAbstractClass('Bait\PollBundle\Model\PollField');
+        $this->pollField = $this->getMockForAbstractClass('Bait\PollBundle\Model\Field');
     }
 
     public function testTitle()
