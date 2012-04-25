@@ -43,6 +43,7 @@ class BaitPollExtension extends Extension
 
         $container->setAlias('bait_poll.form_factory', $config['form']['factory']);
 
+        $container->setParameter('bait_poll.form.template', $config['form']['template']);
         $loader->load('poll.xml');
     }
 }
