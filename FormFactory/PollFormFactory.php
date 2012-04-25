@@ -2,7 +2,7 @@
 
 namespace Bait\PollBundle\FormFactory;
 
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class PollFormFactory implements PollFormFactoryInterface
 {
@@ -12,8 +12,7 @@ class PollFormFactory implements PollFormFactoryInterface
 
     protected $name;
 
-
-    public function __construct($formFactory, $type, $name)
+    public function __construct(FormFactoryInterface $formFactory, $type, $name)
     {
         $this->formFactory = $formFactory;
         $this->type = $type;
