@@ -76,7 +76,7 @@ class Poll
                 foreach ($data as $fieldId => $value) {
                     $field = str_replace('field_', '', $fieldId);
 
-                    $field = $this->get('doctrine.orm.entity_manager')->getReference('AcmeDemoBundle:PollField', $field);
+                    $field = $this->entityManager->getReference($this->fieldClass, $field);
                     $vote = $this->voteManager->create($field, $value);
 
                     $votes[] = $vote;
