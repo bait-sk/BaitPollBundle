@@ -2,7 +2,14 @@
 
 namespace Bait\PollBundle;
 
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Bait\PollBundle\FormFactory\PollFormFactoryInterface;
+use Bait\PollBundle\Model\PollManagerInterface;
+use Bait\PollBundle\Model\VoteManagerInterface;
+
 /**
  * Class responsible for poll management.
  *
@@ -12,18 +19,37 @@ class Poll
 {
     protected $request;
 
+    protected $engine;
+
+    protected $template;
+
+    protected $entityManager;
+
     protected $formFactory;
 
     protected $pollManager;
 
     protected $voteManager;
 
-    public function __construct($request, $formFactory, $pollManager, $voteManager)
+    public function __construct(
+        Request $request,
+        EngineInterface $engine,
+        ObjectManager $entityManager,
+        PollFormFactoryInterface $formFactory,
+        PollManagerInterface $pollManager,
+        VoteManagerInterface $voteManager,
+        $template,
+        $fieldClass
+    )
     {
         $this->request = $request;
+        $this->engine = $engine;
+        $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
         $this->pollManager = $pollManager;
         $this->voteManager = $voteManager;
+        $this->template = $template;
+        $this->fieldClass = $fieldClass;
     }
 
     public function create($id)
