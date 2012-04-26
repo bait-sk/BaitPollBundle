@@ -1,7 +1,7 @@
 BaitPollBundle
 ==============
 
-This bundle provides support for various types of polls and competitions for Symfony2.
+This bundle provides support for various types of polls for Symfony2.
 
 [![Build Status](https://secure.travis-ci.org/bait-sk/BaitPollBundle.png?branch=master)](http://travis-ci.org/bait-sk/BaitPollBundle)
 
