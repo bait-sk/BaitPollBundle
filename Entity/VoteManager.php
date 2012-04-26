@@ -7,12 +7,14 @@ use Bait\PollBundle\Model\VoteManager as BaseVoteManager;
 use Bait\PollBundle\Model\VoteInterface;
 
 /**
+ * Doctrine 2 ORM specific vote manager.
+ *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
 class VoteManager extends BaseVoteManager
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var EntityManager
      */
     protected $entityManager;
 
@@ -27,7 +29,7 @@ class VoteManager extends BaseVoteManager
     protected $class;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @param EntityManager $entityManager
      * @param string $class
      */
     public function __construct(EntityManager $entityManager, $class)
@@ -37,12 +39,20 @@ class VoteManager extends BaseVoteManager
         $this->class = $class;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function findBy($criteria)
     {
         return $this->repository->findBy($criteria);
     }
 
-    public function doSave($votes)
+    /**
+     * Doctrine 2 ORM specific save.
+     *
+     * {@inheritDoc}
+     */
+    public function doSave(array $votes)
     {
         foreach ($votes as $vote) {
             if (!$vote instanceof VoteInterface) {
@@ -55,6 +65,9 @@ class VoteManager extends BaseVoteManager
         $this->entityManager->flush();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getClass()
     {
         return $this->class;

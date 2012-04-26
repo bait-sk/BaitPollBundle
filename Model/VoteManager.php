@@ -3,12 +3,14 @@
 namespace Bait\PollBundle\Model;
 
 /**
-* @author Ondrej Slintak <ondrowan@gmail.com>
-*/
+ * Connection agnostic vote manager.
+ *
+ * @author Ondrej Slintak <ondrowan@gmail.com>
+ */
 abstract class VoteManager implements VoteManagerInterface
 {
     /**
-     * @param FieldInterface $field
+     * @param FieldInterface $field Poll field
      *
      * @return VoteInterface
      */
@@ -18,16 +20,19 @@ abstract class VoteManager implements VoteManagerInterface
     }
 
     /**
-     * @param Poll $poll
+     * @param PollInterface $poll Poll
      *
      * @return array
      */
-    public function findByPoll(Poll $poll)
+    public function findByPoll(PollInterface $poll)
     {
         return $this->findBy(array('poll' => $poll));
     }
 
-    public function create(Field $field, $value)
+    /**
+     * {@inheritDoc}
+     */
+    public function create(FieldInterface $field, $value)
     {
         $voteClass = $this->getClass();
 
@@ -38,6 +43,9 @@ abstract class VoteManager implements VoteManagerInterface
         return $vote;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function save($votes)
     {
         $votes = (array) $votes;
@@ -45,9 +53,24 @@ abstract class VoteManager implements VoteManagerInterface
         $this->doSave($votes);
     }
 
+    /**
+     * Finds votes by given criteria.
+     *
+     * @param array $criteria Criteria by which function filters votes
+     */
     abstract public function findBy($criteria);
 
-    abstract public function doSave($votes);
+    /**
+     * Connection dependant save.
+     *
+     * @paramter array $votes Array of votes
+     */
+    abstract public function doSave(array $votes);
 
+    /**
+     * Gets class name of vote.
+     *
+     * @return string
+     */
     abstract public function getClass();
 }
