@@ -69,7 +69,7 @@ abstract class Poll implements PollInterface
      *
      * @param string $title
      *
-     * @return Poll
+     * @return PollInterface
      */
     public function setTitle($title)
     {
@@ -99,7 +99,7 @@ abstract class Poll implements PollInterface
      *
      * @param \DateTime $datetime
      *
-     * @return Poll
+     * @return PollInterface
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
@@ -123,7 +123,7 @@ abstract class Poll implements PollInterface
      *
      * @param \DateTime $startAt
      *
-     * @return Poll
+     * @return PollInterface
      */
     public function setStartAt(\DateTime $startAt)
     {
@@ -145,7 +145,7 @@ abstract class Poll implements PollInterface
      *
      * @param \DateTime $endAt
      *
-     * @return Poll
+     * @return PollInterface
      */
     public function setEndAt(\DateTime $endAt)
     {
@@ -167,7 +167,7 @@ abstract class Poll implements PollInterface
      *
      * @param boolean $isActive
      *
-     * @return Poll
+     * @return PollInterface
      */
     public function setActive($isActive)
     {
@@ -189,7 +189,7 @@ abstract class Poll implements PollInterface
      *
      * @param boolean $votesVisible
      *
-     * @return Poll
+     * @return PollInterface
      */
     public function setVotesVisible($votesVisible)
     {
