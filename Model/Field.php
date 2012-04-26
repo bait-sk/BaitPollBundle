@@ -55,9 +55,7 @@ abstract class Field implements FieldInterface
     }
 
     /**
-     * Returns unique id of poll field.
-     *
-     * @return mixed
+     * {@inheritDoc}
      */
     public function getId()
     {
@@ -79,9 +77,7 @@ abstract class Field implements FieldInterface
     }
 
     /**
-     * Gets all children of poll field.
-     *
-     * @return mixed
+     * {@inheritDoc}
      */
     public function getChildren()
     {
@@ -113,10 +109,7 @@ abstract class Field implements FieldInterface
     }
 
     /**
-     * Checks if field has children. This helps to
-     * determine if current field is standalone.
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function isStandalone()
     {
@@ -186,9 +179,7 @@ abstract class Field implements FieldInterface
     }
 
     /**
-     * Gets type of poll field.
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getType()
     {
@@ -236,9 +227,7 @@ abstract class Field implements FieldInterface
     }
 
     /**
-     * Gets validation constraints of field.
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function getValidationConstraints()
     {
