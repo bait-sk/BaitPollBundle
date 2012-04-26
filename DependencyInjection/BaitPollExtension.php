@@ -32,6 +32,7 @@ class BaitPollExtension extends Extension
 
         $container->setParameter('bait_poll.form.type', $config['form']['type']);
         $container->setParameter('bait_poll.form.name', $config['form']['name']);
+        $container->setAlias('bait_poll.form.factory', $config['form']['factory']);
 
         $container->setParameter('bait_poll.poll.class', $config['poll']['class']);
         $container->setParameter('bait_poll.field.class', $config['field']['class']);
@@ -41,8 +42,6 @@ class BaitPollExtension extends Extension
         $container->setAlias('bait_poll.poll.manager', $config['poll']['manager']);
 
         $loader->load('form.xml');
-
-        $container->setAlias('bait_poll.form_factory', $config['form']['factory']);
 
         $container->setParameter('bait_poll.form.template', $config['form']['template']);
         $loader->load('poll.xml');

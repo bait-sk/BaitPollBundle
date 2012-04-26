@@ -6,10 +6,10 @@
     <services>
         <service id="bait_poll.form.default" class="Bait\PollBundle\Form\PollType">
             <tag name="form.type" alias="bait_poll.form" />
-            <argument type="service" id="bait_poll.poll.manager.default" />
+            <argument type="service" id="bait_poll.poll.manager" />
         </service>
 
-        <service id="bait_poll.form_factory.default" class="Bait\PollBundle\FormFactory\PollFormFactory" public="false">
+        <service id="bait_poll.form.factory.default" class="Bait\PollBundle\FormFactory\PollFormFactory" public="false">
             <argument type="service" id="form.factory" />
             <argument>%bait_poll.form.type%</argument>
             <argument>%bait_poll.form.name%</argument>

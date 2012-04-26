@@ -106,7 +106,7 @@ class Poll
             );
         }
 
-        $this->form = $this->formFactory->createForm($id);
+        $this->form = $this->formFactory->create($id);
         $formName = $this->form->getName();
 
         if ($this->request->getMethod() === 'POST' && $this->request->request->has($formName)) {

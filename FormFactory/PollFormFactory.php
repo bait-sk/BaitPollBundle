@@ -4,14 +4,33 @@ namespace Bait\PollBundle\FormFactory;
 
 use Symfony\Component\Form\FormFactoryInterface;
 
+/**
+ * Form factory responsible for creating poll forms.
+ *
+ * @author Ondrej Slintak <ondrowan@gmail.com>
+ */
 class PollFormFactory implements PollFormFactoryInterface
 {
+    /**
+     * @var FormFactoryInterface
+     */
     protected $formFactory;
 
+    /**
+     * @var string Name of form type service
+     */
     protected $type;
 
+    /**
+     * @var string Name of form
+     */
     protected $name;
 
+    /**
+     * @param FormFactoryInterface $formFactory
+     * @param string $type Name of poll form type service
+     * @param string $name Name of form
+     */
     public function __construct(FormFactoryInterface $formFactory, $type, $name)
     {
         $this->formFactory = $formFactory;
@@ -19,7 +38,10 @@ class PollFormFactory implements PollFormFactoryInterface
         $this->name = $name;
     }
 
-    public function createForm($id)
+    /**
+     * {@inheritdoc}
+     */
+    public function create($id)
     {
         $type = $this->formFactory->getType($this->type);
         $type->setId($id);
