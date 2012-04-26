@@ -67,7 +67,7 @@ abstract class Field implements FieldInterface
      *
      * @param mixed $children
      *
-     * @return Field
+     * @return FieldInterface
      */
     public function setChildren($children)
     {
@@ -87,11 +87,11 @@ abstract class Field implements FieldInterface
     /**
      * Sets parent of poll field.
      *
-     * @param Field $parent
+     * @param FieldInterface $parent
      *
-     * @return Field
+     * @return FieldInterface
      */
-    public function setParent($parent)
+    public function setParent(FieldInterface $parent)
     {
         $this->title = $title;
 
@@ -101,7 +101,7 @@ abstract class Field implements FieldInterface
     /**
      * Gets parent of poll field.
      *
-     * @return Field
+     * @return FieldInterface
      */
     public function getParent()
     {
@@ -121,7 +121,7 @@ abstract class Field implements FieldInterface
      *
      * @param string $title
      *
-     * @return Field
+     * @return FieldInterface
      */
     public function setTitle($title)
     {
@@ -145,7 +145,7 @@ abstract class Field implements FieldInterface
      *
      * @param \DateTime $createdAt
      *
-     * @return Field
+     * @return FieldInterface
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
@@ -169,7 +169,7 @@ abstract class Field implements FieldInterface
      *
      * @param string $type
      *
-     * @return Field
+     * @return FieldInterface
      */
     public function setType($type)
     {
@@ -191,7 +191,7 @@ abstract class Field implements FieldInterface
      *
      * @param bool $required
      *
-     * @return Field
+     * @return FieldInterface
      */
     public function setRequired($required)
     {
@@ -215,7 +215,7 @@ abstract class Field implements FieldInterface
      *
      * @param string $validationConstraint
      *
-     * @return Field
+     * @return FieldInterface
      */
     public function addValidationConstraint($validationConstraint)
     {
