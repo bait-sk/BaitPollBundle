@@ -79,7 +79,7 @@ abstract class Poll implements PollInterface
     }
 
     /**
-     * Gets title of poll.
+     * {@inheritDoc}
      */
     public function getTitle()
     {
@@ -95,7 +95,11 @@ abstract class Poll implements PollInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Sets date of creation of poll.
+     *
+     * @param \DateTime $datetime
+     *
+     * @return Poll
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
@@ -105,7 +109,9 @@ abstract class Poll implements PollInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Gets date of creation of poll.
+     *
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -127,9 +133,7 @@ abstract class Poll implements PollInterface
     }
 
     /**
-     * Gets start date of poll.
-     *
-     * @return \DateTime
+     * {@inheritDoc}
      */
     public function getStartAt()
     {
@@ -151,9 +155,7 @@ abstract class Poll implements PollInterface
     }
 
     /**
-     * Gets end date of poll.
-     *
-     * @return \DateTime
+     * {@inheritDoc}
      */
     public function getEndAt()
     {
@@ -175,9 +177,7 @@ abstract class Poll implements PollInterface
     }
 
     /**
-     * Gets visbility of poll.
-     *
-     * @return boolean
+     * {@inheritDoc}
      */
     public function isActive()
     {
@@ -199,9 +199,7 @@ abstract class Poll implements PollInterface
     }
 
     /**
-     * Gets visibility of votes after user voted.
-     *
-     * @return boolean
+     * {@inheritDoc}
      */
     public function isVotesVisible()
     {

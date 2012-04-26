@@ -3,7 +3,7 @@
 namespace Bait\PollBundle\Model;
 
 /**
- * Interface used by polls in this bundle.
+ * Interface defining shape of polls in this bundle.
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
@@ -14,21 +14,40 @@ interface PollInterface
      *
      * @return mixed
      */
-    function getId();
+    public function getId();
 
     /**
-     * Gets date of creation of poll.
+     * Gets title of poll.
+     *
+     * @return string
+     */
+    public function getTitle();
+
+    /**
+     * Gets start date of poll.
      *
      * @return \DateTime
      */
-    function getCreatedAt();
+    public function getStartAt();
 
     /**
-     * Sets date of creation of poll.
+     * Gets end date of poll.
      *
-     * @param \DateTime $datetime
-     *
-     * @return Poll
+     * @return \DateTime
      */
-    function setCreatedAt(\DateTime $datetime);
+    public function getEndAt();
+
+    /**
+     * Gets visbility of poll.
+     *
+     * @return boolean
+     */
+    public function isActive();
+
+    /**
+     * Gets visibility of votes after user voted.
+     *
+     * @return boolean
+     */
+    public function isVotesVisible();
 }
