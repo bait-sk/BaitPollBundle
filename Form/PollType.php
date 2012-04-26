@@ -10,25 +10,46 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Bait\PollBundle\Model\PollManagerInterface;
 use Bait\PollBundle\Model\Field;
 
+/**
+ * Poll form type. It dynamically generates poll by its DB
+ * representation.
+ *
+ * @author Ondrej Slintak <ondrowan@gmail.com>
+ */
 class PollType extends AbstractType
 {
-    protected $entityManager;
+    /**
+     * @var PollManagerInterface Poll manager
+     */
+    protected $pollManager;
 
+    /**
+     * @var array Translation table of field types
+     */
     protected $fieldTypes = array(
         Field::TYPE_TEXT => 'text',
         Field::TYPE_RADIO => 'choice',
     );
 
-    public function __construct(PollManagerInterface $entityManager)
+    /**
+     * @param PollManagerInterface $pollManager Poll manager
+     */
+    public function __construct(PollManagerInterface $pollManager)
     {
-        $this->entityManager = $entityManager;
+        $this->pollManager = $pollManager;
     }
 
+    /**
+     * @param mixed Sets id of poll
+     */
     public function setId($id)
     {
         $this->id = $id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function buildForm(FormBuilder $builder, array $options)
     {
         $fields = $this->getFields();
@@ -63,6 +84,9 @@ class PollType extends AbstractType
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getDefaultOptions(array $options)
     {
         $fields = $this->getFields();
@@ -96,14 +120,22 @@ class PollType extends AbstractType
         return array('validation_constraint' => $constraints, 'fields' => $fields);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getName()
     {
         return 'bait_poll_form';
     }
 
+    /**
+     * Gets all fields from current poll.
+     *
+     * @return Doctrine\ORM\PersistentCollection
+     */
     protected function getFields()
     {
-        $poll = $this->entityManager->findOneById($this->id);
+        $poll = $this->pollManager->findOneById($this->id);
 
         return $poll->getFields();
     }
