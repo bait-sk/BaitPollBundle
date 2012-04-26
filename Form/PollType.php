@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\MaxLength;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Bait\PollBundle\Model\PollManagerInterface;
-use Bait\PollBundle\Model\Field;
+use Bait\PollBundle\Model\FieldInterface;
 
 /**
  * Poll form type. It dynamically generates poll by its DB
@@ -27,8 +27,8 @@ class PollType extends AbstractType
      * @var array Translation table of field types
      */
     protected $fieldTypes = array(
-        Field::TYPE_TEXT => 'text',
-        Field::TYPE_RADIO => 'choice',
+        FieldInterface::TYPE_TEXT => 'text',
+        FieldInterface::TYPE_RADIO => 'choice',
     );
 
     /**
