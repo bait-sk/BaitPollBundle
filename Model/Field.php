@@ -20,7 +20,7 @@ abstract class Field implements FieldInterface
     protected $children;
 
     /**
-     * @var Field
+     * @var FieldInterface
      */
     protected $parent;
 
