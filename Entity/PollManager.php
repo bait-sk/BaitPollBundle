@@ -29,7 +29,7 @@ class PollManager extends BasePollManager
     /**
      * {@inheritDoc}
      */
-    public function findOneBy($criteria)
+    public function findOneBy(array $criteria)
     {
         return $this->repository->findOneBy($criteria);
     }
@@ -37,7 +37,7 @@ class PollManager extends BasePollManager
     /**
      * {@inheritDoc}
      */
-    public function findBy($criteria)
+    public function findBy(array $criteria)
     {
         return $this->repository->findBy($criteria);
     }

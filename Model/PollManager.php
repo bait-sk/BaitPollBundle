@@ -36,7 +36,7 @@ abstract class PollManager implements PollManagerInterface
      *
      * @return PollInterface
      */
-    abstract public function findOneBy($criteria);
+    abstract public function findOneBy(array $criteria);
 
     /**
      * Finds polls by given criteria.
@@ -45,5 +45,5 @@ abstract class PollManager implements PollManagerInterface
      *
      * @return array
      */
-    abstract public function findBy($criteria);
+    abstract public function findBy(array $criteria);
 }
