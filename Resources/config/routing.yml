@@ -1,3 +1,0 @@
-bait_poll_show:
-    pattern: /show/{id}
-    defaults: { _controller: BaitPollBundle:Poll:show }
