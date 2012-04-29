@@ -65,20 +65,45 @@ class PollType extends AbstractType
 
         foreach ($fields as $field) {
             if ($field->isStandalone()) {
-                if (in_array($field->getType(), array('TYPE_RADIO'))) {
+                $choiceFields = array(
+                    FieldInterface::TYPE_RADIO,
+                    FieldInterface::TYPE_DROPDOWN
+                );
+
+                $fieldType = $field->getType();
+
+                if (in_array($fieldType, $choiceFields)) {
                     $choices = array();
 
                     foreach ($field->getChildren() as $choice) {
                         $choices[$choice->getId()] = $choice->getTitle();
                     }
 
+                    $options = array(
+                        'label' => $field->getTitle(),
+                        'choices' => $choices,
+                    )
+
+                    $additionalOptions = array();
+
+                    if ($fieldType === FieldInterface::TYPE_RADIO) {
+                        $additionalOptions = array(
+                            'expanded' => true,
+                            'multiple' => false,
+                        );
+                    } else if ($fieldType === FieldInterface::TYPE_CHECKBOX) {
+                        $additionalOptions = array(
+                            'expanded' => true,
+                            'multiple' => true,
+                        );
+                    }
+
+                    $options = array_merge($options, $additionalOptions);
+
                     $builder->add(
                         sprintf('field_%s', $field->getId()),
                         'choice',
-                        array(
-                            'label' => $field->getTitle(),
-                            'choices' => $choices,
-                        )
+                        $options
                     );
                 } else {
                     $builder->add(
