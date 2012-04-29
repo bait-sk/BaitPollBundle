@@ -38,6 +38,8 @@ class PollType extends AbstractType
     protected $fieldTypes = array(
         FieldInterface::TYPE_TEXT => 'text',
         FieldInterface::TYPE_RADIO => 'choice',
+        FieldInterface::TYPE_CHECKBOX => 'choice',
+        FieldInterface::TYPE_DROPDOWN => 'choice',
     );
 
     /**
@@ -82,7 +84,7 @@ class PollType extends AbstractType
                     $options = array(
                         'label' => $field->getTitle(),
                         'choices' => $choices,
-                    )
+                    );
 
                     $additionalOptions = array();
 
