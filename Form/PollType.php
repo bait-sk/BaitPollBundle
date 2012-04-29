@@ -69,7 +69,8 @@ class PollType extends AbstractType
             if ($field->isStandalone()) {
                 $choiceFields = array(
                     FieldInterface::TYPE_RADIO,
-                    FieldInterface::TYPE_DROPDOWN
+                    FieldInterface::TYPE_DROPDOWN,
+                    FieldInterface::TYPE_CHECKBOX,
                 );
 
                 $fieldType = $field->getType();
