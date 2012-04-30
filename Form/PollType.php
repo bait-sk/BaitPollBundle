@@ -36,7 +36,7 @@ class PollType extends AbstractType
      * @var array Translation table of field types
      */
     protected $fieldTypes = array(
-        FieldInterface::TYPE_TEXT => 'text',
+        FieldInterface::TYPE_INPUT => 'text',
         FieldInterface::TYPE_RADIO => 'choice',
         FieldInterface::TYPE_CHECKBOX => 'choice',
         FieldInterface::TYPE_SELECT => 'choice',
