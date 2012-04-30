@@ -22,6 +22,7 @@ interface FieldInterface
     const TYPE_TEXT = 'TYPE_TEXT';
     const TYPE_INPUT = 'TYPE_INPUT';
     const TYPE_INTEGER = 'TYPE_INTEGER';
+    const TYPE_EMAIL = 'TYPE_EMAIL';
     const TYPE_TEXTAREA = 'TYPE_TEXTAREA';
     const TYPE_FILE = 'TYPE_FILE';
 
