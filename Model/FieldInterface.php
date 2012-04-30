@@ -23,8 +23,10 @@ interface FieldInterface
     const TYPE_INPUT = 'TYPE_INPUT';
     const TYPE_INTEGER = 'TYPE_INTEGER';
     const TYPE_EMAIL = 'TYPE_EMAIL';
+    const TYPE_URL = 'TYPE_URL';
     const TYPE_TEXTAREA = 'TYPE_TEXTAREA';
     const TYPE_FILE = 'TYPE_FILE';
+    const TYPE_ASSET = 'TYPE_ASSET';
 
     const TYPE_RADIO = 'TYPE_RADIO';
     const TYPE_CHECKBOX = 'TYPE_CHECKBOX';
