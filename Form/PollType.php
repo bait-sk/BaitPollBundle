@@ -71,6 +71,7 @@ class PollType extends AbstractType
                     FieldInterface::TYPE_RADIO,
                     FieldInterface::TYPE_SELECT,
                     FieldInterface::TYPE_CHECKBOX,
+                    FieldInterface::TYPE_SELECT_MULTIPLE,
                 );
 
                 $fieldType = $field->getType();
@@ -97,6 +98,11 @@ class PollType extends AbstractType
                     } else if ($fieldType === FieldInterface::TYPE_CHECKBOX) {
                         $additionalOptions = array(
                             'expanded' => true,
+                            'multiple' => true,
+                        );
+                    } else if ($fieldType === FieldInterface::TYPE_SELECT_MULTIPLE) {
+                        $additionalOptions = array(
+                            'expanded' => false,
                             'multiple' => true,
                         );
                     }
