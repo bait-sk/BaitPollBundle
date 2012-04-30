@@ -39,7 +39,7 @@ class PollType extends AbstractType
         FieldInterface::TYPE_TEXT => 'text',
         FieldInterface::TYPE_RADIO => 'choice',
         FieldInterface::TYPE_CHECKBOX => 'choice',
-        FieldInterface::TYPE_DROPDOWN => 'choice',
+        FieldInterface::TYPE_SELECT => 'choice',
     );
 
     /**
@@ -69,7 +69,7 @@ class PollType extends AbstractType
             if ($field->isStandalone()) {
                 $choiceFields = array(
                     FieldInterface::TYPE_RADIO,
-                    FieldInterface::TYPE_DROPDOWN,
+                    FieldInterface::TYPE_SELECT,
                     FieldInterface::TYPE_CHECKBOX,
                 );
 

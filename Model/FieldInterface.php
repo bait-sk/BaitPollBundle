@@ -26,8 +26,8 @@ interface FieldInterface
 
     const TYPE_RADIO = 'TYPE_RADIO';
     const TYPE_CHECKBOX = 'TYPE_CHECKBOX';
-    const TYPE_DROPDOWN = 'TYPE_DROPDOWN';
-    const TYPE_DROPDOWN_MULTIPLE = 'TYPE_DROPDOWN_MULTIPLE';
+    const TYPE_SELECT = 'TYPE_SELECT';
+    const TYPE_SELECT_MULTIPLE = 'TYPE_SELECT_MULTIPLE';
 
     /**
      * Returns unique id of poll field.
