@@ -7,7 +7,7 @@
    file that was distributed with this source code.
 #}
 
-<form action="{{ path(request.attributes.get('_route')) }}" method="post">
+<form action="{{ request.uri }}" method="post">
     {{ form_widget(form) }}
 
     <input type="submit">
