@@ -92,7 +92,6 @@ class Poll extends BasePoll
     {
         return $this->fields;
     }
-
 }
 ```
 
@@ -131,7 +130,7 @@ class Field extends BaseField
     protected $parent;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\Poll")
+     * @ORM\ManyToOne(targetEntity="Poll")
      */
     protected $poll;
 }
@@ -161,7 +160,7 @@ class Vote extends BaseVote
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\Field")
+     * @ORM\ManyToOne(targetEntity="Field")
      */
     protected $field;
 }
@@ -190,14 +189,14 @@ php app/console doctrine:schema:update --force
 4. Render it
 ------------
 
-** Controller **
+**Controller**
 
 ``` php
 $poll = $this->container->get('bait_poll.poll');
 $poll->create(1);
 ```
 
-** Template **
+**Template**
 
 ``` html
 {{ poll.render()|raw }}
