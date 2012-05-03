@@ -24,6 +24,7 @@
             <argument>%bait_poll.field.class%</argument>
             <argument>%bait_poll.cookie.prefix%</argument>
             <argument>%bait_poll.cookie.duration%</argument>
+            <argument>%bait_poll.form.theme%</argument>
         </service>
     </services>
 </container>

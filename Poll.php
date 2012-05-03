@@ -80,6 +80,11 @@ class Poll
     protected $cookieDuration;
 
     /**
+     * @var string
+     */
+    protected $formTheme;
+
+    /**
      * Constructs Poll service.
      *
      * @param Request $request Current request
@@ -99,7 +104,8 @@ class Poll
         $template,
         $fieldClass,
         $cookiePrefix,
-        $cookieDuration
+        $cookieDuration,
+        $formTheme
     )
     {
         $this->request = $request;
@@ -112,6 +118,7 @@ class Poll
         $this->fieldClass = $fieldClass;
         $this->cookiePrefix = $cookiePrefix;
         $this->cookieDuration = $cookieDuration;
+        $this->formTheme = $formTheme;
     }
 
     /**
@@ -190,7 +197,12 @@ class Poll
             $this->alreadyVoted = true;
         }
 
-        $viewData = array('form' => $this->form->createView(), 'request' => $this->request, 'alreadyVoted' => $this->alreadyVoted);
+        $viewData = array(
+            'form' => $this->form->createView(),
+            'theme' => $this->formTheme,
+            'request' => $this->request,
+            'alreadyVoted' => $this->alreadyVoted,
+        );
 
         return $this->engine->render($this->template, $viewData);
     }
