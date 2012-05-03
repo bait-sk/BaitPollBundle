@@ -14,7 +14,7 @@
     {%- elseif label.asset_type == 'TYPE_ASSET_IMAGE' -%}
         {{ block('image_label') }}
     {%- elseif label.asset_type == 'TYPE_ASSET_VIDEO' -%}
-        {{ block('audio_label') }}
+        {{ block('video_label') }}
     {%- endif -%}
 
 {%- else -%}
