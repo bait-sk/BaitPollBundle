@@ -45,6 +45,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('name')->defaultValue('bait_poll_form')->end()
                         ->scalarNode('factory')->defaultValue('bait_poll.form.factory.default')->end()
                         ->scalarNode('template')->defaultValue('BaitPollBundle:Poll:default.html.twig')->end()
+                        ->scalarNode('theme')->defaultValue('BaitPollBundle::form_theme.html.twig')->end()
                     ->end()
                 ->end()
 

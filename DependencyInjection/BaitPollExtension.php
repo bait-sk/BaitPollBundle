@@ -46,6 +46,8 @@ class BaitPollExtension extends Extension
         $container->setParameter('bait_poll.poll.class', $config['poll']['class']);
         $container->setParameter('bait_poll.field.class', $config['field']['class']);
         $container->setParameter('bait_poll.vote.class', $config['vote']['class']);
+        $container->setParameter('bait_poll.form.template', $config['form']['template']);
+        $container->setParameter('bait_poll.form.theme', $config['form']['theme']);
 
         $container->setAlias('bait_poll.vote.manager', $config['vote']['manager']);
         $container->setAlias('bait_poll.poll.manager', $config['poll']['manager']);
@@ -55,7 +57,6 @@ class BaitPollExtension extends Extension
         $container->setParameter('bait_poll.cookie.prefix', $config['cookie']['prefix']);
         $container->setParameter('bait_poll.cookie.duration', $config['cookie']['duration']);
 
-        $container->setParameter('bait_poll.form.template', $config['form']['template']);
         $loader->load('poll.xml');
     }
 }
