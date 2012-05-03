@@ -39,6 +39,11 @@ abstract class Field implements FieldInterface
     protected $title;
 
     /**
+     * @var string
+     */
+    protected $assetPath;
+
+    /**
      * @var \DateTime
      */
     protected $createdAt;
@@ -102,7 +107,7 @@ abstract class Field implements FieldInterface
      */
     public function setParent(FieldInterface $parent)
     {
-        $this->title = $title;
+        $this->parent = $parent;
 
         return $this;
     }
@@ -140,13 +145,33 @@ abstract class Field implements FieldInterface
     }
 
     /**
-     * Gets title of poll field.
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Sets asset path of poll field.
+     *
+     * @param string $assetPath
+     *
+     * @return FieldInterface
+     */
+    public function setAssetPath($assetPath)
+    {
+        $this->assetPath = $assetPath;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAssetPath()
+    {
+        return $this->assetPath;
     }
 
     /**

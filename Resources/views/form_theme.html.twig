@@ -1,0 +1,45 @@
+{% block generic_label %}
+{% spaceless %}
+
+{%- if required -%}
+    {%- set attr = attr|merge({'class': attr.class|default('') ~ ' required'}) -%}
+{%- endif -%}
+
+<label{% for attrname,attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>
+
+{%- if 'title' in label|keys -%}
+
+    {%- if label.asset_type == 'TYPE_ASSET_AUDIO' -%}
+        {{ block('audio_label') }}
+    {%- elseif label.asset_type == 'TYPE_ASSET_IMAGE' -%}
+        {{ block('image_label') }}
+    {%- elseif label.asset_type == 'TYPE_ASSET_VIDEO' -%}
+        {{ block('audio_label') }}
+    {%- endif -%}
+
+{%- else -%}
+    {{- label|trans -}}
+{%- endif -%}
+
+</label>
+
+{% endspaceless %}
+{% endblock %}
+
+{% block audio_label %}
+{% spaceless %}
+<a href="{{ label.asset_url }}">{{ label.title }}</a>
+{% endspaceless %}
+{% endblock %}
+
+{% block image_label %}
+{% spaceless %}
+<img src="{{ label.asset_url }}" alt="{{ label.title|trans }}" />
+{% endspaceless %}
+{% endblock %}
+
+{% block video_label %}
+{% spaceless %}
+<a href="{{ label.asset_url }}">{{ label.title }}</a>
+{% endspaceless %}
+{% endblock %}

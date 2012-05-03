@@ -80,10 +80,27 @@ class PollType extends AbstractType
                 $fieldType = $field->getType();
 
                 if (in_array($fieldType, $choiceFields)) {
+                    $assetChoiceFields = array(
+                        FieldInterface::TYPE_ASSET_AUDIO,
+                        FieldInterface::TYPE_ASSET_IMAGE,
+                        FieldInterface::TYPE_ASSET_VIDEO,
+                    );
+
                     $choices = array();
 
                     foreach ($field->getChildren() as $choice) {
-                        $choices[$choice->getId()] = $choice->getTitle();
+                        $choiceFieldType = $choice->getType();
+
+                        if(in_array($choiceFieldType, $assetChoiceFields)) {
+                            $choices[$choice->getId()] = array(
+                                'title' => $choice->getTitle(),
+                                'asset_type' => $choiceFieldType,
+                                'asset_url' => $choice->getAssetPath(),
+                            );
+                        }
+                        else {
+                            $choices[$choice->getId()] = $choice->getTitle();
+                        }
                     }
 
                     $options = array(

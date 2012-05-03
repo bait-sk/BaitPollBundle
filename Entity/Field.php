@@ -29,6 +29,11 @@ abstract class Field extends FieldModel
     protected $title;
 
     /**
+     * @ORM\Column(name="asset_path", type="string", length=255, nullable=true)
+     */
+    protected $assetPath;
+
+    /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
