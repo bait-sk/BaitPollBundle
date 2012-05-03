@@ -32,12 +32,20 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('db_driver')->cannotBeOverwritten()->isRequired()->end()
                 ->scalarNode('model_manager_name')->defaultNull()->end()
 
+                ->arrayNode('cookie')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix')->defaultValue('bait_poll_')->end()
+                        ->scalarNode('duration')->defaultValue('5184000')->end()
+                    ->end()
+                ->end()
+
                 ->arrayNode('form')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('type')->defaultValue('bait_poll.form')->end()
                         ->scalarNode('name')->defaultValue('bait_poll_form')->end()
                         ->scalarNode('factory')->defaultValue('bait_poll.form.factory.default')->end()
                         ->scalarNode('template')->defaultValue('BaitPollBundle:Poll:default.html.twig')->end()
+                        ->scalarNode('theme')->defaultValue('BaitPollBundle::form_theme.html.twig')->end()
                     ->end()
                 ->end()
 

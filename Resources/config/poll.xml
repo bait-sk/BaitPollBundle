@@ -22,6 +22,8 @@
             <argument type="service" id="bait_poll.vote.manager" />
             <argument>%bait_poll.form.template%</argument>
             <argument>%bait_poll.field.class%</argument>
+            <argument>%bait_poll.cookie.prefix%</argument>
+            <argument>%bait_poll.cookie.duration%</argument>
         </service>
     </services>
 </container>
