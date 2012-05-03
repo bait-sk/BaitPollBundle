@@ -7,7 +7,7 @@
    file that was distributed with this source code.
 #}
 
-{% form_theme form 'BaitPollBundle::form_theme.html.twig' %}
+{% form_theme form theme %}
 
 <form action="{{ request.uri }}" method="post">
     {{ form_widget(form) }}
