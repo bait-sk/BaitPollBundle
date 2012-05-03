@@ -52,6 +52,9 @@ class BaitPollExtension extends Extension
 
         $loader->load('form.xml');
 
+        $container->setParameter('bait_poll.cookie.prefix', $config['cookie']['prefix']);
+        $container->setParameter('bait_poll.cookie.duration', $config['cookie']['duration']);
+
         $container->setParameter('bait_poll.form.template', $config['form']['template']);
         $loader->load('poll.xml');
     }
