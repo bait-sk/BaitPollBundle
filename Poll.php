@@ -15,6 +15,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Cookie;
 use Bait\PollBundle\FormFactory\PollFormFactoryInterface;
 use Bait\PollBundle\Model\PollManagerInterface;
 use Bait\PollBundle\Model\VoteManagerInterface;
@@ -67,6 +70,16 @@ class Poll
     protected $fieldClass;
 
     /**
+     * @var string
+     */
+    protected $cookiePrefix;
+
+    /**
+     * @var string
+     */
+    protected $cookieDuration;
+
+    /**
      * Constructs Poll service.
      *
      * @param Request $request Current request
@@ -84,7 +97,9 @@ class Poll
         PollManagerInterface $pollManager,
         VoteManagerInterface $voteManager,
         $template,
-        $fieldClass
+        $fieldClass,
+        $cookiePrefix,
+        $cookieDuration
     )
     {
         $this->request = $request;
@@ -95,6 +110,8 @@ class Poll
         $this->voteManager = $voteManager;
         $this->template = $template;
         $this->fieldClass = $fieldClass;
+        $this->cookiePrefix = $cookiePrefix;
+        $this->cookieDuration = $cookieDuration;
     }
 
     /**
@@ -105,8 +122,10 @@ class Poll
      *
      * @throws NotFoundHttpException
      */
-    public function create($id)
+    public function create($id, Response &$response)
     {
+        $this->id = $id;
+
         $poll = $this->pollManager->findOneById($id);
 
         if (!$poll) {
@@ -138,7 +157,16 @@ class Poll
                     }
                 }
 
-                $this->voteManager->save($votes);
+                try {
+                    $this->voteManager->save($votes);
+
+                    $cookie = new Cookie(sprintf('%svoted_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
+
+                    $response = new RedirectResponse($this->request->getUri());
+                    $response->headers->setCookie($cookie);
+                } catch (\Exception $e) {
+                    throw $e;
+                }
             }
         }
     }
@@ -156,7 +184,13 @@ class Poll
             $template = $this->template;
         }
 
-        $viewData = array('form' => $this->form->createView(), 'request' => $this->request);
+        $this->alreadyVoted = false;
+
+        if ($this->request->cookies->has(sprintf('%svoted_%s', $this->cookiePrefix, $this->id))) {
+            $this->alreadyVoted = true;
+        }
+
+        $viewData = array('form' => $this->form->createView(), 'request' => $this->request, 'alreadyVoted' => $this->alreadyVoted);
 
         return $this->engine->render($this->template, $viewData);
     }
