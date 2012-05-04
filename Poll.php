@@ -198,7 +198,7 @@ class Poll
             'alreadyVoted' => $this->hasVoted()
         );
 
-        return $this->engine->render($this->template, $viewData);
+        return $this->engine->render($template, $viewData);
     }
 
     /**
