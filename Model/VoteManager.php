@@ -63,6 +63,14 @@ abstract class VoteManager implements VoteManagerInterface
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function countByField(FieldInterface $field)
+    {
+        return $this->doCountByField($field);
+    }
+
+    /**
      * Finds votes by given criteria.
      *
      * @param array $criteria Criteria by which function filters votes
@@ -75,6 +83,15 @@ abstract class VoteManager implements VoteManagerInterface
      * @paramter array $votes Array of votes
      */
     abstract public function doSave(array $votes);
+
+    /**
+     * Connection dependant count by field.
+     *
+     * @parameter FieldInterface $field Field to check votes for
+     *
+     * @return integer
+     */
+    abstract public function doCountByField(FieldInterface $field);
 
     /**
      * Gets class name of vote.

@@ -34,4 +34,13 @@ interface VoteManagerInterface
      * @param mixed $votes Votes to save (VoteInterface or array of them)
      */
     public function save($votes);
+
+    /**
+     * Counts all votes for given field.
+     *
+     * @parem FieldInterface $field Field to check votes for
+     *
+     * @return interger
+     */
+    public function countByField(FieldInterface $field);
 }

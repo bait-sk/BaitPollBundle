@@ -14,6 +14,7 @@ namespace Bait\PollBundle\Entity;
 use Doctrine\ORM\EntityManager;
 use Bait\PollBundle\Model\VoteManager as BaseVoteManager;
 use Bait\PollBundle\Model\VoteInterface;
+use Bait\PollBundle\Model\FieldInterface;
 
 /**
  * Doctrine 2 ORM specific vote manager.
@@ -72,6 +73,18 @@ class VoteManager extends BaseVoteManager
         }
 
         $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function doCountByField(FieldInterface $field)
+    {
+        $query = $this->entityManager->createQuery(
+            sprintf("SELECT COUNT(v.id) FROM %s v WHERE v.value = '%s'", $this->class, $field->getId())
+        );
+
+        return $query->getSingleScalarResult();
     }
 
     /**
