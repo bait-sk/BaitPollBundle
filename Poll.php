@@ -191,12 +191,26 @@ class Poll
             $template = $this->template;
         }
 
+        $alreadyVoted = $this->hasVoted();
+
         $viewData = array(
             'form' => $this->form->createView(),
             'theme' => $this->formTheme,
             'request' => $this->request,
             'alreadyVoted' => $this->hasVoted()
         );
+
+        if ($alreadyVoted) {
+            $poll = $this->pollManager->findOneById($this->id);
+            $fields = $poll->getFields();
+            $fieldCount = array();
+
+            foreach ($fields as $field) {
+                $fieldCount[$field->getId()] = $this->voteManager->countByField($field);
+            }
+
+            $viewData['results'] = $fieldCount;
+        }
 
         return $this->engine->render($template, $viewData);
     }
