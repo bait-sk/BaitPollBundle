@@ -147,6 +147,8 @@ class Poll
 
         if (!$poll->isActive()) {
             $this->isActive = false;
+
+            return;
         }
 
         $this->form = $this->formFactory->create($id);
