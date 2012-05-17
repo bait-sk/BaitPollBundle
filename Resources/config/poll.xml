@@ -20,11 +20,13 @@
             <argument type="service" id="bait_poll.form.factory" />
             <argument type="service" id="bait_poll.poll.manager" />
             <argument type="service" id="bait_poll.vote.manager" />
-            <argument>%bait_poll.form.template%</argument>
-            <argument>%bait_poll.field.class%</argument>
-            <argument>%bait_poll.cookie.prefix%</argument>
-            <argument>%bait_poll.cookie.duration%</argument>
-            <argument>%bait_poll.form.theme%</argument>
+            <argument type="collection">
+                <argument>%bait_poll.field.class%</argument>
+                <argument>%bait_poll.form.template%</argument>
+                <argument>%bait_poll.form.theme%</argument>
+                <argument>%bait_poll.cookie.prefix%</argument>
+                <argument>%bait_poll.cookie.duration%</argument>
+            </argument>
         </service>
     </services>
 </container>

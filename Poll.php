@@ -106,11 +106,7 @@ class Poll
         PollFormFactoryInterface $formFactory,
         PollManagerInterface $pollManager,
         VoteManagerInterface $voteManager,
-        $template,
-        $fieldClass,
-        $cookiePrefix,
-        $cookieDuration,
-        $theme
+        array $options
     )
     {
         $this->request = $request;
@@ -119,11 +115,13 @@ class Poll
         $this->formFactory = $formFactory;
         $this->pollManager = $pollManager;
         $this->voteManager = $voteManager;
-        $this->template = $template;
-        $this->fieldClass = $fieldClass;
-        $this->cookiePrefix = $cookiePrefix;
-        $this->cookieDuration = $cookieDuration;
-        $this->theme = $theme;
+        list(
+            $this->fieldClass,
+            $this->template,
+            $this->theme,
+            $this->cookiePrefix,
+            $this->cookieDuration
+        ) = $options;
         $this->isActive = true;
     }
 
