@@ -82,7 +82,7 @@ class Poll
     /**
      * @var string
      */
-    protected $formTheme;
+    protected $theme;
 
     /**
      * @var boolean
@@ -110,7 +110,7 @@ class Poll
         $fieldClass,
         $cookiePrefix,
         $cookieDuration,
-        $formTheme
+        $theme
     )
     {
         $this->request = $request;
@@ -123,7 +123,7 @@ class Poll
         $this->fieldClass = $fieldClass;
         $this->cookiePrefix = $cookiePrefix;
         $this->cookieDuration = $cookieDuration;
-        $this->formTheme = $formTheme;
+        $this->theme = $theme;
         $this->isActive = true;
     }
 
