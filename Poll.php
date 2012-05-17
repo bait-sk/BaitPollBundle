@@ -195,7 +195,7 @@ class Poll
      *
      * @return string
      */
-    public function render($template = null)
+    public function render($template = null, $theme = null)
     {
         if (!$this->isActive) {
             return null;
@@ -205,11 +205,15 @@ class Poll
             $template = $this->template;
         }
 
+        if (!$theme) {
+            $theme = $this->theme;
+        }
+
         $alreadyVoted = $this->hasVoted();
 
         $viewData = array(
             'form' => $this->form->createView(),
-            'theme' => $this->formTheme,
+            'theme' => $theme,
             'request' => $this->request,
             'alreadyVoted' => $this->hasVoted()
         );
