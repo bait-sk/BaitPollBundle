@@ -85,6 +85,11 @@ class Poll
     protected $formTheme;
 
     /**
+     * @var boolean
+     */
+    protected $isActive;
+
+    /**
      * Constructs Poll service.
      *
      * @param Request $request Current request
@@ -119,6 +124,7 @@ class Poll
         $this->cookiePrefix = $cookiePrefix;
         $this->cookieDuration = $cookieDuration;
         $this->formTheme = $formTheme;
+        $this->isActive = true;
     }
 
     /**
@@ -139,6 +145,10 @@ class Poll
             throw new NotFoundHttpException(
                 sprintf("Poll with id '%s' was not found.", $id)
             );
+        }
+
+        if (!$poll->isActive()) {
+            $this->isActive = false;
         }
 
         $this->form = $this->formFactory->create($id);
@@ -187,6 +197,10 @@ class Poll
      */
     public function render($template = null)
     {
+        if (!$this->isActive) {
+            return null;
+        }
+
         if (!$template) {
             $template = $this->template;
         }
