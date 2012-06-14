@@ -180,7 +180,7 @@ class Poll
                 try {
                     $response = new RedirectResponse($this->request->getUri());
 
-                    $isAuthenticated = $this->securityContext->isGranted('IS_FULLY_AUTHENTICATED');
+                    $isAuthenticated = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
                     $pollType = $this->poll->getType();
                     $doPersist = false;
 
