@@ -209,13 +209,13 @@ class Poll
             $theme = $this->theme;
         }
 
-        $alreadyVoted = $this->hasVoted();
+        $alreadyVoted = $this->voteManager->hasVoted();
 
         $viewData = array(
             'form' => $this->form->createView(),
             'theme' => $theme,
             'request' => $this->request,
-            'alreadyVoted' => $this->hasVoted()
+            'alreadyVoted' => $alreadyVoted
         );
 
         if ($alreadyVoted) {
