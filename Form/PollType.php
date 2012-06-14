@@ -93,6 +93,7 @@ class PollType extends AbstractType
 
                         if(in_array($choiceFieldType, $assetChoiceFields)) {
                             $choices[$choice->getId()] = array(
+                                'id' => $choice->getId(),
                                 'title' => $choice->getTitle(),
                                 'asset_type' => $choiceFieldType,
                                 'asset_url' => $choice->getAssetPath(),
