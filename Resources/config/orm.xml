@@ -31,6 +31,7 @@
         <service id="bait_poll.vote.manager.default" class="%bait_poll.vote.manager.default.class%">
             <argument type="service" id="bait_poll.entity_manager" />
             <argument>%bait_poll.vote.class%</argument>
+            <argument>%bait_poll.cookie.prefix%</argument>
         </service>
     </services>
 </container>

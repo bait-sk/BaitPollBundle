@@ -65,6 +65,26 @@ abstract class VoteManager implements VoteManagerInterface
     /**
      * {@inheritDoc}
      */
+    public function hasVoted(PollInterface $poll)
+    {
+        return $this->hasVotedAnonymously($poll);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasVotedAnonymously(PollInterface $poll)
+    {
+        if ($this->request->cookies->has(sprintf('%svoted_%s', $this->cookiePrefix, $poll->getId()))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function countByField(FieldInterface $field)
     {
         return $this->doCountByField($field);

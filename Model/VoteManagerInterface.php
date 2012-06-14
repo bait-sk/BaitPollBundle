@@ -36,6 +36,20 @@ interface VoteManagerInterface
     public function save($votes);
 
     /**
+     * Checks if user has already voted in poll.
+     *
+     * @return boolean
+     */
+    public function hasVoted(PollInterface $poll);
+
+    /**
+     * Check if anonymous user has already voted in poll.
+     *
+     * @return boolean
+     */
+    public function hasVotedAnonymously(PollInterface $poll);
+
+    /**
      * Counts all votes for given field.
      *
      * @parem FieldInterface $field Field to check votes for

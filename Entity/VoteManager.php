@@ -39,14 +39,20 @@ class VoteManager extends BaseVoteManager
     protected $class;
 
     /**
+     * @var string
+     */
+    protected $cookiePrefix;
+
+    /**
      * @param EntityManager $entityManager
      * @param string $class
      */
-    public function __construct(EntityManager $entityManager, $class)
+    public function __construct(EntityManager $entityManager, $class, $cookiePrefix)
     {
         $this->entityManager = $entityManager;
         $this->repository = $entityManager->getRepository($class);
         $this->class = $class;
+        $this->cookiePrefix = $cookiePrefix;
     }
 
     /**

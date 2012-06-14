@@ -154,7 +154,7 @@ class Poll
         $this->form = $this->formFactory->create($id);
         $formName = $this->form->getName();
 
-        if ($this->request->getMethod() === 'POST' && $this->request->request->has($formName) && !$this->hasVoted()) {
+        if ($this->request->getMethod() === 'POST' && $this->request->request->has($formName) && !$this->voteManager->hasVoted($poll)) {
             $this->form->bindRequest($this->request);
 
             if ($this->form->isValid()) {
@@ -231,19 +231,5 @@ class Poll
         }
 
         return $this->engine->render($template, $viewData);
-    }
-
-    /**
-     * Checks if user has already voted in this poll.
-     *
-     * @return bool
-     */
-    protected function hasVoted()
-    {
-        if ($this->request->cookies->has(sprintf('%svoted_%s', $this->cookiePrefix, $this->id))) {
-            return true;
-        }
-
-        return false;
     }
 }
