@@ -180,18 +180,28 @@ class Poll
                 try {
                     $response = new RedirectResponse($this->request->getUri());
 
-                    if (PollInterface::POLL_TYPE_USER === $this->poll->getType()) {
-                        $votes->setAuthor($this->securityContext->getUser());
-                    } else if (PollInterface::POLL_TYPE_ANONYMOUS === $this->poll->getType()) {
-                        $cookie = new Cookie(sprintf('%svoted_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
-                        $response->headers->setCookie($cookie);
-                    } else if (PollInterface::POLL_TYPE_MIXED === $this->poll->getType()) {
-                        $votes->setAuthor($this->securityContext->getUser());
-                        $cookie = new Cookie(sprintf('%svoted_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
-                        $response->headers->setCookie($cookie);
+                    $isAuthenticated = $this->securityContext->isGranted('IS_FULLY_AUTHENTICATED');
+                    $pollType = $this->poll->getType();
+                    $doPersist = false;
+
+                    if ((PollInterface::POLL_TYPE_USER === $pollType || PollInterface::POLL_TYPE_MIXED)) && $isAuthenticated) {
+                        $user = $this->securityContext->getToken()->getUser()->getId();
+
+                        $votes->setAuthor($user);
+
+                        $doPersist = true;
                     }
 
-                    $this->voteManager->save($votes);
+                    if (PollInterface::POLL_TYPE_ANONYMOUS === $pollType || PollInterface::POLL_TYPE_MIXED) {
+                        $cookie = new Cookie(sprintf('%svoted_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
+                        $response->headers->setCookie($cookie);
+
+                        $doPersist = true;
+                    }
+
+                    if ($doPersist) {
+                        $this->voteManager->save($votes);
+                    }
 
                 } catch (\Exception $e) {
                     throw $e;
