@@ -177,12 +177,21 @@ class Poll
                 }
 
                 try {
+                    $response = new RedirectResponse($this->request->getUri());
+
+                    if (PollInterface::POLL_TYPE_USER === $this->poll->getType()) {
+                        $votes->setAuthor($this->securityContext->getUser());
+                    } else if (PollInterface::POLL_TYPE_ANONYMOUS === $this->poll->getType()) {
+                        $cookie = new Cookie(sprintf('%svoted_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
+                        $response->headers->setCookie($cookie);
+                    } else if (PollInterface::POLL_TYPE_MIXED === $this->poll->getType()) {
+                        $votes->setAuthor($this->securityContext->getUser());
+                        $cookie = new Cookie(sprintf('%svoted_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
+                        $response->headers->setCookie($cookie);
+                    }
+
                     $this->voteManager->save($votes);
 
-                    $cookie = new Cookie(sprintf('%svoted_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
-
-                    $response = new RedirectResponse($this->request->getUri());
-                    $response->headers->setCookie($cookie);
                 } catch (\Exception $e) {
                     throw $e;
                 }
