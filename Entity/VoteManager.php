@@ -11,6 +11,7 @@
 
 namespace Bait\PollBundle\Entity;
 
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
 use Bait\PollBundle\Model\VoteManager as BaseVoteManager;
 use Bait\PollBundle\Model\VoteInterface;
@@ -47,10 +48,11 @@ class VoteManager extends BaseVoteManager
      * @param EntityManager $entityManager
      * @param string $class
      */
-    public function __construct(EntityManager $entityManager, $class, $cookiePrefix)
+    public function __construct(EntityManager $entityManager, Request $request, $class, $cookiePrefix)
     {
         $this->entityManager = $entityManager;
         $this->repository = $entityManager->getRepository($class);
+        $this->request = $request;
         $this->class = $class;
         $this->cookiePrefix = $cookiePrefix;
     }
