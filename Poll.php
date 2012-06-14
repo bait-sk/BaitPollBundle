@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Bait\PollBundle\FormFactory\PollFormFactoryInterface;
 use Bait\PollBundle\Model\PollManagerInterface;
 use Bait\PollBundle\Model\VoteManagerInterface;
+use Bait\PollBundle\Model\PollInterface;
 
 /**
  * Class responsible for poll management.
