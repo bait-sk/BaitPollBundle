@@ -106,6 +106,7 @@ class Poll
         PollFormFactoryInterface $formFactory,
         PollManagerInterface $pollManager,
         VoteManagerInterface $voteManager,
+        $securityContext,
         array $options
     )
     {
@@ -115,6 +116,7 @@ class Poll
         $this->formFactory = $formFactory;
         $this->pollManager = $pollManager;
         $this->voteManager = $voteManager;
+        $this->securityContext = $securityContext;
         list(
             $this->fieldClass,
             $this->template,
