@@ -28,7 +28,7 @@
             <argument>%bait_poll.poll.class%</argument>
         </service>
 
-        <service id="bait_poll.vote.manager.default" class="%bait_poll.vote.manager.default.class%">
+        <service id="bait_poll.vote.manager.default" class="%bait_poll.vote.manager.default.class%" scope="request">
             <argument type="service" id="bait_poll.entity_manager" />
             <argument type="service" id="request" />
             <argument>%bait_poll.vote.class%</argument>
