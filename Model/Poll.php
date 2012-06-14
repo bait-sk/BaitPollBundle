@@ -58,6 +58,11 @@ abstract class Poll implements PollInterface
      */
     protected $fields;
 
+    /**
+     * @var string
+     */
+    protected $type;
+
     public function __construct()
     {
         $this->setActive(true);
@@ -213,5 +218,25 @@ abstract class Poll implements PollInterface
     public function isVotesVisible()
     {
         return $this->votesVisible;
+    }
+
+    /**
+     * Sets type of poll.
+     *
+     * @return PollInterface
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

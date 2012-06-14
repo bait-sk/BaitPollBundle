@@ -18,6 +18,10 @@ namespace Bait\PollBundle\Model;
  */
 interface PollInterface
 {
+    const POLL_TYPE_USER = 'POLL_TYPE_USER';
+    const POLL_TYPE_ANONYMOUS = 'POLL_TYPE_ANONYMOUS';
+    const POLL_TYPE_MIXED = 'POLL_TYPE_MIXED';
+
     /**
      * Returns unique poll ID.
      *
@@ -59,4 +63,11 @@ interface PollInterface
      * @return boolean
      */
     public function isVotesVisible();
+
+    /**
+     * Gets type of poll.
+     *
+     * @return string
+     */
+    public function getType();
 }
