@@ -137,15 +137,15 @@ class Poll
     {
         $this->id = $id;
 
-        $poll = $this->pollManager->findOneById($id);
+        $this->poll = $this->pollManager->findOneById($id);
 
-        if (!$poll) {
+        if (!$this->poll) {
             throw new NotFoundHttpException(
                 sprintf("Poll with id '%s' was not found.", $id)
             );
         }
 
-        if (!$poll->isActive()) {
+        if (!$this->poll->isActive()) {
             $this->isActive = false;
 
             return;
@@ -154,7 +154,7 @@ class Poll
         $this->form = $this->formFactory->create($id);
         $formName = $this->form->getName();
 
-        if ($this->request->getMethod() === 'POST' && $this->request->request->has($formName) && !$this->voteManager->hasVoted($poll)) {
+        if ($this->request->getMethod() === 'POST' && $this->request->request->has($formName) && !$this->voteManager->hasVoted($this->poll)) {
             $this->form->bindRequest($this->request);
 
             if ($this->form->isValid()) {
@@ -209,7 +209,7 @@ class Poll
             $theme = $this->theme;
         }
 
-        $alreadyVoted = $this->voteManager->hasVoted();
+        $alreadyVoted = $this->voteManager->hasVoted($this->poll);
 
         $viewData = array(
             'form' => $this->form->createView(),
@@ -219,8 +219,7 @@ class Poll
         );
 
         if ($alreadyVoted) {
-            $poll = $this->pollManager->findOneById($this->id);
-            $fields = $poll->getFields();
+            $fields = $this->poll->getFields();
             $fieldCount = array();
 
             foreach ($fields as $field) {
