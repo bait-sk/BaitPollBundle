@@ -52,4 +52,9 @@ abstract class Poll extends PollModel
      * @ORM\Column(name="votes_visible", type="boolean")
      */
     protected $votesVisible;
+
+    /**
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    protected $type;
 }
