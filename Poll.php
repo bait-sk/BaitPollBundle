@@ -187,9 +187,9 @@ class Poll
                     if ((PollInterface::POLL_TYPE_USER === $pollType || PollInterface::POLL_TYPE_MIXED) && $isAuthenticated) {
                         $user = $this->securityContext->getToken()->getUser();
 
-                        $votes = array_map(function ($vote) use ($user) {
+                        foreach ($votes as $vote) {
                             $vote->setAuthor($user);
-                        }, $votes);
+                        }
 
                         $doPersist = true;
                     }
