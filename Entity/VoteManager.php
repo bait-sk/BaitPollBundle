@@ -74,7 +74,7 @@ class VoteManager extends BaseVoteManager
     {
         foreach ($votes as $vote) {
             if (!$vote instanceof VoteInterface) {
-                throw new InvalidArgumentException('Vote must be instance of VoterInterface.');
+                throw new \InvalidArgumentException('Vote must be instance of VoterInterface.');
             }
 
             $this->entityManager->persist($vote);
