@@ -166,10 +166,10 @@ class Poll
                 $votes = array();
 
                 foreach ($data as $fieldId => $value) {
-                    $field = str_replace('field_', '', $fieldId);
+                    $fieldId = str_replace('field_', '', $fieldId);
 
                     $values = (array) $value;
-                    $field = $this->objectManager->getReference($this->fieldClass, $field);
+                    $field = $this->objectManager->getReference($this->fieldClass, $fieldId);
 
                     foreach ($values as $value) {
                         $vote = $this->voteManager->create($field, $value);
