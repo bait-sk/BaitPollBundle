@@ -24,9 +24,9 @@ use Bait\PollBundle\Model\Vote as VoteModel;
 abstract class Vote extends VoteModel
 {
     /**
-     * @ORM\Column(name="value", type="text")
+     * @ORM\Column(name="answer", type="text")
      */
-    protected $value;
+    protected $answer;
 
     /**
      * @ORM\Column(name="created_at", type="datetime")
