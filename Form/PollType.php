@@ -91,7 +91,7 @@ class PollType extends AbstractType
                     foreach ($field->getChildren() as $choice) {
                         $choiceFieldType = $choice->getType();
 
-                        if(in_array($choiceFieldType, $assetChoiceFields)) {
+                        if (in_array($choiceFieldType, $assetChoiceFields)) {
                             $choices[$choice->getId()] = array(
                                 'id' => $choice->getId(),
                                 'title' => $choice->getTitle(),
