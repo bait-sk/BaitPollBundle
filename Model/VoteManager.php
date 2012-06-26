@@ -37,7 +37,7 @@ abstract class VoteManager implements VoteManagerInterface
 
         $vote = new $voteClass();
         $vote->setField($field);
-        $vote->setValue($value);
+        $vote->setAnswer($value);
 
         return $vote;
     }
