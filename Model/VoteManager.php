@@ -29,16 +29,6 @@ abstract class VoteManager implements VoteManagerInterface
     }
 
     /**
-     * @param PollInterface $poll Poll
-     *
-     * @return array
-     */
-    public function findByPoll(PollInterface $poll)
-    {
-        return $this->findBy(array('poll' => $poll));
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function create(FieldInterface $field, $value)
