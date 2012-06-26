@@ -18,4 +18,10 @@ namespace Bait\PollBundle\Model;
  */
 interface VoteInterface
 {
+    /**
+     * Gets field this vote belongs to.
+     *
+     * @return FieldInterface
+     */
+    public function getField();
 }
