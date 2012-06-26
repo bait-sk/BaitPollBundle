@@ -31,7 +31,7 @@ abstract class Vote implements VoteInterface
     /**
      * @var string
      */
-    protected $value;
+    protected $answer;
 
     /**
      * @var \DateTime
@@ -68,9 +68,7 @@ abstract class Vote implements VoteInterface
     }
 
     /**
-     * Gets field this vote belongs to.
-     *
-     * @return FieldInterface
+     * {@inheritDoc}
      */
     public function getField()
     {
@@ -78,13 +76,13 @@ abstract class Vote implements VoteInterface
     }
 
     /**
-     * Sets value of vote.
+     * Sets answer of vote.
      *
      * @param string $value Value of vote
      *
      * @return VoteInterface
      */
-    public function setValue($value)
+    public function setAnswer($value)
     {
         $this->value = $value;
 
@@ -92,7 +90,7 @@ abstract class Vote implements VoteInterface
     }
 
     /**
-     * Gets value of vote.
+     * Gets answer of vote.
      *
      * @return string
      */
