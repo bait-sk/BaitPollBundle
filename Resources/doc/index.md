@@ -201,3 +201,37 @@ $poll->create(1);
 ``` html
 {{ poll.render()|raw }}
 ```
+
+Integration with [FOSUserBundle](http://github.com/FriendsOfSymfony/FOSUserBundle)
+==============================
+
+1. Install [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
+2. Implement `SignedVoteInterface` in your `Vote` entity / document:
+
+``` php
+...
+
+use Bait\PollBundle\Model\SignedVoteInterface;
+
+class Vote extends BaseVote implements SignedVoteInterface
+{
+    /**
+     * Voter.
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\User")
+     */
+    protected $author;
+
+    public function setAuthor(UserInterface $author)
+    {
+        $this->author = $author;
+    }
+
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    ...
+}
+```
