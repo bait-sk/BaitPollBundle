@@ -31,13 +31,13 @@ abstract class VoteManager implements VoteManagerInterface
     /**
      * {@inheritDoc}
      */
-    public function create(FieldInterface $field, $value)
+    public function create(FieldInterface $field, $answer)
     {
         $voteClass = $this->getClass();
 
         $vote = new $voteClass();
         $vote->setField($field);
-        $vote->setAnswer($value);
+        $vote->setAnswer($answer);
 
         return $vote;
     }

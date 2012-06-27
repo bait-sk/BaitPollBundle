@@ -76,15 +76,11 @@ abstract class Vote implements VoteInterface
     }
 
     /**
-     * Sets answer of vote.
-     *
-     * @param string $value Value of vote
-     *
-     * @return VoteInterface
+     * {@inheritDoc}
      */
-    public function setAnswer($value)
+    public function setAnswer($answer)
     {
-        $this->value = $value;
+        $this->answer = $answer;
 
         return $this;
     }
@@ -94,9 +90,9 @@ abstract class Vote implements VoteInterface
      *
      * @return string
      */
-    public function getValue()
+    public function getAnswer()
     {
-        return $this->value;
+        return $this->answer;
     }
 
     /**

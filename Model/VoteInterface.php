@@ -24,4 +24,13 @@ interface VoteInterface
      * @return FieldInterface
      */
     public function getField();
+
+    /**
+     * Sets answer of vote.
+     *
+     * @param string $answer Value of vote
+     *
+     * @return VoteInterface
+     */
+    public function setAnswer($answer);
 }
