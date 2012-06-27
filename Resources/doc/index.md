@@ -209,6 +209,7 @@ Integration with [FOSUserBundle](http://github.com/FriendsOfSymfony/FOSUserBundl
 2. Implement `SignedVoteInterface` in your `Vote` entity / document:
 
 ``` php
+<?php
 ...
 
 use Bait\PollBundle\Model\SignedVoteInterface;
@@ -233,5 +234,36 @@ class Vote extends BaseVote implements SignedVoteInterface
     }
 
     ...
+}
+```
+
+3. Create your version of `VoteManager` that implements `SignedVoteManagerInterface`:
+
+``` php
+<?php
+
+...
+
+use Bait\PollBundle\Entity\VoteManager as BaseVoteManager;
+use Bait\PollBundle\Model\SignedVoteManagerInterface;
+use Bait\PollBundle\Model\PollInterface;
+
+class VoteManager extends BaseVoteManager implements SignedVoteManagerInterface
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function hasVoted(PollInterface $poll)
+    {
+        return $this->hasVotedAnonymously($poll) || $this->hasUserVoted($poll);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasUserVoted(PollInterface $poll)
+    {
+        ...
+    }
 }
 ```
