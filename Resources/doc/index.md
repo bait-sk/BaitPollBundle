@@ -205,8 +205,8 @@ $poll->create(1);
 Integration with [FOSUserBundle](http://github.com/FriendsOfSymfony/FOSUserBundle)
 ==============================
 
-1. Install [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
-2. Implement `SignedVoteInterface` in your `Vote` entity / document:
+* Install [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
+* Implement `SignedVoteInterface` in your `Vote` entity / document:
 
 ``` php
 <?php
@@ -237,7 +237,7 @@ class Vote extends BaseVote implements SignedVoteInterface
 }
 ```
 
-3. Create your version of `VoteManager` that implements `SignedVoteManagerInterface`:
+* Create your version of `VoteManager` that implements `SignedVoteManagerInterface`:
 
 ``` php
 <?php
