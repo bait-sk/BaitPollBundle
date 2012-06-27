@@ -241,7 +241,6 @@ class Vote extends BaseVote implements SignedVoteInterface
 
 ``` php
 <?php
-
 ...
 
 use Bait\PollBundle\Entity\VoteManager as BaseVoteManager;
@@ -267,3 +266,5 @@ class VoteManager extends BaseVoteManager implements SignedVoteManagerInterface
     }
 }
 ```
+
+* Optionally, you can implement `SignedPollInterface` in your Poll entity / document if you need it.
