@@ -183,7 +183,7 @@ class Poll
                 $pollType = $this->poll->getType();
                 $doPersist = false;
 
-                if ((PollInterface::POLL_TYPE_USER === $pollType || PollInterface::POLL_TYPE_MIXED) && $isAuthenticated) {
+                if (in_array($pollType, array(PollInterface::POLL_TYPE_USER, PollInterface::POLL_TYPE_MIXED)) && $isAuthenticated) {
                     $user = $this->securityContext->getToken()->getUser();
 
                     foreach ($votes as $vote) {
@@ -193,7 +193,7 @@ class Poll
                     $doPersist = true;
                 }
 
-                if (PollInterface::POLL_TYPE_ANONYMOUS === $pollType || PollInterface::POLL_TYPE_MIXED) {
+                if (in_array($pollType, array(PollInterface::POLL_TYPE_ANONYMOUS, PollInterface::POLL_TYPE_MIXED))) {
                     $cookie = new Cookie(sprintf('%svoted_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
                     $response->headers->setCookie($cookie);
 
