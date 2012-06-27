@@ -22,6 +22,7 @@ use Bait\PollBundle\FormFactory\PollFormFactoryInterface;
 use Bait\PollBundle\Model\PollManagerInterface;
 use Bait\PollBundle\Model\VoteManagerInterface;
 use Bait\PollBundle\Model\PollInterface;
+use Bait\PollBundle\Model\SignedPollInterface;
 
 /**
  * Class responsible for poll management.
@@ -73,6 +74,11 @@ class Poll
     /**
      * @var string
      */
+    protected $pollClass;
+
+    /**
+     * @var string
+     */
     protected $cookiePrefix;
 
     /**
@@ -120,6 +126,7 @@ class Poll
         $this->securityContext = $securityContext;
         list(
             $this->fieldClass,
+            $this->pollClass,
             $this->template,
             $this->theme,
             $this->cookiePrefix,
@@ -135,6 +142,7 @@ class Poll
      * @param mixed $id Id of poll to be created
      *
      * @throws NotFoundHttpException
+     * @throws Exception
      */
     public function create($id, Response &$response)
     {
@@ -179,18 +187,36 @@ class Poll
 
                 $response = new RedirectResponse($this->request->getUri());
 
-                $isAuthenticated = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
                 $pollType = $this->poll->getType();
+
+                // Checks if poll type is proper one, defined in PollInterface
+                $fieldClassReflection = new \ReflectionClass($this->pollClass);
+                $fieldConstants = $fieldClassReflection->getConstants();
+
+                if (!in_array($pollType, $fieldConstants)) {
+                    throw new \Exception(sprintf('"%s" is incorrect poll type.', $pollType));
+                }
+
+                // Checks what multi-vote prevention mechanisms should be triggered
+                // and error that might occur.
                 $doPersist = false;
 
-                if (in_array($pollType, array(PollInterface::POLL_TYPE_USER, PollInterface::POLL_TYPE_MIXED)) && $isAuthenticated) {
-                    $user = $this->securityContext->getToken()->getUser();
+                if ($this->poll instanceof SignedPollInterface) {
+                    $isAuthenticated = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
 
-                    foreach ($votes as $vote) {
-                        $vote->setAuthor($user);
+                    if (in_array($pollType, array(PollInterface::POLL_TYPE_USER, PollInterface::POLL_TYPE_MIXED)) && $isAuthenticated) {
+                        $user = $this->securityContext->getToken()->getUser();
+
+                        foreach ($votes as $vote) {
+                            $vote->setAuthor($user);
+                        }
+
+                        $doPersist = true;
                     }
-
-                    $doPersist = true;
+                } else {
+                    if (in_array($pollType, array(PollInterface::POLL_TYPE_USER, PollInterface::POLL_TYPE_MIXED))) {
+                        throw new \Exception(sprintf('Poll type is "%s", but your Poll class doesn\'t (%s) implement Bait\PollBundle\Model\SignedPollInterface', $pollType, $this->pollClass));
+                    }
                 }
 
                 if (in_array($pollType, array(PollInterface::POLL_TYPE_ANONYMOUS, PollInterface::POLL_TYPE_MIXED))) {
@@ -200,6 +226,7 @@ class Poll
                     $doPersist = true;
                 }
 
+                // If everything went ok, save all votes
                 if ($doPersist) {
                     $this->voteManager->save($votes);
                 }

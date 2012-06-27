@@ -23,6 +23,7 @@
             <argument type="service" id="security.context" />
             <argument type="collection">
                 <argument>%bait_poll.field.class%</argument>
+                <argument>%bait_poll.poll.class%</argument>
                 <argument>%bait_poll.form.template%</argument>
                 <argument>%bait_poll.form.theme%</argument>
                 <argument>%bait_poll.cookie.prefix%</argument>
