@@ -177,36 +177,31 @@ class Poll
                     }
                 }
 
-                try {
-                    $response = new RedirectResponse($this->request->getUri());
+                $response = new RedirectResponse($this->request->getUri());
 
-                    $isAuthenticated = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
-                    $pollType = $this->poll->getType();
-                    $doPersist = false;
+                $isAuthenticated = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
+                $pollType = $this->poll->getType();
+                $doPersist = false;
 
-                    if ((PollInterface::POLL_TYPE_USER === $pollType || PollInterface::POLL_TYPE_MIXED) && $isAuthenticated) {
-                        $user = $this->securityContext->getToken()->getUser();
+                if ((PollInterface::POLL_TYPE_USER === $pollType || PollInterface::POLL_TYPE_MIXED) && $isAuthenticated) {
+                    $user = $this->securityContext->getToken()->getUser();
 
-                        foreach ($votes as $vote) {
-                            $vote->setAuthor($user);
-                        }
-
-                        $doPersist = true;
+                    foreach ($votes as $vote) {
+                        $vote->setAuthor($user);
                     }
 
-                    if (PollInterface::POLL_TYPE_ANONYMOUS === $pollType || PollInterface::POLL_TYPE_MIXED) {
-                        $cookie = new Cookie(sprintf('%svoted_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
-                        $response->headers->setCookie($cookie);
+                    $doPersist = true;
+                }
 
-                        $doPersist = true;
-                    }
+                if (PollInterface::POLL_TYPE_ANONYMOUS === $pollType || PollInterface::POLL_TYPE_MIXED) {
+                    $cookie = new Cookie(sprintf('%svoted_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
+                    $response->headers->setCookie($cookie);
 
-                    if ($doPersist) {
-                        $this->voteManager->save($votes);
-                    }
+                    $doPersist = true;
+                }
 
-                } catch (\Exception $e) {
-                    throw $e;
+                if ($doPersist) {
+                    $this->voteManager->save($votes);
                 }
             }
         }
