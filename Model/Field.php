@@ -59,6 +59,11 @@ abstract class Field implements FieldInterface
     protected $required;
 
     /**
+     * @var int
+     */
+    protected $position;
+
+    /**
      * @var array
      */
     protected $validationConstraints = array();
@@ -242,6 +247,30 @@ abstract class Field implements FieldInterface
     public function isRequired()
     {
         return $this->required;
+    }
+
+    /**
+     * Sets position of field in poll.
+     *
+     * @param int $position
+     *
+     * @return FieldInterface
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Gets position of field in poll.
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 
     /**
