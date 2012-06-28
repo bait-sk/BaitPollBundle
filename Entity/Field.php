@@ -54,6 +54,11 @@ abstract class Field extends FieldModel
     protected $required;
 
     /**
+     * @ORM\Column(name="position", type="integer", nullable=true)
+     */
+    protected $position;
+
+    /**
      * @ORM\Column(name="validation_constraints", type="array")
      */
     protected $validationConstraints;
