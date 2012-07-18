@@ -29,6 +29,11 @@ abstract class Vote extends VoteModel
     protected $answer;
 
     /**
+     * @ORM\Column(name="client_ip", type="string", length="39")
+     */
+    protected $clientIp;
+
+    /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;

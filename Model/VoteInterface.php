@@ -33,4 +33,14 @@ interface VoteInterface
      * @return VoteInterface
      */
     public function setAnswer($answer);
+
+
+    /**
+     * Sets client's IP address
+     *
+     * @param $ip
+     *
+     * @return mixed
+     */
+    public function setClientIp($ip);
 }

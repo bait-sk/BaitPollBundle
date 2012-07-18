@@ -34,6 +34,11 @@ abstract class Vote implements VoteInterface
     protected $answer;
 
     /**
+     * @var string
+     */
+    protected $clientIp;
+
+    /**
      * @var \DateTime
      */
     protected $createdAt;
@@ -95,6 +100,23 @@ abstract class Vote implements VoteInterface
         return $this->answer;
     }
 
+
+    /**
+     * @param string $clientIp
+     */
+    public function setClientIp($clientIp)
+    {
+        $this->clientIp = $clientIp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClientIp()
+    {
+        return $this->clientIp;
+    }
+
     /**
      * Sets time this vote was created at.
      *
@@ -128,4 +150,5 @@ abstract class Vote implements VoteInterface
     {
         return "anonymous";
     }
+
 }
