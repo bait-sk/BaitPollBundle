@@ -165,6 +165,42 @@ class Vote extends BaseVote
     protected $field;
 }
 ```
+ad FieldManager implementing `findOrderedPollFields` method according to your `Field` entity, e.g.:
+
+``` php
+<?php
+
+namespace Acme\DemoBundle\Entity;
+
+use Bait\PollBundle\Entity\FieldManager as BaseFieldManager;
+use Bait\PollBundle\Model\PollInterface;
+
+class FieldManager extends BaseFieldManager
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function findOrderedPollFields(PollInterface $poll)
+    {
+        return $this->repository
+            ->createQueryBuilder('f')
+            ->where('f.poll = ?1')
+            ->orderBy('f.position')
+            ->setParameter(1, $poll->getId())
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+}
+
+```
+then you need to register your FieldManager as a service, e.g.:
+
+``` yml
+    acme_demo_field_manager:
+        class: Acme\DemoBundle\Entity\FieldManager
+        arguments: [@bait_poll.entity_manager, %bait_poll.field.class%]
+```
 
 and add some config to `app/config.yml`:
 
@@ -175,6 +211,7 @@ bait_poll:
         class: Acme\DemoBundle\Entity\Poll
     field:
         class: Acme\DemoBundle\Entity\Field
+        manager: acme_demo_field_manager
     vote:
         class: Acme\DemoBundle\Entity\Vote
 ```

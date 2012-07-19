@@ -56,9 +56,10 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
-                ->arrayNode('field')
+                ->arrayNode('field')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('class')->end()
+                        ->scalarNode('manager')->defaultValue('bait_poll.field.manager.default')->end()
                     ->end()
                 ->end()
 

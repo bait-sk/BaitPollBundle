@@ -51,6 +51,7 @@ class BaitPollExtension extends Extension
 
         $container->setAlias('bait_poll.vote.manager', $config['vote']['manager']);
         $container->setAlias('bait_poll.poll.manager', $config['poll']['manager']);
+        $container->setAlias('bait_poll.field.manager', $config['field']['manager']);
 
         $loader->load('form.xml');
 

@@ -19,10 +19,10 @@ namespace Bait\PollBundle\Model;
 abstract class FieldManager
 {
     /**
-     * Returns ordered fields of certain poll. Primary ordering is by
+     * Returns ordered fields of certain poll.
      *
      *
-     * @param PollInterface $ids Id of poll
+     * @param PollInterface $poll Id of poll
      *
      * @return array
      */

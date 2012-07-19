@@ -13,13 +13,14 @@ namespace Bait\PollBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
 use Bait\PollBundle\Model\FieldManager as BaseFieldManager;
+use Bait\PollBundle\Model\PollInterface;
 
 /**
- * Doctrine 2 ORM dependant poll manager.
+ * Doctrine 2 ORM dependant field manager.
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-class FieldManager extends BaseFieldManager
+abstract class FieldManager extends BaseFieldManager
 {
     /**
      * @var \Doctrine\ORM\EntityRepository
@@ -42,5 +43,6 @@ class FieldManager extends BaseFieldManager
     {
         return $this->repository->findOneBy($criteria);
     }
+
 }
 

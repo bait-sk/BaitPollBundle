@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\MaxLength;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Bait\PollBundle\Model\FieldManager;
 use Bait\PollBundle\Model\PollManagerInterface;
 use Bait\PollBundle\Model\FieldInterface;
 
@@ -28,9 +29,16 @@ use Bait\PollBundle\Model\FieldInterface;
 class PollType extends AbstractType
 {
     /**
+     * @var FieldManager $fieldManager
+     */
+    protected $fieldManager;
+
+    /**
      * @var PollManagerInterface Poll manager
      */
     protected $pollManager;
+
+    protected $id;
 
     /**
      * @var array Translation table of field types
@@ -46,11 +54,12 @@ class PollType extends AbstractType
     );
 
     /**
-     * @param PollManagerInterface $pollManager Poll manager
+     * @param FieldManager $fieldManager Field manager
      */
-    public function __construct(PollManagerInterface $pollManager)
+    public function __construct(PollManagerInterface $pollManager, FieldManager $fieldManager)
     {
         $this->pollManager = $pollManager;
+        $this->fieldManager = $fieldManager;
     }
 
     /**
@@ -195,12 +204,12 @@ class PollType extends AbstractType
     /**
      * Gets all fields from current poll.
      *
-     * @return Doctrine\ORM\PersistentCollection
+     * @return \Doctrine\ORM\PersistentCollection
      */
     protected function getFields()
     {
         $poll = $this->pollManager->findOneById($this->id);
 
-        return $poll->getFields();
+        return $this->fieldManager->findOrderedPollFields($poll);
     }
 }

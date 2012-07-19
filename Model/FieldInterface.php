@@ -59,7 +59,7 @@ interface FieldInterface
     public function getAssetPath();
 
     /**
-     * Gets all children of poll field.
+     * Gets all ordered children of poll field.
      *
      * @return mixed
      */
@@ -85,4 +85,28 @@ interface FieldInterface
      * @return array
      */
     public function getValidationConstraints();
+
+    /**
+     * Gets position of field in poll.
+     *
+     * @return int
+     */
+    public function getPosition();
+
+    /**
+     * Sets position of field in poll.
+     *
+     * @param int $position
+     *
+     * @return FieldInterface
+     */
+    public function setPosition($position);
+
+    /**
+     * Compares position of the field and outputs
+     * usort() friendly value
+     *
+     * @return integer
+     */
+    public function compareFieldPositions(FieldInterface $field1, FieldInterface $field2);
 }

@@ -100,7 +100,10 @@ abstract class Field implements FieldInterface
      */
     public function getChildren()
     {
-        return $this->children;
+        $fields = $this->children->toArray();
+        usort($fields, array($this,'compareFieldPositions'));
+
+        return $fields;
     }
 
     /**
@@ -250,11 +253,7 @@ abstract class Field implements FieldInterface
     }
 
     /**
-     * Sets position of field in poll.
-     *
-     * @param int $position
-     *
-     * @return FieldInterface
+     * {@inheritDoc}
      */
     public function setPosition($position)
     {
@@ -264,9 +263,7 @@ abstract class Field implements FieldInterface
     }
 
     /**
-     * Gets position of field in poll.
-     *
-     * @return int
+     * {@inheritDoc}
      */
     public function getPosition()
     {
@@ -296,4 +293,17 @@ abstract class Field implements FieldInterface
     {
         return $this->validationConstraints;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function compareFieldPositions(FieldInterface $field1, FieldInterface $field2)
+    {
+        if ($field1->getPosition() > $field2->getPosition()) return 1;
+        if ($field1->getPosition() < $field2->getPosition()) return -1;
+        //we don't want to swap fields with null position
+        return 1;
+    }
+
+
 }

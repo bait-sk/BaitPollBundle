@@ -16,6 +16,7 @@
     <parameters>
         <parameter key="bait_poll.poll.manager.default.class">Bait\PollBundle\Entity\PollManager</parameter>
         <parameter key="bait_poll.vote.manager.default.class">Bait\PollBundle\Entity\VoteManager</parameter>
+        <parameter key="bait_poll.field.manager.default.class">Bait\PollBundle\Entity\FieldManager</parameter>
     </parameters>
 
     <services>
@@ -28,9 +29,9 @@
             <argument>%bait_poll.poll.class%</argument>
         </service>
 
-        <service id="bait_poll.field.manager.default" class="%bait_poll.poll.field.default.class%">
+        <service id="bait_poll.field.manager.default" class="%bait_poll.field.manager.default.class%">
             <argument type="service" id="bait_poll.entity_manager" />
-            <argument>%bait_poll.poll.class%</argument>
+            <argument>%bait_poll.field.class%</argument>
         </service>
 
         <service id="bait_poll.vote.manager.default" class="%bait_poll.vote.manager.default.class%" scope="request">
