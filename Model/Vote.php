@@ -34,19 +34,10 @@ abstract class Vote implements VoteInterface
     protected $answer;
 
     /**
-     * @var string
+     * @var VoteGroupInterface
      */
-    protected $clientIp;
+    protected $votegroup;
 
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    public function __construct()
-    {
-        $this->setCreatedAt(new \DateTime());
-    }
 
     /**
      * Gets id of vote.
@@ -100,55 +91,20 @@ abstract class Vote implements VoteInterface
         return $this->answer;
     }
 
-
     /**
-     * @param string $clientIp
+     * {@inheritDoc}
      */
-    public function setClientIp($clientIp)
+    public function getVoteGroup()
     {
-        $this->clientIp = $clientIp;
+        return $this->votegroup;
     }
 
     /**
-     * @return string
+     * {@inheritDoc}
      */
-    public function getClientIp()
-    {
-        return $this->clientIp;
+    public function setVoteGroup(VoteGroupInterface $voteGroup) {
+        $this->votegroup = $voteGroup;
     }
 
-    /**
-     * Sets time this vote was created at.
-     *
-     * @param \DateTime $createdAt Time of creation
-     *
-     * @return VoteInterface
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets time this vote was created at.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Gets name of author.
-     *
-     * @return string
-     */
-    public function getAuthorName()
-    {
-        return "anonymous";
-    }
 
 }

@@ -12,19 +12,24 @@
 namespace Bait\PollBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Bait\PollBundle\Model\Vote as VoteModel;
+use Bait\PollBundle\Model\VoteGroup as VoteGroupModel;
 
 /**
  * Base Vote ORM entity
  *
- * @author Ondrej Slintak <ondrowan@gmail.com>
+ * @author Matej Zilak <teo@teo.sk>
  *
  * @ORM\MappedSuperclass
  */
-abstract class Vote extends VoteModel
+abstract class VoteGroup extends VoteGroupModel
 {
     /**
-     * @ORM\Column(name="answer", type="text")
+     * @ORM\Column(name="client_ip", type="string", length="39")
      */
-    protected $answer;
+    protected $clientIp;
+
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    protected $createdAt;
 }
