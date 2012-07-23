@@ -67,6 +67,10 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('class')->end()
                         ->scalarNode('manager')->defaultValue('bait_poll.vote.manager.default')->end()
+                        ->arrayNode('group')->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('class')->end()
+                                ->scalarNode('manager')->defaultValue('bait_poll.vote.group.manager.default')->end()
                     ->end()
                 ->end()
             ->end();

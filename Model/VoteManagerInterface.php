@@ -23,10 +23,11 @@ interface VoteManagerInterface
      *
      * @param FieldInterface $field Poll field
      * @param string $value Vote value
+     * @param VoteGroupInterface $voteGroup
      *
      * @return VoteInterface
      */
-    public function create(FieldInterface $field, $value);
+    public function create(FieldInterface $field, $value, VoteGroupInterface $voteGroup);
 
     /**
      * Saves vote to DB.
@@ -34,20 +35,6 @@ interface VoteManagerInterface
      * @param mixed $votes Votes to save (VoteInterface or array of them)
      */
     public function save($votes);
-
-    /**
-     * Checks if user has already voted in poll.
-     *
-     * @return boolean
-     */
-    public function hasVoted(PollInterface $poll);
-
-    /**
-     * Check if anonymous user has already voted in poll.
-     *
-     * @return boolean
-     */
-    public function hasVotedAnonymously(PollInterface $poll);
 
     /**
      * Counts all votes for given field.

@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Bait\PollBundle\FormFactory\PollFormFactoryInterface;
 use Bait\PollBundle\Model\PollManagerInterface;
 use Bait\PollBundle\Model\VoteManagerInterface;
+use Bait\PollBundle\Model\VoteGroupManagerInterface;
 use Bait\PollBundle\Model\PollInterface;
 use Bait\PollBundle\Model\SignedPollInterface;
 
@@ -60,6 +61,11 @@ class Poll
      * @var VoteManagerInterface
      */
     protected $voteManager;
+
+    /**
+     * @var VoteGroupManagerInterface
+     */
+    protected $voteGroupManager;
 
     /**
      * @var string
@@ -105,6 +111,7 @@ class Poll
      * @param PollFormFactoryInterface $formFactory Poll form factory
      * @param PollManagerInterface $pollManager Poll manager
      * @param VoteManagerInterface $voteManager Vote manager
+     * @param VoteGroupManagerInterface $voteGroupManager Vote group manager
      */
     public function __construct(
         Request $request,
@@ -113,6 +120,7 @@ class Poll
         PollFormFactoryInterface $formFactory,
         PollManagerInterface $pollManager,
         VoteManagerInterface $voteManager,
+        VoteGroupManagerInterface $voteGroupManager,
         $securityContext,
         array $options
     )
@@ -123,6 +131,7 @@ class Poll
         $this->formFactory = $formFactory;
         $this->pollManager = $pollManager;
         $this->voteManager = $voteManager;
+        $this->voteGroupManager = $voteGroupManager;
         $this->securityContext = $securityContext;
         list(
             $this->fieldClass,
@@ -165,13 +174,15 @@ class Poll
         $this->form = $this->formFactory->create($id);
         $formName = $this->form->getName();
 
-        if ($this->request->getMethod() === 'POST' && $this->request->request->has($formName) && !$this->voteManager->hasVoted($this->poll)) {
+        if ($this->request->getMethod() === 'POST' && $this->request->request->has($formName) && !$this->voteGroupManager->hasVoted($this->poll)) {
             $this->form->bindRequest($this->request);
 
             if ($this->form->isValid()) {
                 $data = $this->form->getData();
 
                 $votes = array();
+
+                $voteGroup = $this->voteGroupManager->create($this->poll);
 
                 foreach ($data as $fieldId => $answer) {
                     $fieldId = str_replace('field_', '', $fieldId);
@@ -180,7 +191,7 @@ class Poll
                     $field = $this->objectManager->getReference($this->fieldClass, $fieldId);
 
                     foreach ($answers as $answer) {
-                        $vote = $this->voteManager->create($field, $answer);
+                        $vote = $this->voteManager->create($field, $answer, $voteGroup);
                         $votes[] = $vote;
                     }
                 }
@@ -206,10 +217,7 @@ class Poll
 
                     if (in_array($pollType, array(PollInterface::POLL_TYPE_USER, PollInterface::POLL_TYPE_MIXED)) && $isAuthenticated) {
                         $user = $this->securityContext->getToken()->getUser();
-
-                        foreach ($votes as $vote) {
-                            $vote->setAuthor($user);
-                        }
+                        $voteGroup->setAuthor($user);
 
                         $doPersist = true;
                     }
@@ -228,6 +236,7 @@ class Poll
 
                 // If everything went ok, save all votes
                 if ($doPersist) {
+                    $this->voteGroupManager->save($voteGroup);
                     $this->voteManager->save($votes);
                 }
             }
@@ -255,7 +264,7 @@ class Poll
             $theme = $this->theme;
         }
 
-        $alreadyVoted = $this->voteManager->hasVoted($this->poll);
+        $alreadyVoted = $this->voteGroupManager->hasVoted($this->poll);
 
         $viewData = array(
             'form' => $this->form->createView(),
