@@ -136,6 +136,37 @@ class Field extends BaseField
 }
 ```
 
+**VoteGroup**
+``` php
+<?php
+
+namespace Acme\DemoBundle\Entity;
+
+use Bait\PollBundle\Entity\VoteGroup as BaseVoteGroup;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="poll_vote_group")
+ */
+class VoteGroup extends BaseVoteGroup
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * Poll.
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\Poll")
+     */
+    protected $poll;
+}
+```
+
 **Vote**
 
 ``` php
@@ -163,6 +194,13 @@ class Vote extends BaseVote
      * @ORM\ManyToOne(targetEntity="Field")
      */
     protected $field;
+
+    /**
+     * VoteGroup.
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\VoteGroup")
+     */
+    protected $votegroup;
 }
 ```
 ad FieldManager implementing `findOrderedPollFields` method according to your `Field` entity, e.g.:
@@ -214,6 +252,8 @@ bait_poll:
         manager: acme_demo_field_manager
     vote:
         class: Acme\DemoBundle\Entity\Vote
+        group:
+            class: Acme\DemoBundle\Entity\VoteGroup
 ```
 
 ```
@@ -243,15 +283,15 @@ Integration with [FOSUserBundle](http://github.com/FriendsOfSymfony/FOSUserBundl
 ==============================
 
 * Install [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
-* Implement `SignedVoteInterface` in your `Vote` entity / document:
+* Implement `SignedVoteGroupInterface` in your `VoteGroup` entity / document:
 
 ``` php
 <?php
 ...
 
-use Bait\PollBundle\Model\SignedVoteInterface;
+use Bait\PollBundle\Model\SignedVoteGroupInterface;
 
-class Vote extends BaseVote implements SignedVoteInterface
+class VoteGroup extends BaseVoteGroup implements SignedVoteGroupInterface
 {
     /**
      * Voter.
@@ -274,17 +314,18 @@ class Vote extends BaseVote implements SignedVoteInterface
 }
 ```
 
-* Create your version of `VoteManager` that implements `SignedVoteManagerInterface`:
+* Create your version of `VoteGroupManager` that implements `SignedVoteGroupManagerInterface`:
 
 ``` php
 <?php
-...
 
-use Bait\PollBundle\Entity\VoteManager as BaseVoteManager;
-use Bait\PollBundle\Model\SignedVoteManagerInterface;
+namespace Acme\DemoBundle\Entity;
+
+use Bait\PollBundle\Entity\VoteGroupManager as BaseVoteGroupManager;
+use Bait\PollBundle\Model\SignedVoteGroupManagerInterface;
 use Bait\PollBundle\Model\PollInterface;
 
-class VoteManager extends BaseVoteManager implements SignedVoteManagerInterface
+class VoteGroupManager extends BaseVoteGroupManager implements SignedVoteGroupManagerInterface
 {
     /**
      * {@inheritDoc}

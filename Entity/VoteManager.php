@@ -65,17 +65,6 @@ class VoteManager extends BaseVoteManager
         return $this->repository->findBy($criteria);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function create(FieldInterface $field, $answer)
-    {
-        $vote =  parent::create($field, $answer);
-        $vote->setClientIp($this->request->getClientIp());
-
-        return $vote;
-    }
-
 
     /**
      * Doctrine 2 ORM specific save.
