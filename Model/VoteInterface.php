@@ -26,6 +26,20 @@ interface VoteInterface
     public function getField();
 
     /**
+     * Gets vote group this vote belongs to.
+     *
+     * @return VoteGroupInterface
+     */
+    public function getVoteGroup();
+
+    /**
+     * Sets group this vote belongs to
+     *
+     * @param VoteGroupInterface $voteGroup
+     */
+    public function setVoteGroup(VoteGroupInterface $voteGroup);
+
+    /**
      * Sets answer of vote.
      *
      * @param string $answer Value of vote
@@ -34,13 +48,4 @@ interface VoteInterface
      */
     public function setAnswer($answer);
 
-
-    /**
-     * Sets client's IP address
-     *
-     * @param $ip
-     *
-     * @return mixed
-     */
-    public function setClientIp($ip);
 }

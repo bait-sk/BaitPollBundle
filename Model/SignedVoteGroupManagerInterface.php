@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-interface SignedVoteManagerInterface extends VoteManagerInterface
+interface SignedVoteGroupManagerInterface extends VoteGroupManagerInterface
 {
     /**
      * Finds out if user has already voted, depending on

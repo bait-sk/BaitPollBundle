@@ -31,13 +31,14 @@ abstract class VoteManager implements VoteManagerInterface
     /**
      * {@inheritDoc}
      */
-    public function create(FieldInterface $field, $answer)
+    public function create(FieldInterface $field, $answer, VoteGroupInterface $voteGroup)
     {
         $voteClass = $this->getClass();
 
         $vote = new $voteClass();
         $vote->setField($field);
         $vote->setAnswer($answer);
+        $vote->setVoteGroup($voteGroup);
 
         return $vote;
     }
@@ -50,26 +51,6 @@ abstract class VoteManager implements VoteManagerInterface
         $votes = (array) $votes;
 
         $this->doSave($votes);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function hasVoted(PollInterface $poll)
-    {
-        return $this->hasVotedAnonymously($poll);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function hasVotedAnonymously(PollInterface $poll)
-    {
-        if ($this->request->cookies->has(sprintf('%svoted_%s', $this->cookiePrefix, $poll->getId()))) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
