@@ -1,8 +1,6 @@
 BaitPollBundle
 ==============
 
-> Warning, you're currently on a branch that is in-development-progress and functionality is broken.
-
 > This bundle is **not** production ready. It still needs a lot of love.
 > We appreciate if you try it out and submit [issue](https://github.com/bait-sk/BaitPollBundle/issues)
 > if you find some bug or if there is something you'd like to see in it.
