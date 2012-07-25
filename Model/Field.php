@@ -64,6 +64,11 @@ abstract class Field implements FieldInterface
     protected $position;
 
     /**
+     * @var bool
+     */
+    protected $isActive;
+
+    /**
      * @var array
      */
     protected $validationConstraints = array();
@@ -303,6 +308,16 @@ abstract class Field implements FieldInterface
         if ($field1->getPosition() < $field2->getPosition()) return -1;
         //we don't want to swap fields with null position
         return 1;
+    }
+
+    /**
+     * Checks if the field is active
+     *
+     * @return bool
+     */
+    public function isActive()
+    {
+      return $this->isActive;
     }
 
 

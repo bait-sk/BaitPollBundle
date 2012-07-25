@@ -109,4 +109,11 @@ interface FieldInterface
      * @return integer
      */
     public function compareFieldPositions(FieldInterface $field1, FieldInterface $field2);
+
+    /**
+     * Checks if the field is active
+     *
+     * @return bool
+     */
+    public function isActive();
 }
