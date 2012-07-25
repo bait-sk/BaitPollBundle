@@ -203,7 +203,7 @@ class Vote extends BaseVote
     protected $votegroup;
 }
 ```
-ad FieldManager implementing `findOrderedPollFields` method according to your `Field` entity, e.g.:
+add FieldManager implementing `findOrderedPollFields` method according to your `Field` entity, e.g.:
 
 ``` php
 <?php
@@ -223,8 +223,10 @@ class FieldManager extends BaseFieldManager
         return $this->repository
             ->createQueryBuilder('f')
             ->where('f.poll = ?1')
+            ->andWhere('f.isActive = ?2')
             ->orderBy('f.position')
             ->setParameter(1, $poll->getId())
+            ->setParameter(2, 1)
             ->getQuery()
             ->getResult()
             ;
