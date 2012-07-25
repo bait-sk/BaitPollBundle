@@ -9,7 +9,7 @@
 
 {% form_theme form theme %}
 
-<form action="{{ request.uri }}" method="post">
+<form action="{{ request.uri }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
 
     <input type="submit">
