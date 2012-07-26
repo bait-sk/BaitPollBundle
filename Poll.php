@@ -20,10 +20,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Cookie;
 use Bait\PollBundle\FormFactory\PollFormFactoryInterface;
 use Bait\PollBundle\Model\PollManagerInterface;
+use Bait\PollBundle\Model\FieldManager;
 use Bait\PollBundle\Model\VoteManagerInterface;
 use Bait\PollBundle\Model\VoteGroupManagerInterface;
 use Bait\PollBundle\Model\PollInterface;
 use Bait\PollBundle\Model\SignedPollInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class responsible for poll management.
@@ -95,6 +97,11 @@ class Poll
     /**
      * @var string
      */
+    protected $uploadDir;
+
+    /**
+     * @var string
+     */
     protected $theme;
 
     /**
@@ -110,6 +117,7 @@ class Poll
      * @param ObjectManager $objectManager Doctrine's object manager
      * @param PollFormFactoryInterface $formFactory Poll form factory
      * @param PollManagerInterface $pollManager Poll manager
+     * @param FieldManager $fieldManager Field manager
      * @param VoteManagerInterface $voteManager Vote manager
      * @param VoteGroupManagerInterface $voteGroupManager Vote group manager
      */
@@ -119,6 +127,7 @@ class Poll
         ObjectManager $objectManager,
         PollFormFactoryInterface $formFactory,
         PollManagerInterface $pollManager,
+        FieldManager $fieldManager,
         VoteManagerInterface $voteManager,
         VoteGroupManagerInterface $voteGroupManager,
         $securityContext,
@@ -130,6 +139,7 @@ class Poll
         $this->objectManager = $objectManager;
         $this->formFactory = $formFactory;
         $this->pollManager = $pollManager;
+        $this->fieldManager = $fieldManager;
         $this->voteManager = $voteManager;
         $this->voteGroupManager = $voteGroupManager;
         $this->securityContext = $securityContext;
@@ -139,7 +149,8 @@ class Poll
             $this->template,
             $this->theme,
             $this->cookiePrefix,
-            $this->cookieDuration
+            $this->cookieDuration,
+            $this->uploadDir
         ) = $options;
         $this->isActive = true;
     }
@@ -232,6 +243,25 @@ class Poll
                     $response->headers->setCookie($cookie);
 
                     $doPersist = true;
+                }
+
+                // Checks if any upload occurred/should have occurred
+                // and handles it
+
+                if ($this->fieldManager->hasUploadFileds($this->poll)) {
+                    if ("" == $this->uploadDir) {
+                        throw new \Exception("You should configure the bait_poll.upload_dir directive in your config.yml");
+                    }
+                    if (!is_writable($this->uploadDir . '/')) {
+                        throw new \Exception(sprintf('"%s" is not a writable folder for uploads.', $this->uploadDir));
+                    }
+
+                    foreach ($data as $field) {
+                        if ($field instanceof UploadedFile) {
+                            //@TODO: create unique filename - votegroup id as folder
+                            $field->move($this->uploadDir,'test');
+                        }
+                    }
                 }
 
                 // If everything went ok, save all votes

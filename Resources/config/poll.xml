@@ -19,6 +19,7 @@
             <argument type="service" id="bait_poll.entity_manager" />
             <argument type="service" id="bait_poll.form.factory" />
             <argument type="service" id="bait_poll.poll.manager" />
+            <argument type="service" id="bait_poll.field.manager" />
             <argument type="service" id="bait_poll.vote.manager" />
             <argument type="service" id="bait_poll.vote.group.manager" />
             <argument type="service" id="security.context" />
@@ -29,6 +30,7 @@
                 <argument>%bait_poll.form.theme%</argument>
                 <argument>%bait_poll.cookie.prefix%</argument>
                 <argument>%bait_poll.cookie.duration%</argument>
+                <argument>%bait_poll.upload_dir%</argument>
             </argument>
         </service>
     </services>

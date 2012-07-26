@@ -12,7 +12,7 @@
 namespace Bait\PollBundle\Model;
 
 /**
- * Connection agnostic poll manager.
+ * Connection agnostic field manager.
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
@@ -27,5 +27,24 @@ abstract class FieldManager
      * @return array
      */
     abstract public function findOrderedPollFields(PollInterface $poll);
+
+    /**
+     * Checks if a poll has upload fields
+     *
+     * @param PollInterface $poll
+     * @return bool
+     */
+    public function hasUploadFileds(PollInterface $poll)
+    {
+        $fields = $this->findOrderedPollFields($poll);
+        $doesIt = false;
+        foreach ($fields as $field) {
+            if ($field->getType() === FieldInterface::TYPE_FILE) {
+                $doesIt = true;
+                break;
+            }
+        }
+        return $doesIt;
+    }
 }
 

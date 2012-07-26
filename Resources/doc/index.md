@@ -247,6 +247,8 @@ and add some config to `app/config.yml`:
 ``` yml
 bait_poll:
     db_driver: orm
+    #this is needed when you want to use upload field types
+    upload_dir: %kernel.root_dir%/../web/poll
     poll:
         class: Acme\DemoBundle\Entity\Poll
     field:

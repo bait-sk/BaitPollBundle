@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('db_driver')->cannotBeOverwritten()->isRequired()->end()
+                ->scalarNode('upload_dir')->defaultNull()->end()
                 ->scalarNode('model_manager_name')->defaultNull()->end()
 
                 ->arrayNode('cookie')->addDefaultsIfNotSet()
