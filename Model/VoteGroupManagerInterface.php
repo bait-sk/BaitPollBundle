@@ -31,6 +31,7 @@ interface VoteGroupManagerInterface
      * Saves vote group to DB.
      *
      * @param VoteGroupInterface $voteGroup
+     * @return VoteGroupInterface
      */
     public function save(VoteGroupInterface $voteGroup);
 

@@ -256,10 +256,13 @@ class Poll
                         throw new \Exception(sprintf('"%s" is not a writable folder for uploads.', $this->uploadDir));
                     }
 
-                    foreach ($data as $field) {
+                    $voteGroup = $this->voteGroupManager->save($voteGroup);
+                    $folder = $this->uploadDir . '/' . $voteGroup->getId();
+                    mkdir($folder);
+
+                    foreach ($data as $fieldName => $field) {
                         if ($field instanceof UploadedFile) {
-                            //@TODO: create unique filename - votegroup id as folder
-                            $field->move($this->uploadDir,'test');
+                            $field->move($folder, $fieldName . '.' . $field->guessExtension());
                         }
                     }
                 }

@@ -36,6 +36,8 @@ abstract class VoteGroupManager implements VoteGroupManagerInterface {
     public function save(VoteGroupInterface $voteGroup)
     {
         $this->doSave($voteGroup);
+
+        return $voteGroup;
     }
 
     /**
