@@ -41,6 +41,11 @@ abstract class Field implements FieldInterface
     /**
      * @var string
      */
+    protected $description;
+
+    /**
+     * @var string
+     */
     protected $assetPath;
 
     /**
@@ -163,6 +168,28 @@ abstract class Field implements FieldInterface
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Sets description of poll field.
+     *
+     * @param string $description
+     *
+     * @return FieldInterface
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**

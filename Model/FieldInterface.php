@@ -73,6 +73,13 @@ interface FieldInterface
     public function getTitle();
 
     /**
+     * Gets description of poll field.
+     *
+     * @return string
+     */
+    public function getDescription();
+
+    /**
      * Gets type of poll field.
      *
      * @return string
