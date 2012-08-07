@@ -136,20 +136,20 @@ class Field extends BaseField
 }
 ```
 
-**VoteGroup**
+**AnswerGroup**
 ``` php
 <?php
 
 namespace Acme\DemoBundle\Entity;
 
-use Bait\PollBundle\Entity\VoteGroup as BaseVoteGroup;
+use Bait\PollBundle\Entity\AnswerGroup as BaseAnswerGroup;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="poll_vote_group")
+ * @ORM\Table(name="poll_answer_group")
  */
-class VoteGroup extends BaseVoteGroup
+class AnswerGroup extends BaseAnswerGroup
 {
     /**
      * @ORM\Id
@@ -167,21 +167,21 @@ class VoteGroup extends BaseVoteGroup
 }
 ```
 
-**Vote**
+**Answer**
 
 ``` php
 <?php
 
 namespace Acme\DemoBundle\Entity;
 
-use Bait\PollBundle\Entity\Vote as BaseVote;
+use Bait\PollBundle\Entity\Answer as BaseAnswer;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="poll_vote")
+ * @ORM\Table(name="poll_answer")
  */
-class Vote extends BaseVote
+class Answer extends BaseAnswer
 {
     /**
      * @ORM\Id
@@ -196,11 +196,11 @@ class Vote extends BaseVote
     protected $field;
 
     /**
-     * VoteGroup.
+     * AnswerGroup.
      *
-     * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\VoteGroup")
+     * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\AnswerGroup")
      */
-    protected $votegroup;
+    protected $answerGroup;
 }
 ```
 add FieldManager implementing `findOrderedPollFields` method according to your `Field` entity, e.g.:
@@ -254,10 +254,10 @@ bait_poll:
     field:
         class: Acme\DemoBundle\Entity\Field
         manager: acme_demo_field_manager
-    vote:
-        class: Acme\DemoBundle\Entity\Vote
-        group:
-            class: Acme\DemoBundle\Entity\VoteGroup
+    answer:
+        class: Acme\DemoBundle\Entity\Answer
+    answer_group:
+        class: Acme\DemoBundle\Entity\AnswerGroup
 ```
 
 ```
@@ -287,18 +287,18 @@ Integration with [FOSUserBundle](http://github.com/FriendsOfSymfony/FOSUserBundl
 ==============================
 
 * Install [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
-* Implement `SignedVoteGroupInterface` in your `VoteGroup` entity / document:
+* Implement `SignedAnswerGroupInterface` in your `AnswerGroup` entity / document:
 
 ``` php
 <?php
 ...
 
-use Bait\PollBundle\Model\SignedVoteGroupInterface;
+use Bait\PollBundle\Model\SignedAnswerGroupInterface;
 
-class VoteGroup extends BaseVoteGroup implements SignedVoteGroupInterface
+class AnswerGroup extends BaseAnswerGroup implements SignedAnswerGroupInterface
 {
     /**
-     * Voter.
+     * Author of answer.
      *
      * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\User")
      */
@@ -318,31 +318,31 @@ class VoteGroup extends BaseVoteGroup implements SignedVoteGroupInterface
 }
 ```
 
-* Create your version of `VoteGroupManager` that implements `SignedVoteGroupManagerInterface`:
+* Create your version of `AnswerGroupManager` that implements `SignedAnswerGroupManagerInterface`:
 
 ``` php
 <?php
 
 namespace Acme\DemoBundle\Entity;
 
-use Bait\PollBundle\Entity\VoteGroupManager as BaseVoteGroupManager;
-use Bait\PollBundle\Model\SignedVoteGroupManagerInterface;
+use Bait\PollBundle\Entity\AnswerGroupManager as BaseAnswerGroupManager;
+use Bait\PollBundle\Model\SignedAnswerGroupManagerInterface;
 use Bait\PollBundle\Model\PollInterface;
 
-class VoteGroupManager extends BaseVoteGroupManager implements SignedVoteGroupManagerInterface
+class AnswerGroupManager extends BaseAnswerGroupManager implements SignedAnswerGroupManagerInterface
 {
     /**
      * {@inheritDoc}
      */
-    public function hasVoted(PollInterface $poll)
+    public function hasAnswered(PollInterface $poll)
     {
-        return $this->hasVotedAnonymously($poll) || $this->hasUserVoted($poll);
+        return $this->hasAnsweredAnonymously($poll) || $this->hasUserAnswered($poll);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function hasUserVoted(PollInterface $poll)
+    public function hasUserAnswered(PollInterface $poll)
     {
         ...
     }

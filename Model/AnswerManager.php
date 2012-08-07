@@ -12,16 +12,16 @@
 namespace Bait\PollBundle\Model;
 
 /**
- * Connection agnostic vote manager.
+ * Connection agnostic answer manager.
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-abstract class VoteManager implements VoteManagerInterface
+abstract class AnswerManager implements AnswerManagerInterface
 {
     /**
      * @param FieldInterface $field Poll field
      *
-     * @return VoteInterface
+     * @return AnswerInterface
      */
     public function findByField(FieldInterface $field)
     {
@@ -31,26 +31,26 @@ abstract class VoteManager implements VoteManagerInterface
     /**
      * {@inheritDoc}
      */
-    public function create(FieldInterface $field, $answer, VoteGroupInterface $voteGroup)
+    public function create(FieldInterface $field, $answer, AnswerGroupInterface $answerGroup)
     {
-        $voteClass = $this->getClass();
+        $answerClass = $this->getClass();
 
-        $vote = new $voteClass();
-        $vote->setField($field);
-        $vote->setAnswer($answer);
-        $vote->setVoteGroup($voteGroup);
+        $answer = new $answerClass();
+        $answer->setField($field);
+        $answer->setAnswer($answer);
+        $answer->setAnswerGroup($answerGroup);
 
-        return $vote;
+        return $answer;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function save($votes)
+    public function save($answers)
     {
-        $votes = (array) $votes;
+        $answers = (array) $answers;
 
-        $this->doSave($votes);
+        $this->doSave($answers);
     }
 
     /**
@@ -62,30 +62,30 @@ abstract class VoteManager implements VoteManagerInterface
     }
 
     /**
-     * Finds votes by given criteria.
+     * Finds answers by given criteria.
      *
-     * @param array $criteria Criteria by which function filters votes
+     * @param array $criteria Criteria by which function filters answers
      */
     abstract public function findBy($criteria);
 
     /**
      * Connection dependant save.
      *
-     * @paramter array $votes Array of votes
+     * @paramter array $answers Array of answers
      */
-    abstract public function doSave(array $votes);
+    abstract public function doSave(array $answers);
 
     /**
      * Connection dependant count by field.
      *
-     * @parameter FieldInterface $field Field to check votes for
+     * @parameter FieldInterface $field Field to check answers for
      *
      * @return integer
      */
     abstract public function doCountByField(FieldInterface $field);
 
     /**
-     * Gets class name of vote.
+     * Gets class name of answer.
      *
      * @return string
      */

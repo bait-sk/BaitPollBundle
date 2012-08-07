@@ -12,16 +12,16 @@
 namespace Bait\PollBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Bait\PollBundle\Model\Vote as VoteModel;
+use Bait\PollBundle\Model\Answer as AnswerModel;
 
 /**
- * Base Vote ORM entity
+ * Base Answer ORM entity
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  *
  * @ORM\MappedSuperclass
  */
-abstract class Vote extends VoteModel
+abstract class Answer extends AnswerModel
 {
     /**
      * @ORM\Column(name="answer", type="text")

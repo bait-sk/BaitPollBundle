@@ -18,13 +18,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-interface SignedVoteGroupManagerInterface extends VoteGroupManagerInterface
+interface SignedAnswerGroupManagerInterface extends AnswerGroupManagerInterface
 {
     /**
-     * Finds out if user has already voted, depending on
+     * Finds out if user has already answered, depending on
      * type of poll.
      *
      * @return boolean
      */
-    public function hasUserVoted(PollInterface $poll);
+    public function hasUserAnswered(PollInterface $poll);
 }

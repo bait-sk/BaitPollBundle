@@ -13,16 +13,16 @@ namespace Bait\PollBundle\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
-use Bait\PollBundle\Model\VoteManager as BaseVoteManager;
-use Bait\PollBundle\Model\VoteInterface;
+use Bait\PollBundle\Model\AnswerManager as BaseAnswerManager;
+use Bait\PollBundle\Model\AnswerInterface;
 use Bait\PollBundle\Model\FieldInterface;
 
 /**
- * Doctrine 2 ORM specific vote manager.
+ * Doctrine 2 ORM specific answer manager.
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-class VoteManager extends BaseVoteManager
+class AnswerManager extends BaseAnswerManager
 {
     /**
      * @var EntityManager
@@ -71,14 +71,14 @@ class VoteManager extends BaseVoteManager
      *
      * {@inheritDoc}
      */
-    public function doSave(array $votes)
+    public function doSave(array $answers)
     {
-        foreach ($votes as $vote) {
-            if (!$vote instanceof VoteInterface) {
-                throw new \InvalidArgumentException('Vote must be instance of VoterInterface.');
+        foreach ($answers as $answer) {
+            if (!$answer instanceof AnswerInterface) {
+                throw new \InvalidArgumentException('Answer must be instance of AnswerInterface.');
             }
 
-            $this->entityManager->persist($vote);
+            $this->entityManager->persist($answer);
         }
 
         $this->entityManager->flush();

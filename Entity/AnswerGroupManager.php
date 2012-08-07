@@ -1,28 +1,28 @@
 <?php
 
-    /*
-    * This file is part of the BaitPollBundle package.
-    *
-    * (c) BAIT s.r.o. <http://www.bait.sk/>
-    *
-    * For the full copyright and license information, please view the LICENSE
-    * file that was distributed with this source code.
-    */
+/*
+ * This file is part of the BaitPollBundle package.
+ *
+ * (c) BAIT s.r.o. <http://www.bait.sk/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Bait\PollBundle\Entity;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
-use Bait\PollBundle\Model\VoteGroupManager as BaseVoteGroupManager;
-use Bait\PollBundle\Model\VoteGroupInterface;
+use Bait\PollBundle\Model\AnswerGroupManager as BaseAnswerGroupManager;
+use Bait\PollBundle\Model\AnswerGroupInterface;
 use Bait\PollBundle\Model\PollInterface;
 
 /**
- * Doctrine 2 ORM specific vote group manager.
+ * Doctrine 2 ORM specific answer group manager.
  *
  * @author Matej Zilak <teo@teo.sk>
  */
-class VoteGroupManager extends BaseVoteGroupManager
+class AnswerGroupManager extends BaseAnswerGroupManager
 {
     /**
      * @var EntityManager
@@ -59,12 +59,11 @@ class VoteGroupManager extends BaseVoteGroupManager
 
     public function create(PollInterface $poll)
     {
-        $voteGroup =  parent::create($poll);
-        $voteGroup->setClientIp($this->request->getClientIp());
+        $answerGroup =  parent::create($poll);
+        $answerGroup->setClientIp($this->request->getClientIp());
 
-        return $voteGroup;
+        return $answerGroup;
     }
-
 
     /**
      *{@inheritDoc}
@@ -79,14 +78,12 @@ class VoteGroupManager extends BaseVoteGroupManager
      *
      * {@inheritDoc}
      */
-    public function doSave($voteGroup)
+    public function doSave($answerGroup)
     {
-        if (!$voteGroup instanceof VoteGroupInterface) {
-            throw new \InvalidArgumentException('Vote Group must be instance of VoteGroupInterface.');
+        if (!$answerGroup instanceof AnswerGroupInterface) {
+            throw new \InvalidArgumentException('Answer Group must be instance of AnswerGroupInterface.');
         }
-        $this->entityManager->persist($voteGroup);
+        $this->entityManager->persist($answerGroup);
         $this->entityManager->flush();
     }
-
-
 }

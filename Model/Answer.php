@@ -12,11 +12,11 @@
 namespace Bait\PollBundle\Model;
 
 /**
- * Base Vote model.
+ * Base Answer model.
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-abstract class Vote implements VoteInterface
+abstract class Answer implements AnswerInterface
 {
     /**
      * @var mixed
@@ -31,16 +31,15 @@ abstract class Vote implements VoteInterface
     /**
      * @var string
      */
-    protected $answer;
+    protected $value;
 
     /**
-     * @var VoteGroupInterface
+     * @var AnswerGroupInterface
      */
-    protected $votegroup;
-
+    protected $answerGroup;
 
     /**
-     * Gets id of vote.
+     * Gets id of answer.
      *
      * @return mixed
      */
@@ -50,11 +49,11 @@ abstract class Vote implements VoteInterface
     }
 
     /**
-     * Sets field this vote belongs to.
+     * Sets field this answer belongs to.
      *
      * @param FieldInterface Poll field
      *
-     * @return VoteInterface
+     * @return AnswerInterface
      */
     public function setField(FieldInterface $field)
     {
@@ -74,37 +73,33 @@ abstract class Vote implements VoteInterface
     /**
      * {@inheritDoc}
      */
-    public function setAnswer($answer)
+    public function setValue($value)
     {
-        $this->answer = $answer;
+        $this->value = $value;
 
         return $this;
     }
 
     /**
-     * Gets answer of vote.
-     *
-     * @return string
+     * {@inheritDoc}
      */
-    public function getAnswer()
+    public function getValue()
     {
-        return $this->answer;
+        return $this->value;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getVoteGroup()
+    public function getAnswerGroup()
     {
-        return $this->votegroup;
+        return $this->answergroup;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setVoteGroup(VoteGroupInterface $voteGroup) {
-        $this->votegroup = $voteGroup;
+    public function setAnswerGroup(AnswerGroupInterface $answerGroup) {
+        $this->answergroup = $answerGroup;
     }
-
-
 }

@@ -12,11 +12,11 @@
 namespace Bait\PollBundle\Model;
 
 /**
- * Base VoteGroup model.
+ * Base AnswerGroup model.
  *
  * @author Matej Zilak <teo@teo.sk>
  */
-abstract class VoteGroup implements VoteGroupInterface
+abstract class AnswerGroup implements AnswerGroupInterface
 {
     /**
      * @var mixed
@@ -44,7 +44,7 @@ abstract class VoteGroup implements VoteGroupInterface
     }
 
     /**
-     * Gets id of vote group.
+     * Gets id of answer group.
      *
      * @return mixed
      */
@@ -54,11 +54,11 @@ abstract class VoteGroup implements VoteGroupInterface
     }
 
     /**
-     * Sets poll this vote group belongs to.
+     * Sets poll this answer group belongs to.
      *
      * @param PollInterface Poll
      *
-     * @return VoteInterface
+     * @return AnswerInterface
      */
     public function setPoll(PollInterface $poll)
     {
@@ -92,11 +92,11 @@ abstract class VoteGroup implements VoteGroupInterface
     }
 
     /**
-     * Sets time this vote was created at.
+     * Sets time this answer was created at.
      *
      * @param \DateTime $createdAt Time of creation
      *
-     * @return VoteInterface
+     * @return AnswerInterface
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
@@ -106,7 +106,7 @@ abstract class VoteGroup implements VoteGroupInterface
     }
 
     /**
-     * Gets time this vote was created at.
+     * Gets time this answer was created at.
      *
      * @return \DateTime
      */
@@ -124,5 +124,4 @@ abstract class VoteGroup implements VoteGroupInterface
     {
         return "anonymous";
     }
-
 }

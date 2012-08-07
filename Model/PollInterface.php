@@ -58,11 +58,11 @@ interface PollInterface
     public function isActive();
 
     /**
-     * Gets visibility of votes after user voted.
+     * Gets visibility of answers after user answered.
      *
      * @return boolean
      */
-    public function isVotesVisible();
+    public function isAnswersVisible();
 
     /**
      * Gets type of poll.

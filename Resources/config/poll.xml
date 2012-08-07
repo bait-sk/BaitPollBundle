@@ -20,8 +20,8 @@
             <argument type="service" id="bait_poll.form.factory" />
             <argument type="service" id="bait_poll.poll.manager" />
             <argument type="service" id="bait_poll.field.manager" />
-            <argument type="service" id="bait_poll.vote.manager" />
-            <argument type="service" id="bait_poll.vote.group.manager" />
+            <argument type="service" id="bait_poll.answer.manager" />
+            <argument type="service" id="bait_poll.answer_group.manager" />
             <argument type="service" id="security.context" />
             <argument type="collection">
                 <argument>%bait_poll.field.class%</argument>

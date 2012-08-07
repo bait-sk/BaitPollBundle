@@ -12,14 +12,14 @@
 namespace Bait\PollBundle\Model;
 
 /**
- * Interface defining shape of vote groups in this bundle.
+ * Interface defining shape of answer groups in this bundle.
  *
  * @author Matej Zilak <teo@teo.sk>
  */
-interface VoteGroupInterface
+interface AnswerGroupInterface
 {
     /**
-     * Gets poll this vote belongs to.
+     * Gets poll this answer belongs to.
      *
      * @return PollInterface
      */

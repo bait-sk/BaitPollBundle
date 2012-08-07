@@ -21,8 +21,8 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Bait\PollBundle\FormFactory\PollFormFactoryInterface;
 use Bait\PollBundle\Model\PollManagerInterface;
 use Bait\PollBundle\Model\FieldManager;
-use Bait\PollBundle\Model\VoteManagerInterface;
-use Bait\PollBundle\Model\VoteGroupManagerInterface;
+use Bait\PollBundle\Model\AnswerManagerInterface;
+use Bait\PollBundle\Model\AnswerGroupManagerInterface;
 use Bait\PollBundle\Model\PollInterface;
 use Bait\PollBundle\Model\SignedPollInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -60,14 +60,14 @@ class Poll
     protected $pollManager;
 
     /**
-     * @var VoteManagerInterface
+     * @var AnswerManagerInterface
      */
-    protected $voteManager;
+    protected $answerManager;
 
     /**
-     * @var VoteGroupManagerInterface
+     * @var AnswerGroupManagerInterface
      */
-    protected $voteGroupManager;
+    protected $answerGroupManager;
 
     /**
      * @var string
@@ -118,8 +118,8 @@ class Poll
      * @param PollFormFactoryInterface $formFactory Poll form factory
      * @param PollManagerInterface $pollManager Poll manager
      * @param FieldManager $fieldManager Field manager
-     * @param VoteManagerInterface $voteManager Vote manager
-     * @param VoteGroupManagerInterface $voteGroupManager Vote group manager
+     * @param AnswerManagerInterface $answerManager Answer manager
+     * @param AnswerGroupManagerInterface $answerGroupManager Answer group manager
      */
     public function __construct(
         Request $request,
@@ -128,8 +128,8 @@ class Poll
         PollFormFactoryInterface $formFactory,
         PollManagerInterface $pollManager,
         FieldManager $fieldManager,
-        VoteManagerInterface $voteManager,
-        VoteGroupManagerInterface $voteGroupManager,
+        AnswerManagerInterface $answerManager,
+        AnswerGroupManagerInterface $answerGroupManager,
         $securityContext,
         array $options
     )
@@ -140,8 +140,8 @@ class Poll
         $this->formFactory = $formFactory;
         $this->pollManager = $pollManager;
         $this->fieldManager = $fieldManager;
-        $this->voteManager = $voteManager;
-        $this->voteGroupManager = $voteGroupManager;
+        $this->answerManager = $answerManager;
+        $this->answerGroupManager = $answerGroupManager;
         $this->securityContext = $securityContext;
         list(
             $this->fieldClass,
@@ -185,15 +185,15 @@ class Poll
         $this->form = $this->formFactory->create($id);
         $formName = $this->form->getName();
 
-        if ($this->request->getMethod() === 'POST' && $this->request->request->has($formName) && !$this->voteGroupManager->hasVoted($this->poll)) {
+        if ($this->request->getMethod() === 'POST' && $this->request->request->has($formName) && !$this->answerGroupManager->hasAnswered($this->poll)) {
             $this->form->bindRequest($this->request);
 
             if ($this->form->isValid()) {
                 $data = $this->form->getData();
 
-                $votes = array();
+                $answers = array();
 
-                $voteGroup = $this->voteGroupManager->create($this->poll);
+                $answerGroup = $this->answerGroupManager->create($this->poll);
 
                 foreach ($data as $fieldId => $answer) {
                     $fieldId = str_replace('field_', '', $fieldId);
@@ -202,8 +202,8 @@ class Poll
                     $field = $this->objectManager->getReference($this->fieldClass, $fieldId);
 
                     foreach ($answers as $answer) {
-                        $vote = $this->voteManager->create($field, $answer, $voteGroup);
-                        $votes[] = $vote;
+                        $answer = $this->answerManager->create($field, $answer, $answerGroup);
+                        $answers[] = $answer;
                     }
                 }
 
@@ -219,7 +219,7 @@ class Poll
                     throw new \Exception(sprintf('"%s" is incorrect poll type.', $pollType));
                 }
 
-                // Checks what multi-vote prevention mechanisms should be triggered
+                // Checks what multi-answer prevention mechanisms should be triggered
                 // and error that might occur.
                 $doPersist = false;
 
@@ -228,7 +228,7 @@ class Poll
 
                     if (in_array($pollType, array(PollInterface::POLL_TYPE_USER, PollInterface::POLL_TYPE_MIXED)) && $isAuthenticated) {
                         $user = $this->securityContext->getToken()->getUser();
-                        $voteGroup->setAuthor($user);
+                        $answerGroup->setAuthor($user);
 
                         $doPersist = true;
                     }
@@ -239,7 +239,7 @@ class Poll
                 }
 
                 if (in_array($pollType, array(PollInterface::POLL_TYPE_ANONYMOUS, PollInterface::POLL_TYPE_MIXED))) {
-                    $cookie = new Cookie(sprintf('%svoted_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
+                    $cookie = new Cookie(sprintf('%sanswerd_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
                     $response->headers->setCookie($cookie);
 
                     $doPersist = true;
@@ -256,8 +256,8 @@ class Poll
                         throw new \Exception(sprintf('"%s" is not a writable folder for uploads.', $this->uploadDir));
                     }
 
-                    $voteGroup = $this->voteGroupManager->save($voteGroup);
-                    $folder = $this->uploadDir . '/' . $voteGroup->getId();
+                    $answerGroup = $this->answerGroupManager->save($answerGroup);
+                    $folder = $this->uploadDir . '/' . $answerGroup->getId();
                     mkdir($folder);
 
                     foreach ($data as $fieldName => $field) {
@@ -267,10 +267,10 @@ class Poll
                     }
                 }
 
-                // If everything went ok, save all votes
+                // If everything went ok, save all answers
                 if ($doPersist) {
-                    $this->voteGroupManager->save($voteGroup);
-                    $this->voteManager->save($votes);
+                    $this->answerGroupManager->save($answerGroup);
+                    $this->answerManager->save($answers);
                 }
             }
         }
@@ -297,21 +297,21 @@ class Poll
             $theme = $this->theme;
         }
 
-        $alreadyVoted = $this->voteGroupManager->hasVoted($this->poll);
+        $alreadyAnswered = $this->answerGroupManager->hasAnswered($this->poll);
 
         $viewData = array(
             'form' => $this->form->createView(),
             'theme' => $theme,
             'request' => $this->request,
-            'alreadyVoted' => $alreadyVoted
+            'alreadyAnswered' => $alreadyAnswered
         );
 
-        if ($alreadyVoted) {
+        if ($alreadyAnswered) {
             $fields = $this->poll->getFields();
             $fieldCount = array();
 
             foreach ($fields as $field) {
-                $fieldCount[$field->getId()] = $this->voteManager->countByField($field);
+                $fieldCount[$field->getId()] = $this->answerManager->countByField($field);
             }
 
             $viewData['results'] = $fieldCount;

@@ -51,7 +51,7 @@ abstract class Poll implements PollInterface
     /**
      * @var boolean
      */
-    protected $votesVisible;
+    protected $answersVisible;
 
     /**
      * @var mixed
@@ -66,7 +66,7 @@ abstract class Poll implements PollInterface
     public function __construct()
     {
         $this->setActive(true);
-        $this->setVotesVisible(true);
+        $this->setAnswersVisible(true);
         $this->setCreatedAt(new \DateTime());
     }
 
@@ -199,15 +199,15 @@ abstract class Poll implements PollInterface
     }
 
     /**
-     * Sets visibility of votes after user voted.
+     * Sets visibility of answers after user answered.
      *
-     * @param boolean $votesVisible
+     * @param boolean $answersVisible
      *
      * @return PollInterface
      */
-    public function setVotesVisible($votesVisible)
+    public function setAnswersVisible($answersVisible)
     {
-        $this->votesVisible = (boolean) $votesVisible;
+        $this->answersVisible = (boolean) $answersVisible;
 
         return $this;
     }
@@ -215,9 +215,9 @@ abstract class Poll implements PollInterface
     /**
      * {@inheritDoc}
      */
-    public function isVotesVisible()
+    public function isAnswersVisible()
     {
-        return $this->votesVisible;
+        return $this->answersVisible;
     }
 
     /**

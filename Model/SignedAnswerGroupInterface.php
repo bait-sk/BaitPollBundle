@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-interface SignedVoteGroupInterface extends VoteGroupInterface
+interface SignedAnswerGroupInterface extends AnswerGroupInterface
 {
     /**
      * Sets author of the Poll

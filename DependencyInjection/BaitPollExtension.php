@@ -45,13 +45,13 @@ class BaitPollExtension extends Extension
 
         $container->setParameter('bait_poll.poll.class', $config['poll']['class']);
         $container->setParameter('bait_poll.field.class', $config['field']['class']);
-        $container->setParameter('bait_poll.vote.class', $config['vote']['class']);
-        $container->setParameter('bait_poll.vote.group.class', $config['vote']['group']['class']);
+        $container->setParameter('bait_poll.answer.class', $config['answer']['class']);
+        $container->setParameter('bait_poll.answer_group.class', $config['answer_group']['class']);
         $container->setParameter('bait_poll.form.template', $config['form']['template']);
         $container->setParameter('bait_poll.form.theme', $config['form']['theme']);
 
-        $container->setAlias('bait_poll.vote.manager', $config['vote']['manager']);
-        $container->setAlias('bait_poll.vote.group.manager', $config['vote']['group']['manager']);
+        $container->setAlias('bait_poll.answer.manager', $config['answer']['manager']);
+        $container->setAlias('bait_poll.answer_group.manager', $config['answer_group']['manager']);
         $container->setAlias('bait_poll.poll.manager', $config['poll']['manager']);
         $container->setAlias('bait_poll.field.manager', $config['field']['manager']);
 

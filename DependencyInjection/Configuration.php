@@ -64,14 +64,17 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
-                ->arrayNode('vote')->addDefaultsIfNotSet()
+                ->arrayNode('answer')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('class')->end()
-                        ->scalarNode('manager')->defaultValue('bait_poll.vote.manager.default')->end()
-                        ->arrayNode('group')->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('class')->end()
-                                ->scalarNode('manager')->defaultValue('bait_poll.vote.group.manager.default')->end()
+                        ->scalarNode('manager')->defaultValue('bait_poll.answer.manager.default')->end()
+                    ->end()
+                ->end()
+
+                ->arrayNode('answer_group')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->isRequired()->end()
+                        ->scalarNode('manager')->defaultValue('bait_poll.answer_group.manager.default')->end()
                     ->end()
                 ->end()
             ->end();
