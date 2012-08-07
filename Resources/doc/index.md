@@ -224,6 +224,7 @@ class FieldManager extends BaseFieldManager
             ->createQueryBuilder('f')
             ->where('f.poll = ?1')
             ->andWhere('f.isActive = ?2')
+            ->andWhere('f.deletedAt IS NULL')
             ->orderBy('f.position')
             ->setParameter(1, $poll->getId())
             ->setParameter(2, 1)
