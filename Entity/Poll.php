@@ -34,6 +34,11 @@ abstract class Poll extends PollModel
     protected $createdAt;
 
     /**
+     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
+    /**
      * @ORM\Column(name="start_at", type="datetime")
      */
     protected $startAt;
@@ -57,4 +62,22 @@ abstract class Poll extends PollModel
      * @ORM\Column(name="type", type="string", length=255)
      */
     protected $type;
+
+    /**
+     * @return \DateTime
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * @param \DateTime $deletedAt
+     */
+    public function  setDeletedAt(\DateTime $deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
+    }
+
+
 }

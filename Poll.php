@@ -170,7 +170,7 @@ class Poll
 
         $this->poll = $this->pollManager->findOneById($id);
 
-        if (!$this->poll) {
+        if (!$this->poll || $this->poll->getDeletedAt()) {
             throw new NotFoundHttpException(
                 sprintf("Poll with id '%s' was not found.", $id)
             );

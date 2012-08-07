@@ -44,6 +44,11 @@ abstract class Field extends FieldModel
     protected $createdAt;
 
     /**
+     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     protected $isActive;
@@ -67,4 +72,20 @@ abstract class Field extends FieldModel
      * @ORM\Column(name="validation_constraints", type="array")
      */
     protected $validationConstraints;
+
+    /**
+     * @return \DateTime
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * @param \DateTime $deletedAt
+     */
+    public function  setDeletedAt(\DateTime $deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
+    }
 }
