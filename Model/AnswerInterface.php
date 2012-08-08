@@ -53,8 +53,5 @@ interface AnswerInterface
      *
      * @return string
      */
-    public function getValue()
-    {
-        return $this->value;
-    }
+    public function getValue();
 }
