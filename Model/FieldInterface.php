@@ -110,14 +110,6 @@ interface FieldInterface
     public function setPosition($position);
 
     /**
-     * Compares position of the field and outputs
-     * usort() friendly value
-     *
-     * @return integer
-     */
-    public function compareFieldPositions(FieldInterface $field1, FieldInterface $field2);
-
-    /**
      * Checks if the field is active
      *
      * @return bool

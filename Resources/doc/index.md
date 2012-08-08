@@ -120,6 +120,7 @@ class Field extends BaseField
 
     /**
      * @ORM\OneToMany(targetEntity="Field", mappedBy="parent")
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $children;
 

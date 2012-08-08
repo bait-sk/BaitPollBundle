@@ -110,10 +110,7 @@ abstract class Field implements FieldInterface
      */
     public function getChildren()
     {
-        $fields = $this->children->toArray();
-        usort($fields, array($this,'compareFieldPositions'));
-
-        return $fields;
+        return $this->children;
     }
 
     /**
@@ -324,18 +321,6 @@ abstract class Field implements FieldInterface
     public function getValidationConstraints()
     {
         return $this->validationConstraints;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function compareFieldPositions(FieldInterface $field1, FieldInterface $field2)
-    {
-        if ($field1->getPosition() < $field2->getPosition()) {
-            return -1;
-        }
-
-        return 1;
     }
 
     /**
