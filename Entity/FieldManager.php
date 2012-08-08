@@ -20,7 +20,7 @@ use Bait\PollBundle\Model\PollInterface;
  *
  * @author Ondrej Slintak <ondrowan@gmail.com>
  */
-abstract class FieldManager extends BaseFieldManager
+class FieldManager extends BaseFieldManager
 {
     /**
      * @var \Doctrine\ORM\EntityRepository
@@ -39,10 +39,15 @@ abstract class FieldManager extends BaseFieldManager
     /**
      * {@inheritDoc}
      */
+    public function findOrderedPollFields(PollInterface $poll) {
+        return $this->repository->findBy(array('isActive' => 1, 'poll' => $poll->getId()), array('position' => 'ASC'));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function findOneBy(array $criteria)
     {
         return $this->repository->findOneBy($criteria);
     }
-
 }
-

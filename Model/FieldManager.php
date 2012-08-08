@@ -21,7 +21,6 @@ abstract class FieldManager
     /**
      * Returns ordered fields of certain poll.
      *
-     *
      * @param PollInterface $poll Id of poll
      *
      * @return array
