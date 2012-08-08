@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Bait\PollBundle\FormFactory\PollFormFactoryInterface;
 use Bait\PollBundle\Model\PollManagerInterface;
 use Bait\PollBundle\Model\FieldManager;
+use Bait\PollBundle\Model\FieldInterface;
 use Bait\PollBundle\Model\AnswerManagerInterface;
 use Bait\PollBundle\Model\AnswerGroupManagerInterface;
 use Bait\PollBundle\Model\PollInterface;
@@ -197,9 +198,13 @@ class Poll
 
                 foreach ($data as $fieldId => $userAnswer) {
                     $fieldId = str_replace('field_', '', $fieldId);
-
-                    $userAnswers = (array) $userAnswer;
                     $field = $this->objectManager->getReference($this->fieldClass, $fieldId);
+                    if ($field->getType() === FieldInterface::TYPE_FILE) {
+                        $userAnswers = (array) $userAnswer->getClientOriginalName();
+                    } else {
+                        $userAnswers = (array) $userAnswer;
+                    }
+
 
                     foreach ($userAnswers as $userAnswer) {
                         $answer = $this->answerManager->create($field, $userAnswer, $answerGroup);
