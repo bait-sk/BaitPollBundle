@@ -93,13 +93,13 @@ abstract class Answer implements AnswerInterface
      */
     public function getAnswerGroup()
     {
-        return $this->answergroup;
+        return $this->answerGroup;
     }
 
     /**
      * {@inheritDoc}
      */
     public function setAnswerGroup(AnswerGroupInterface $answerGroup) {
-        $this->answergroup = $answerGroup;
+        $this->answerGroup = $answerGroup;
     }
 }

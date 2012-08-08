@@ -195,14 +195,14 @@ class Poll
 
                 $answerGroup = $this->answerGroupManager->create($this->poll);
 
-                foreach ($data as $fieldId => $answer) {
+                foreach ($data as $fieldId => $userAnswer) {
                     $fieldId = str_replace('field_', '', $fieldId);
 
-                    $answers = (array) $answer;
+                    $userAnswers = (array) $userAnswer;
                     $field = $this->objectManager->getReference($this->fieldClass, $fieldId);
 
-                    foreach ($answers as $answer) {
-                        $answer = $this->answerManager->create($field, $answer, $answerGroup);
+                    foreach ($userAnswers as $userAnswer) {
+                        $answer = $this->answerManager->create($field, $userAnswer, $answerGroup);
                         $answers[] = $answer;
                     }
                 }

@@ -24,7 +24,7 @@ use Bait\PollBundle\Model\Answer as AnswerModel;
 abstract class Answer extends AnswerModel
 {
     /**
-     * @ORM\Column(name="answer", type="text")
+     * @ORM\Column(name="value", type="text")
      */
-    protected $answer;
+    protected $value;
 }

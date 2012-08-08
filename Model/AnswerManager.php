@@ -31,13 +31,13 @@ abstract class AnswerManager implements AnswerManagerInterface
     /**
      * {@inheritDoc}
      */
-    public function create(FieldInterface $field, $answer, AnswerGroupInterface $answerGroup)
+    public function create(FieldInterface $field, $userAnswer, AnswerGroupInterface $answerGroup)
     {
         $answerClass = $this->getClass();
 
         $answer = new $answerClass();
         $answer->setField($field);
-        $answer->setAnswer($answer);
+        $answer->setValue($userAnswer);
         $answer->setAnswerGroup($answerGroup);
 
         return $answer;
