@@ -165,11 +165,7 @@ class PollType extends AbstractType
         $constraints = array();
 
         foreach ($fields as $field) {
-            $validationConstraints = $field->getValidationConstraints();
-
-            if ($field->isStandalone() && !empty($validationConstraints)) {
-                $constraints[sprintf('field_%s', $field->getId())] = $validationConstraints;
-            }
+            $constraints[sprintf('field_%s', $field->getId())] = $this->loadValidationConstraints($field);
         }
 
         $constraints = new Collection(
@@ -200,5 +196,23 @@ class PollType extends AbstractType
         $poll = $this->pollManager->findOneById($this->id);
 
         return $this->fieldManager->findOrderedPollFields($poll);
+    }
+
+    /**
+     * Loads validation constraints of single field.
+     *
+     * @param FieldInterface $field Single field
+     *
+     * @return mixed
+     */
+    protected function loadValidationConstraints(FieldInterface $field)
+    {
+        $validationConstraints = $field->getValidationConstraints();
+
+        if ($field->isStandalone() && !empty($validationConstraints)) {
+            return $validationConstraints;
+        }
+
+        return null;
     }
 }
