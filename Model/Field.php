@@ -331,9 +331,10 @@ abstract class Field implements FieldInterface
      */
     public function compareFieldPositions(FieldInterface $field1, FieldInterface $field2)
     {
-        if ($field1->getPosition() > $field2->getPosition()) return 1;
-        if ($field1->getPosition() < $field2->getPosition()) return -1;
-        //we don't want to swap fields with null position
+        if ($field1->getPosition() < $field2->getPosition()) {
+            return -1;
+        }
+
         return 1;
     }
 
@@ -346,6 +347,4 @@ abstract class Field implements FieldInterface
     {
       return $this->isActive;
     }
-
-
 }
