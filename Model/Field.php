@@ -11,6 +11,8 @@
 
 namespace Bait\PollBundle\Model;
 
+use Symfony\Component\Validator\Constraint;
+
 /**
  * Base Field model
  *
@@ -306,7 +308,7 @@ abstract class Field implements FieldInterface
      *
      * @return FieldInterface
      */
-    public function addValidationConstraint($validationConstraint)
+    public function addValidationConstraint(Constraint $validationConstraint)
     {
         if (!in_array($validationConstraint, $this->validationConstraints, true)) {
             $this->validationConstraints[] = $validationConstraint;
