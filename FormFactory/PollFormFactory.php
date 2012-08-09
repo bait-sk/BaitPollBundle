@@ -54,6 +54,7 @@ class PollFormFactory implements PollFormFactoryInterface
     {
         $type = $this->formFactory->getType($this->type);
         $type->setId($id);
+        $type->setFields();
 
         $builder = $this->formFactory->createNamedBuilder($type, sprintf('%s_%s', $this->name, $id));
 

@@ -39,8 +39,8 @@ class FieldManager extends BaseFieldManager
     /**
      * {@inheritDoc}
      */
-    public function findOrderedPollFields(PollInterface $poll) {
-        return $this->repository->findBy(array('isActive' => 1, 'poll' => $poll->getId()), array('position' => 'ASC'));
+    public function findOrderedPollFields($pollId) {
+        return $this->repository->findBy(array('isActive' => 1, 'poll' => $pollId), array('position' => 'ASC'));
     }
 
     /**

@@ -25,7 +25,7 @@ abstract class FieldManager
      *
      * @return array
      */
-    abstract public function findOrderedPollFields(PollInterface $poll);
+    abstract public function findOrderedPollFields($pollId);
 
     /**
      * Checks if a poll has upload fields
