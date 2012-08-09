@@ -100,9 +100,11 @@ abstract class Field implements FieldInterface
      *
      * @return FieldInterface
      */
-    public function setChildren($children)
+    public function addChild(FieldInterface $child)
     {
-        $this->children = $children;
+        if (!in_array($child, $this->children, true)) {
+            $this->children[] = $child;
+        }
 
         return $this;
     }
