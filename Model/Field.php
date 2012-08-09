@@ -330,12 +330,24 @@ abstract class Field implements FieldInterface
     }
 
     /**
-     * Checks if the field is active
+     * Sets if the field is active.
+     *
+     * @return FieldInterface
+     */
+    public function setActive($activity)
+    {
+        $this->active = $activity;
+
+        return $this;
+    }
+
+    /**
+     * Checks if the field is active.
      *
      * @return bool
      */
     public function isActive()
     {
-      return $this->isActive;
+        return $this->isActive;
     }
 }
