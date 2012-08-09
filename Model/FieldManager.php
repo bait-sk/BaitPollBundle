@@ -21,11 +21,11 @@ abstract class FieldManager
     /**
      * Returns ordered fields of certain poll.
      *
-     * @param PollInterface $poll Id of poll
+     * @param $poll Id of poll
      *
      * @return array
      */
-    abstract public function findOrderedPollFields(PollInterface $poll);
+    abstract public function findOrderedPollFields($pollId);
 
     /**
      * Checks if a poll has upload fields
@@ -35,7 +35,7 @@ abstract class FieldManager
      */
     public function hasUploadFileds(PollInterface $poll)
     {
-        $fields = $this->findOrderedPollFields($poll);
+        $fields = $this->findOrderedPollFields($poll->getId());
         $doesIt = false;
         foreach ($fields as $field) {
             if ($field->getType() === FieldInterface::TYPE_FILE) {

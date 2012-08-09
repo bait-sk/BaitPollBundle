@@ -36,6 +36,11 @@ class PollType extends AbstractType
      */
     protected $pollManager;
 
+    /**
+     * @var array $fields
+     */
+    protected $fields;
+
     protected $id;
 
     /**
@@ -70,13 +75,21 @@ class PollType extends AbstractType
     }
 
     /**
+     * Sets all fields from current poll.
+     *
+     */
+    public function setFields()
+    {
+        $this->fields = $this->fieldManager->findOrderedPollFields($this->id);
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $fields = $this->getFields();
 
-        foreach ($fields as $field) {
+        foreach ($this->fields as $field) {
             if ($field->isStandalone()) {
                 $choiceFields = array(
                     FieldInterface::TYPE_RADIO,
@@ -161,8 +174,7 @@ class PollType extends AbstractType
      */
     public function getDefaultOptions(array $options)
     {
-        $fields = $this->getFields();
-        $constraints = $this->loadValidationConstraints($fields);
+        $constraints = $this->loadValidationConstraints($this->fields);
 
         $constraints = new Collection(
             array(
@@ -171,7 +183,7 @@ class PollType extends AbstractType
             )
         );
 
-        return array('validation_constraint' => $constraints, 'fields' => $fields);
+        return array('validation_constraint' => $constraints, 'fields' => $this->fields);
     }
 
     /**
@@ -182,17 +194,6 @@ class PollType extends AbstractType
         return 'bait_poll_form';
     }
 
-    /**
-     * Gets all fields from current poll.
-     *
-     * @return \Doctrine\ORM\PersistentCollection
-     */
-    protected function getFields()
-    {
-        $poll = $this->pollManager->findOneById($this->id);
-
-        return $this->fieldManager->findOrderedPollFields($poll);
-    }
 
     /**
      * Loads validation constraints of all provided fields.
