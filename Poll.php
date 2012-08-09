@@ -262,8 +262,8 @@ class Poll
                     }
 
                     $answerGroup = $this->answerGroupManager->save($answerGroup);
-                    $folder = $this->uploadDir . '/' . $answerGroup->getId();
-                    mkdir($folder);
+                    $folder = $this->uploadDir . '/' . $this->poll->getId() . '/answergroups/' . $answerGroup->getId();
+                    mkdir($folder, 0777, true);
 
                     foreach ($data as $fieldName => $field) {
                         if ($field instanceof UploadedFile) {
