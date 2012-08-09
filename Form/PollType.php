@@ -195,24 +195,6 @@ class PollType extends AbstractType
     }
 
     /**
-     * Loads validation constraints of single field.
-     *
-     * @param FieldInterface $field Single field
-     *
-     * @return mixed
-     */
-    protected function loadFieldValidationConstraints(FieldInterface $field)
-    {
-        $validationConstraints = $field->getValidationConstraints();
-
-        if (!empty($validationConstraints) && $field->isStandalone()) {
-            return $validationConstraints;
-        }
-
-        return null;
-    }
-
-    /**
      * Loads validation constraints of all provided fields.
      *
      * @param array $fields Fields to load validation constraints from
@@ -224,7 +206,11 @@ class PollType extends AbstractType
         $validationConstraints = array();
 
         foreach ($fields as $field) {
-            $validationConstraints[sprintf('field_%s', $field->getId())] = $field->getValidationConstraints();
+            $fieldValidationConstraints = $field->getValidationConstraints();
+
+            if ($fieldValidationConstraints) {
+                $validationConstraints[sprintf('field_%s', $field->getId())] = $field->getValidationConstraints();
+            }
         }
 
         return $validationConstraints;
