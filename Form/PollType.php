@@ -36,6 +36,9 @@ class PollType extends AbstractType
      */
     protected $fields;
 
+    /**
+     * @var integer $id Id of field
+     */
     protected $id;
 
     /**
