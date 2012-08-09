@@ -40,7 +40,7 @@ class FieldManager extends BaseFieldManager
      * {@inheritDoc}
      */
     public function findOrderedPollFields($pollId) {
-        return $this->repository->findBy(array('isActive' => 1, 'poll' => $pollId), array('position' => 'ASC'));
+        return $this->repository->findBy(array('isActive' => 1, 'poll' => $pollId, 'deletedAt' => null), array('position' => 'ASC'));
     }
 
     /**
