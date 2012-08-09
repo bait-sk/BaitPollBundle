@@ -199,7 +199,7 @@ class Answer extends BaseAnswer
     /**
      * AnswerGroup.
      *
-     * @ORM\Column(name="answer_group")
+     * @ORM\JoinColumn(name="answer_group")
      * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\AnswerGroup")
      */
     protected $answerGroup;
