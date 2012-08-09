@@ -32,11 +32,6 @@ class PollType extends AbstractType
     protected $fieldManager;
 
     /**
-     * @var PollManagerInterface Poll manager
-     */
-    protected $pollManager;
-
-    /**
      * @var array $fields
      */
     protected $fields;
@@ -60,9 +55,8 @@ class PollType extends AbstractType
     /**
      * @param FieldManager $fieldManager Field manager
      */
-    public function __construct(PollManagerInterface $pollManager, FieldManager $fieldManager)
+    public function __construct(FieldManager $fieldManager)
     {
-        $this->pollManager = $pollManager;
         $this->fieldManager = $fieldManager;
     }
 
@@ -193,7 +187,6 @@ class PollType extends AbstractType
     {
         return 'bait_poll_form';
     }
-
 
     /**
      * Loads validation constraints of all provided fields.

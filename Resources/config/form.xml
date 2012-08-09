@@ -15,7 +15,6 @@
     <services>
         <service id="bait_poll.form.default" class="Bait\PollBundle\Form\PollType">
             <tag name="form.type" alias="bait_poll.form" />
-            <argument type="service" id="bait_poll.poll.manager" />
             <argument type="service" id="bait_poll.field.manager" />
         </service>
 
