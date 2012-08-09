@@ -11,6 +11,8 @@
 
 namespace Bait\PollBundle\Tests\Model;
 
+use Symfony\Component\Validator\Constraints\Blank;
+
 class FieldTest extends \PHPUnit_Framework_TestCase
 {
     protected $pollField;
@@ -18,6 +20,11 @@ class FieldTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->pollField = $this->getMockForAbstractClass('Bait\PollBundle\Model\Field');
+    }
+
+    protected function tearDown()
+    {
+        $this->pollField = null;
     }
 
     public function testTitle()
@@ -36,5 +43,41 @@ class FieldTest extends \PHPUnit_Framework_TestCase
 
         $this->pollField->setCreatedAt($date);
         $this->assertEquals($date, $this->pollField->getCreatedAt());
+    }
+
+    public function testIsStandalone()
+    {
+        $this->assertTrue($this->pollField->isStandalone());
+
+        $childField = $this->getMockForAbstractClass('Bait\PollBundle\Model\Field');
+        $this->pollField->setParent($childField);
+        $this->assertFalse($this->pollField->isStandalone());
+    }
+
+    public function testIncorrectValidationConstraintInput()
+    {
+        $this->setExpectedException('ErrorException');
+
+        $this->pollField->addValidationConstraint(new \stdClass);
+    }
+
+    public function testGetValidationConstraintsInStandaloneField()
+    {
+        $this->assertEmpty($this->pollField->getValidationConstraints());
+
+        $blankConstraint = new Blank();
+        $this->pollField->addValidationConstraint(new Blank());
+
+        $validationConstraints = $this->pollField->getValidationConstraints();
+        $this->assertEquals(1, count($validationConstraints));
+        $this->assertEquals($blankConstraint, $validationConstraints[0]);
+    }
+
+    public function testGetValidationConstrainsInChildField()
+    {
+        $childField = $this->getMockForAbstractClass('Bait\PollBundle\Model\Field');
+        $this->pollField->setParent($childField);
+
+        $this->assertNull($this->pollField->getValidationConstraints());
     }
 }
