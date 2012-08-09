@@ -322,7 +322,11 @@ abstract class Field implements FieldInterface
      */
     public function getValidationConstraints()
     {
-        return $this->validationConstraints;
+        if ($this->isStandalone()) {
+            return $this->validationConstraints;
+        }
+
+        return null;
     }
 
     /**
