@@ -148,7 +148,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="poll_answer_group")
+ * @ORM\Table(name="answer_group")
  */
 class AnswerGroup extends BaseAnswerGroup
 {
@@ -199,6 +199,7 @@ class Answer extends BaseAnswer
     /**
      * AnswerGroup.
      *
+     * @ORM\Column(name="answer_group")
      * @ORM\ManyToOne(targetEntity="Acme\DemoBundle\Entity\AnswerGroup")
      */
     protected $answerGroup;

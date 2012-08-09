@@ -44,9 +44,9 @@ abstract class Field extends FieldModel
     protected $createdAt;
 
     /**
-     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
-    private $deletedAt;
+    protected $deletedAt;
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
