@@ -162,11 +162,7 @@ class PollType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         $fields = $this->getFields();
-        $constraints = array();
-
-        foreach ($fields as $field) {
-            $constraints[sprintf('field_%s', $field->getId())] = $this->loadValidationConstraints($field);
-        }
+        $constraints = $this->loadValidationConstraints($fields);
 
         $constraints = new Collection(
             array(
@@ -205,14 +201,32 @@ class PollType extends AbstractType
      *
      * @return mixed
      */
-    protected function loadValidationConstraints(FieldInterface $field)
+    protected function loadFieldValidationConstraints(FieldInterface $field)
     {
         $validationConstraints = $field->getValidationConstraints();
 
-        if ($field->isStandalone() && !empty($validationConstraints)) {
+        if (!empty($validationConstraints) && $field->isStandalone()) {
             return $validationConstraints;
         }
 
         return null;
+    }
+
+    /**
+     * Loads validation constraints of all provided fields.
+     *
+     * @param array $fields Fields to load validation constraints from
+     *
+     * @return array
+     */
+    protected function loadValidationConstraints(array $fields)
+    {
+        $validationConstraints = array();
+
+        foreach ($fields as $field) {
+            $validationConstraints[sprintf('field_%s', $field->getId())] = $field->getValidationConstraints();
+        }
+
+        return $validationConstraints;
     }
 }
