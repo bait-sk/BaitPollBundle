@@ -27,9 +27,20 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('bait_poll');
 
+        $supportedDBDrivers = array('orm');
+
         $rootNode
             ->children()
-                ->scalarNode('db_driver')->cannotBeOverwritten()->isRequired()->end()
+                ->scalarNode('db_driver')
+                    ->validate()
+                        ->ifNotInArray($supportedDBDrivers)
+                        ->thenInvalid('The driver %s is not supported. Please choose one of ' . json_encode($supportedDBDrivers))
+                    ->end()
+                    ->cannotBeEmpty()
+                    ->cannotBeOverwritten()
+                    ->isRequired()
+                ->end()
+
                 ->scalarNode('upload_dir')->defaultNull()->end()
                 ->scalarNode('model_manager_name')->defaultNull()->end()
 
