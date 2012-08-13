@@ -244,7 +244,7 @@ class Poll
                 }
 
                 if (in_array($pollType, array(PollInterface::POLL_TYPE_ANONYMOUS, PollInterface::POLL_TYPE_MIXED))) {
-                    $cookie = new Cookie(sprintf('%sanswerd_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
+                    $cookie = new Cookie(sprintf('%sanswered_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
                     $response->headers->setCookie($cookie);
 
                     $doPersist = true;
