@@ -19,19 +19,19 @@ namespace Bait\PollBundle\Model;
  */
 interface FieldInterface
 {
-    const TYPE_TEXT = 'TYPE_TEXT';
     const TYPE_INPUT = 'TYPE_INPUT';
     const TYPE_INTEGER = 'TYPE_INTEGER';
     const TYPE_EMAIL = 'TYPE_EMAIL';
-    const TYPE_URL = 'TYPE_URL';
     const TYPE_TEXTAREA = 'TYPE_TEXTAREA';
     const TYPE_FILE = 'TYPE_FILE';
     const TYPE_DATE = 'TYPE_DATE';
     const TYPE_DATETIME = 'TYPE_DATETIME';
     const TYPE_TIME = 'TYPE_TIME';
 
-    const TYPE_ASSET_IMAGE = 'TYPE_ASSET_IMAGE';
     const TYPE_ASSET_AUDIO = 'TYPE_ASSET_AUDIO';
+    const TYPE_ASSET_IMAGE = 'TYPE_ASSET_IMAGE';
+    const TYPE_ASSET_TEXT = 'TYPE_ASSET_TEXT';
+    const TYPE_ASSET_URL = 'TYPE_ASSET_URL';
     const TYPE_ASSET_VIDEO = 'TYPE_ASSET_VIDEO';
 
     const TYPE_RADIO = 'TYPE_RADIO';

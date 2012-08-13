@@ -148,7 +148,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="answer_group")
+ * @ORM\Table(name="poll_answer_group")
  */
 class AnswerGroup extends BaseAnswerGroup
 {

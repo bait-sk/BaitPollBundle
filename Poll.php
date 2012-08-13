@@ -311,7 +311,7 @@ class Poll
             'alreadyAnswered' => $alreadyAnswered
         );
 
-        if ($alreadyAnswered) {
+        if ($this->poll->isAnswersVisible()) {
             $fields = $this->poll->getFields();
             $fieldCount = array();
 
