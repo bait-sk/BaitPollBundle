@@ -88,7 +88,6 @@ class PollType extends AbstractType
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-
         foreach ($this->fields as $field) {
             if ($field->isStandalone()) {
                 $choiceFields = array(
@@ -110,6 +109,10 @@ class PollType extends AbstractType
                     $choices = array();
 
                     foreach ($field->getChildren() as $choice) {
+                        if (!$choice->isRenderable()) {
+                            continue;
+                        }
+
                         $choiceFieldType = $choice->getType();
 
                         if (in_array($choiceFieldType, $assetChoiceFields)) {
