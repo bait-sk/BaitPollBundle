@@ -363,7 +363,7 @@ abstract class Field implements FieldInterface
      */
     public function setActive($activity)
     {
-        $this->active = $activity;
+        $this->isActive = $activity;
 
         return $this;
     }
