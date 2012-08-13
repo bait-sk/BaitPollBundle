@@ -249,7 +249,7 @@ abstract class Field implements FieldInterface
      *
      * @param \DateTime $deletedAt
      */
-    public function setDeletedAt(\DateTime $deletedAt)
+    public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
 
