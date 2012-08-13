@@ -90,7 +90,7 @@ class AnswerManager extends BaseAnswerManager
     public function doCountByField(FieldInterface $field)
     {
         $query = $this->entityManager->createQuery(
-            sprintf("SELECT COUNT(v.id) FROM %s v WHERE v.answer = '%s'", $this->class, $field->getId())
+            sprintf("SELECT COUNT(v.id) FROM %s v WHERE v.value = '%s'", $this->class, $field->getId())
         );
 
         return $query->getSingleScalarResult();
