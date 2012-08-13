@@ -32,16 +32,14 @@ class PollType extends AbstractType
     protected $fieldManager;
 
     /**
-     * @var PollManagerInterface Poll manager
-     */
-    protected $pollManager;
-
-    /**
      * @var array $fields
      */
     protected $fields;
 
-    protected $id;
+    /**
+     * @var integer $pollId Id of field
+     */
+    protected $pollId;
 
     /**
      * @var array Translation table of field types
@@ -60,18 +58,17 @@ class PollType extends AbstractType
     /**
      * @param FieldManager $fieldManager Field manager
      */
-    public function __construct(PollManagerInterface $pollManager, FieldManager $fieldManager)
+    public function __construct(FieldManager $fieldManager)
     {
-        $this->pollManager = $pollManager;
         $this->fieldManager = $fieldManager;
     }
 
     /**
-     * @param mixed Sets id of poll
+     * @param mixed $pollId Sets id of poll
      */
-    public function setId($id)
+    public function setPollId($pollId)
     {
-        $this->id = $id;
+        $this->pollId = $pollId;
     }
 
     /**
@@ -80,7 +77,7 @@ class PollType extends AbstractType
      */
     public function setFields()
     {
-        $this->fields = $this->fieldManager->findOrderedPollFields($this->id);
+        $this->fields = $this->fieldManager->findOrderedPollFields($this->pollId);
     }
 
     /**
@@ -193,7 +190,6 @@ class PollType extends AbstractType
     {
         return 'bait_poll_form';
     }
-
 
     /**
      * Loads validation constraints of all provided fields.
