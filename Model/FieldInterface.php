@@ -120,9 +120,10 @@ interface FieldInterface
     public function isActive();
 
     /**
-     * Gets if and when was field deleted.
+     * Checks if field is renderable. That means field has to be active
+     * and field cannot be deleted.
      *
-     * @return \DateTime
+     * @return bool
      */
-    public function getDeletedAt();
+    public function isRenderable();
 }

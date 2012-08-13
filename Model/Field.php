@@ -375,4 +375,12 @@ abstract class Field implements FieldInterface
     {
         return $this->isActive;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isRenderable()
+    {
+        return $this->isActive() && $this->getDeletedAt() === null;
+    }
 }
