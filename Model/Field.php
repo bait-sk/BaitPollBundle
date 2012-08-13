@@ -56,6 +56,11 @@ abstract class Field implements FieldInterface
     protected $createdAt;
 
     /**
+     * @var \DateTime
+     */
+    protected $deletedAt;
+
+    /**
      * @var string
      */
     protected $type;
@@ -237,6 +242,26 @@ abstract class Field implements FieldInterface
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Sets when the field was deleted at.
+     *
+     * @param \DateTime $deletedAt
+     */
+    public function setDeletedAt(\DateTime $deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
     }
 
     /**

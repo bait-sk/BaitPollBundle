@@ -118,4 +118,11 @@ interface FieldInterface
      * @return bool
      */
     public function isActive();
+
+    /**
+     * Gets if and when was field deleted.
+     *
+     * @return \DateTime
+     */
+    public function getDeletedAt();
 }
