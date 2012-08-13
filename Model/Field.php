@@ -344,9 +344,7 @@ abstract class Field implements FieldInterface
     }
 
     /**
-     * Checks if the field is active.
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function isActive()
     {
