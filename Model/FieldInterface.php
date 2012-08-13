@@ -62,6 +62,13 @@ interface FieldInterface
     public function getAssetPath();
 
     /**
+     * Gets if and when was field deleted.
+     *
+     * @return \DateTime
+     */
+    public function getDeletedAt();
+
+    /**
      * Gets all ordered children of poll field.
      *
      * @return mixed
