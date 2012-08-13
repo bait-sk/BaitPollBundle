@@ -26,6 +26,9 @@ interface FieldInterface
     const TYPE_URL = 'TYPE_URL';
     const TYPE_TEXTAREA = 'TYPE_TEXTAREA';
     const TYPE_FILE = 'TYPE_FILE';
+    const TYPE_DATE = 'TYPE_DATE';
+    const TYPE_DATETIME = 'TYPE_DATETIME';
+    const TYPE_TIME = 'TYPE_TIME';
 
     const TYPE_ASSET_IMAGE = 'TYPE_ASSET_IMAGE';
     const TYPE_ASSET_AUDIO = 'TYPE_ASSET_AUDIO';

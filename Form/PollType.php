@@ -53,6 +53,9 @@ class PollType extends AbstractType
         FieldInterface::TYPE_CHECKBOX => 'choice',
         FieldInterface::TYPE_SELECT => 'choice',
         FieldInterface::TYPE_FILE => 'file',
+        FieldInterface::TYPE_DATE => 'date',
+        FieldInterface::TYPE_DATETIME => 'datetime',
+        FieldInterface::TYPE_TIME => 'time',
     );
 
     /**
