@@ -66,7 +66,7 @@ class PollType extends AbstractType
      */
     public function setPollFields($pollId)
     {
-        $this->fields = $this->fieldManager->findOrderedPollFields($pollId);
+        $this->fields = $this->fieldManager->findRenderableOrderedPollFields($pollId);
     }
 
     /**
@@ -95,10 +95,6 @@ class PollType extends AbstractType
                     $choices = array();
 
                     foreach ($field->getChildren() as $choice) {
-                        if (!$choice->isRenderable()) {
-                            continue;
-                        }
-
                         $choiceFieldType = $choice->getType();
 
                         if (in_array($choiceFieldType, $assetChoiceFields)) {

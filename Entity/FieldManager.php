@@ -33,14 +33,24 @@ class FieldManager extends BaseFieldManager
      */
     public function __construct(EntityManager $entityManager, $class)
     {
+        $this->class = $class;
+        $this->entityManager = $entityManager;
         $this->repository = $entityManager->getRepository($class);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function findOrderedPollFields($pollId) {
-        return $this->repository->findBy(array('isActive' => 1, 'poll' => $pollId, 'deletedAt' => null), array('position' => 'ASC'));
+    public function findRenderableOrderedPollFields($pollId) {
+        return $this->entityManager->createQuery(
+            "SELECT f, c FROM {$this->class} f
+            LEFT JOIN f.children c
+            WHERE f.poll = :pollId
+            AND f.isActive = true
+            AND f.deletedAt IS NULL
+            ORDER BY f.position ASC, c.position ASC"
+        )->setParameters(array('pollId' => $pollId))
+        ->getResult();
     }
 
     /**

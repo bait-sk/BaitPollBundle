@@ -25,7 +25,7 @@ abstract class FieldManager
      *
      * @return array
      */
-    abstract public function findOrderedPollFields($pollId);
+    abstract public function findRenderableOrderedPollFields($pollId);
 
     /**
      * Checks if a poll has upload fields
@@ -35,7 +35,7 @@ abstract class FieldManager
      */
     public function hasUploadFileds(PollInterface $poll)
     {
-        $fields = $this->findOrderedPollFields($poll->getId());
+        $fields = $this->findRenderableOrderedPollFields($poll->getId());
         $doesIt = false;
         foreach ($fields as $field) {
             if ($field->getType() === FieldInterface::TYPE_FILE) {
