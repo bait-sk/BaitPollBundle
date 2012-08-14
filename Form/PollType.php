@@ -37,11 +37,6 @@ class PollType extends AbstractType
     protected $fields;
 
     /**
-     * @var integer $pollId Id of field
-     */
-    protected $pollId;
-
-    /**
      * @var array Translation table of field types
      */
     protected $fieldTypes = array(
@@ -69,18 +64,9 @@ class PollType extends AbstractType
     /**
      * @param mixed $pollId Sets id of poll
      */
-    public function setPollId($pollId)
+    public function setPollFields($pollId)
     {
-        $this->pollId = $pollId;
-    }
-
-    /**
-     * Sets all fields from current poll.
-     *
-     */
-    public function setFields()
-    {
-        $this->fields = $this->fieldManager->findOrderedPollFields($this->pollId);
+        $this->fields = $this->fieldManager->findOrderedPollFields($pollId);
     }
 
     /**
