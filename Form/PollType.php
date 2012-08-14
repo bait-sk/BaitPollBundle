@@ -87,9 +87,13 @@ class PollType extends AbstractType
 
                 if (in_array($fieldType, $choiceFields)) {
                     $assetChoiceFields = array(
+                        FieldInterface::TYPE_ASSET_TEXT,
+                        FieldInterface::TYPE_ASSET_URL,
                         FieldInterface::TYPE_ASSET_AUDIO,
                         FieldInterface::TYPE_ASSET_IMAGE,
                         FieldInterface::TYPE_ASSET_VIDEO,
+                        FieldInterface::TYPE_ASSET_VIDEO_FLV,
+                        FieldInterface::TYPE_ASSET_VIDEO_YOUTUBE,
                     );
 
                     $choices = array();
