@@ -14,6 +14,7 @@ namespace Bait\PollBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints\Collection;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Bait\PollBundle\Model\FieldManager;
 use Bait\PollBundle\Model\PollManagerInterface;
 use Bait\PollBundle\Model\FieldInterface;
@@ -199,6 +200,10 @@ class PollType extends AbstractType
 
             if ($fieldValidationConstraints) {
                 $validationConstraints[sprintf('field_%s', $field->getId())] = $field->getValidationConstraints();
+            }
+
+            if ($field->isRequired()) {
+                $validationConstraints[sprintf('field_%s', $field->getId())][] = new NotBlank();
             }
         }
 
