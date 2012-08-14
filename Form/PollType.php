@@ -152,6 +152,7 @@ class PollType extends AbstractType
                         $this->fieldTypes[$field->getType()],
                         array(
                             'label' => $field->getTitle(),
+                            'required' => $field->isRequired(),
                         )
                     );
                 }
