@@ -46,6 +46,7 @@ class PollType extends AbstractType
      */
     protected $fieldTypes = array(
         FieldInterface::TYPE_INPUT => 'text',
+        FieldInterface::TYPE_TEXTAREA => 'textarea',
         FieldInterface::TYPE_EMAIL => 'email',
         FieldInterface::TYPE_ASSET_URL => 'url',
         FieldInterface::TYPE_INTEGER => 'integer',
