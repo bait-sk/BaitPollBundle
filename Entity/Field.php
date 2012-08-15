@@ -72,20 +72,4 @@ abstract class Field extends FieldModel
      * @ORM\Column(name="validation_constraints", type="array")
      */
     protected $validationConstraints;
-
-    /**
-     * @return \DateTime
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * @param \DateTime $deletedAt
-     */
-    public function  setDeletedAt(\DateTime $deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
-    }
 }

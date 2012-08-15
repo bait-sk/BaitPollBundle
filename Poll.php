@@ -252,11 +252,11 @@ class Poll
 
                 // Checks if any upload occurred/should have occurred
                 // and handles it
-
-                if ($this->fieldManager->hasUploadFileds($this->poll)) {
+                if ($this->fieldManager->hasUploadFields($this->poll)) {
                     if ("" == $this->uploadDir) {
                         throw new \Exception("You should configure the bait_poll.upload_dir directive in your config.yml");
                     }
+
                     if (!is_writable($this->uploadDir . '/')) {
                         throw new \Exception(sprintf('"%s" is not a writable folder for uploads.', $this->uploadDir));
                     }

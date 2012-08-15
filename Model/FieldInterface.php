@@ -33,6 +33,8 @@ interface FieldInterface
     const TYPE_ASSET_TEXT = 'TYPE_ASSET_TEXT';
     const TYPE_ASSET_URL = 'TYPE_ASSET_URL';
     const TYPE_ASSET_VIDEO = 'TYPE_ASSET_VIDEO';
+    const TYPE_ASSET_VIDEO_FLV = 'TYPE_ASSET_VIDEO_FLV';
+    const TYPE_ASSET_VIDEO_YOUTUBE = 'TYPE_ASSET_VIDEO_YOUTUBE';
 
     const TYPE_RADIO = 'TYPE_RADIO';
     const TYPE_CHECKBOX = 'TYPE_CHECKBOX';
@@ -60,6 +62,13 @@ interface FieldInterface
      * @return string
      */
     public function getAssetPath();
+
+    /**
+     * Gets if and when was field deleted.
+     *
+     * @return \DateTime
+     */
+    public function getDeletedAt();
 
     /**
      * Gets all ordered children of poll field.
@@ -118,4 +127,12 @@ interface FieldInterface
      * @return bool
      */
     public function isActive();
+
+    /**
+     * Checks if field is renderable. That means field has to be active
+     * and field cannot be deleted.
+     *
+     * @return bool
+     */
+    public function isRenderable();
 }

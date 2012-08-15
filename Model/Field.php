@@ -56,6 +56,11 @@ abstract class Field implements FieldInterface
     protected $createdAt;
 
     /**
+     * @var \DateTime
+     */
+    protected $deletedAt;
+
+    /**
      * @var string
      */
     protected $type;
@@ -240,6 +245,26 @@ abstract class Field implements FieldInterface
     }
 
     /**
+     * Sets when the field was deleted at.
+     *
+     * @param \DateTime $deletedAt
+     */
+    public function setDeletedAt(\DateTime $deletedAt = null)
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
      * Sets type of poll field.
      *
      * @param string $type
@@ -338,18 +363,24 @@ abstract class Field implements FieldInterface
      */
     public function setActive($activity)
     {
-        $this->active = $activity;
+        $this->isActive = $activity;
 
         return $this;
     }
 
     /**
-     * Checks if the field is active.
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function isActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isRenderable()
+    {
+        return $this->isActive() && $this->getDeletedAt() === null;
     }
 }

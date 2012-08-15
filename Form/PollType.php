@@ -14,6 +14,7 @@ namespace Bait\PollBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints\Collection;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Bait\PollBundle\Model\FieldManager;
 use Bait\PollBundle\Model\PollManagerInterface;
 use Bait\PollBundle\Model\FieldInterface;
@@ -35,11 +36,6 @@ class PollType extends AbstractType
      * @var array $fields
      */
     protected $fields;
-
-    /**
-     * @var integer $pollId Id of field
-     */
-    protected $pollId;
 
     /**
      * @var array Translation table of field types
@@ -70,18 +66,9 @@ class PollType extends AbstractType
     /**
      * @param mixed $pollId Sets id of poll
      */
-    public function setPollId($pollId)
+    public function setPollFields($pollId)
     {
-        $this->pollId = $pollId;
-    }
-
-    /**
-     * Sets all fields from current poll.
-     *
-     */
-    public function setFields()
-    {
-        $this->fields = $this->fieldManager->findOrderedPollFields($this->pollId);
+        $this->fields = $this->fieldManager->findRenderableOrderedPollFields($pollId);
     }
 
     /**
@@ -89,7 +76,6 @@ class PollType extends AbstractType
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-
         foreach ($this->fields as $field) {
             if ($field->isStandalone()) {
                 $choiceFields = array(
@@ -103,9 +89,13 @@ class PollType extends AbstractType
 
                 if (in_array($fieldType, $choiceFields)) {
                     $assetChoiceFields = array(
+                        FieldInterface::TYPE_ASSET_TEXT,
+                        FieldInterface::TYPE_ASSET_URL,
                         FieldInterface::TYPE_ASSET_AUDIO,
                         FieldInterface::TYPE_ASSET_IMAGE,
                         FieldInterface::TYPE_ASSET_VIDEO,
+                        FieldInterface::TYPE_ASSET_VIDEO_FLV,
+                        FieldInterface::TYPE_ASSET_VIDEO_YOUTUBE,
                     );
 
                     $choices = array();
@@ -163,6 +153,7 @@ class PollType extends AbstractType
                         $this->fieldTypes[$field->getType()],
                         array(
                             'label' => $field->getTitle(),
+                            'required' => $field->isRequired(),
                         )
                     );
                 }
@@ -211,6 +202,10 @@ class PollType extends AbstractType
 
             if ($fieldValidationConstraints) {
                 $validationConstraints[sprintf('field_%s', $field->getId())] = $field->getValidationConstraints();
+            }
+
+            if ($field->isRequired()) {
+                $validationConstraints[sprintf('field_%s', $field->getId())][] = new NotBlank();
             }
         }
 

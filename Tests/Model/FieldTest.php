@@ -80,4 +80,22 @@ class FieldTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($this->pollField->getValidationConstraints());
     }
+
+    public function testIsRenderable()
+    {
+        $this->pollField->setActive(true)->setDeletedAt(null);
+        $this->assertTrue($this->pollField->isRenderable());
+    }
+
+    public function testIsNotRenderable()
+    {
+        $this->pollField->setActive(true)->setDeletedAt(new \DateTime());
+        $this->assertFalse($this->pollField->isRenderable());
+
+        $this->pollField->setActive(false)->setDeletedAt(null);
+        $this->assertFalse($this->pollField->isRenderable());
+
+        $this->pollField->setActive(false)->setDeletedAt(new \DateTime());
+        $this->assertFalse($this->pollField->isRenderable());
+    }
 }
