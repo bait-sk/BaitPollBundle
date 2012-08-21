@@ -313,13 +313,19 @@ class Poll
 
         if ($this->poll->isAnswersVisible()) {
             $fields = $this->poll->getFields();
-            $fieldCount = array();
+            $results = array();
 
             foreach ($fields as $field) {
-                $fieldCount[$field->getId()] = $this->answerManager->countByField($field);
+                if ($field->isStandalone() && $field->hasChildren()) {
+                    $children = $field->getChildren();
+                    $results[$field->getTitle()] = array();
+                    foreach($children as $child) {
+                        $results[$field->getTitle()][$child->getTitle()] = $this->answerManager->countByField($child);
+                    }
+                }
             }
 
-            $viewData['results'] = $fieldCount;
+            $viewData['results'] = $results;
         }
 
         return $this->engine->render($template, $viewData);
