@@ -109,15 +109,22 @@ class PollType extends AbstractType
                                 'title' => $choice->getTitle(),
                                 'asset_type' => $choiceFieldType,
                                 'asset_url' => $choice->getAssetPath(),
+                                'description' => $choice->getDescription()
                             );
                         }
                         else {
-                            $choices[$choice->getId()] = $choice->getTitle();
+                            $choices[$choice->getId()] = array(
+                                'label' => $choice->getTitle(),
+                                'description' => $choice->getDescription()
+                            );
                         }
                     }
 
                     $options = array(
-                        'label' => $field->getTitle(),
+                        'label' => array(
+                            'label' => $field->getTitle(),
+                            'description' => $field->getDescription()
+                        ),
                         'choices' => $choices,
                     );
 
@@ -152,7 +159,10 @@ class PollType extends AbstractType
                         sprintf('field_%s', $field->getId()),
                         $this->fieldTypes[$field->getType()],
                         array(
-                            'label' => $field->getTitle(),
+                            'label' => array(
+                                'label' => $field->getTitle(),
+                                'description' => $field->getDescription()
+                            ),
                             'required' => $field->isRequired(),
                         )
                     );

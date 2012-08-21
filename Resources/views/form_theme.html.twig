@@ -27,7 +27,8 @@
     {%- endif -%}
 
 {%- else -%}
-    {{- label|trans -}}
+    {{ label.description }}<br/>
+    {{- label.label|trans -}}
 {%- endif -%}
 
 </label>
@@ -37,18 +38,21 @@
 
 {% block audio_label %}
 {% spaceless %}
+{{ label.description }}<br/>
 <a href="{{ label.asset_url }}">{{ label.title }}</a>
 {% endspaceless %}
 {% endblock %}
 
 {% block image_label %}
 {% spaceless %}
+{{ label.description }}<br/>
 <img src="{{ label.asset_url }}" alt="{{ label.title|trans }}" />
 {% endspaceless %}
 {% endblock %}
 
 {% block video_label %}
 {% spaceless %}
+{{ label.description }}<br/>
 <a href="{{ label.asset_url }}">{{ label.title }}</a>
 {% endspaceless %}
 {% endblock %}
