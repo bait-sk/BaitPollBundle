@@ -28,7 +28,7 @@ abstract class Field implements FieldInterface
     /**
      * @var mixed
      */
-    protected $children;
+    protected $children = array();
 
     /**
      * @var FieldInterface
@@ -120,6 +120,14 @@ abstract class Field implements FieldInterface
     public function getChildren()
     {
         return $this->children;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasChildren()
+    {
+        return !empty($this->children);
     }
 
     /**
