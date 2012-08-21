@@ -123,6 +123,14 @@ abstract class Field implements FieldInterface
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function hasChildren()
+    {
+        return !empty($this->children);
+    }
+
+    /**
      * Sets parent of poll field.
      *
      * @param FieldInterface $parent

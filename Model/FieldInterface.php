@@ -78,6 +78,13 @@ interface FieldInterface
     public function getChildren();
 
     /**
+     * Checks if fields has any children.
+     *
+     * @return bool
+     */
+    public function hasChildren();
+
+    /**
      * Gets title of poll field.
      *
      * @return string

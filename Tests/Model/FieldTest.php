@@ -54,6 +54,19 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->pollField->isStandalone());
     }
 
+    public function testHasNoChildren()
+    {
+        $this->assertFalse($this->pollField->hasChildren());
+    }
+
+    public function testHasChildren()
+    {
+        $childField = $this->getMockForAbstractClass('Bait\PollBundle\Model\Field');
+        $this->pollField->addChild($childField);
+
+        $this->assertTrue($this->pollField->hasChildren());
+    }
+
     public function testIncorrectValidationConstraintInput()
     {
         $this->setExpectedException('ErrorException');
