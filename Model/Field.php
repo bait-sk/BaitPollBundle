@@ -28,7 +28,7 @@ abstract class Field implements FieldInterface
     /**
      * @var mixed
      */
-    protected $children;
+    protected $children = array();
 
     /**
      * @var FieldInterface
