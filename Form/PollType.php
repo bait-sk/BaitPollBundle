@@ -103,20 +103,26 @@ class PollType extends AbstractType
                     foreach ($field->getChildren() as $choice) {
                         $choiceFieldType = $choice->getType();
 
-                        if (in_array($choiceFieldType, $assetChoiceFields)) {
-                            $choices[$choice->getId()] = array(
-                                'id' => $choice->getId(),
-                                'title' => $choice->getTitle(),
-                                'asset_type' => $choiceFieldType,
-                                'asset_url' => $choice->getAssetPath(),
-                                'description' => $choice->getDescription()
-                            );
-                        }
-                        else {
-                            $choices[$choice->getId()] = array(
-                                'label' => $choice->getTitle(),
-                                'description' => $choice->getDescription()
-                            );
+                        if ($fieldType === FieldInterface::TYPE_SELECT
+                            ||$fieldType === FieldInterface::TYPE_SELECT_MULTIPLE
+                        ) {
+                            $choices[$choice->getId()] = $choice->getTitle();
+                        } else {
+                            if (in_array($choiceFieldType, $assetChoiceFields)) {
+                                $choices[$choice->getId()] = array(
+                                    'id' => $choice->getId(),
+                                    'title' => $choice->getTitle(),
+                                    'asset_type' => $choiceFieldType,
+                                    'asset_url' => $choice->getAssetPath(),
+                                    'description' => $choice->getDescription()
+                                );
+                            }
+                            else {
+                                $choices[$choice->getId()] = array(
+                                    'label' => $choice->getTitle(),
+                                    'description' => $choice->getDescription()
+                                );
+                            }
                         }
                     }
 
