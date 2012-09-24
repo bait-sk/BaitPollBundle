@@ -308,7 +308,8 @@ class Poll
             'form' => $this->form->createView(),
             'theme' => $theme,
             'request' => $this->request,
-            'alreadyAnswered' => $alreadyAnswered
+            'alreadyAnswered' => $alreadyAnswered,
+            'hasUploadFields' => $this->fieldManager->hasUploadFields($this->poll)
         );
 
         if ($this->poll->isAnswersVisible()) {
