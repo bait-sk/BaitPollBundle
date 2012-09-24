@@ -189,6 +189,7 @@ class PollType extends AbstractType
             array(
                 'fields' => $constraints,
                 'allowExtraFields' => true,
+                'allowMissingFields' => true,
             )
         );
 
