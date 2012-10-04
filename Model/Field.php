@@ -127,7 +127,7 @@ abstract class Field implements FieldInterface
      */
     public function hasChildren()
     {
-        return !empty($this->children);
+        return !$this->children->isEmpty();
     }
 
     /**
