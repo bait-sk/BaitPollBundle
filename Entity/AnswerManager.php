@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManager;
 use Bait\PollBundle\Model\AnswerManager as BaseAnswerManager;
 use Bait\PollBundle\Model\AnswerInterface;
 use Bait\PollBundle\Model\FieldInterface;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * Doctrine 2 ORM specific answer manager.
@@ -87,13 +88,24 @@ class AnswerManager extends BaseAnswerManager
     /**
      * {@inheritDoc}
      */
-    public function doCountByField(FieldInterface $field)
+    public function doCountVotesOf(PersistentCollection $fields)
     {
+        foreach ($fields as $field) {
+            $fieldsCount[] = $field->getId();
+            $titles[$field->getId()] = $field->getTitle();
+        }
+
         $query = $this->entityManager->createQuery(
-            sprintf("SELECT COUNT(v.id) FROM %s v WHERE v.value = '%s'", $this->class, $field->getId())
+            sprintf("SELECT v.value, COUNT(v.id) FROM %s v WHERE v.value IN (%s) GROUP BY v.value", $this->class, implode(',', $fieldsCount))
         );
 
-        return $query->getSingleScalarResult();
+        $results = $query->getResult();
+
+        foreach ($results as $result) {
+            $cleanResults[$titles[$result['value']]] = $result[1];
+        }
+
+        return $cleanResults;
     }
 
     /**

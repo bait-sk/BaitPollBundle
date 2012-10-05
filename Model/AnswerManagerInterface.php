@@ -11,6 +11,8 @@
 
 namespace Bait\PollBundle\Model;
 
+use Doctrine\ORM\PersistentCollection;
+
 /**
  * Interface defining shape of answer managers in this bundle.
  *
@@ -37,11 +39,12 @@ interface AnswerManagerInterface
     public function save($answers);
 
     /**
-     * Counts all answers for given field.
+     * Counts all answers for given fields. Works only for checkboxes, radio buttons
+     * and multiselects.
      *
-     * @parem FieldInterface $field Field to check answers for
+     * @param PersistentCollection $fields Fields to check answers for
      *
-     * @return interger
+     * @return array Array containing number of votes as field_id => votes
      */
-    public function countByField(FieldInterface $field);
+    public function countVotesOf(PersistentCollection $fields);
 }

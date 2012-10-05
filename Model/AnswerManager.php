@@ -11,6 +11,8 @@
 
 namespace Bait\PollBundle\Model;
 
+use Doctrine\ORM\PersistentCollection;
+
 /**
  * Connection agnostic answer manager.
  *
@@ -56,9 +58,9 @@ abstract class AnswerManager implements AnswerManagerInterface
     /**
      * {@inheritDoc}
      */
-    public function countByField(FieldInterface $field)
+    public function countVotesOf(PersistentCollection $fields)
     {
-        return $this->doCountByField($field);
+        return $this->doCountVotesOf($fields);
     }
 
     /**
@@ -76,13 +78,14 @@ abstract class AnswerManager implements AnswerManagerInterface
     abstract public function doSave(array $answers);
 
     /**
-     * Connection dependant count by field.
+     * Connection dependant count of all answers for given fields. Works only
+     * for checkboxes, radio buttons and multiselects.
      *
-     * @parameter FieldInterface $field Field to check answers for
+     * @parameter PersistentCollection $fields Field to check answers for
      *
-     * @return integer
+     * @return array
      */
-    abstract public function doCountByField(FieldInterface $field);
+    abstract public function doCountVotesOf(PersistentCollection $fields);
 
     /**
      * Gets class name of answer.
