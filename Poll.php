@@ -319,10 +319,9 @@ class Poll
             foreach ($fields as $field) {
                 if ($field->isStandalone() && $field->hasChildren()) {
                     $children = $field->getChildren();
-                    $results[$field->getTitle()] = array();
-                    foreach($children as $child) {
-                        $results[$field->getTitle()][$child->getTitle()] = $this->answerManager->countByField($child);
-                    }
+
+                    $answersCount = $this->answerManager->countVotesOf($children);
+                    $results[$field->getTitle()] = $answersCount;
                 }
             }
 
