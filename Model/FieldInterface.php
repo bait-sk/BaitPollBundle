@@ -143,4 +143,11 @@ interface FieldInterface
      * @return bool
      */
     public function isRenderable();
+
+    /**
+     * Returns array of years to be used by default in year widgets
+     *
+     * @return array
+     */
+    public function getYearRange();
 }

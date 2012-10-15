@@ -162,16 +162,25 @@ class PollType extends AbstractType
                         $options
                     );
                 } else {
+                    $additionalOptions = array();
+                    $options = array(
+                        'label' => array(
+                            'label' => $field->getTitle(),
+                            'description' => $field->getDescription()
+                        ),
+                        'required' => $field->isRequired()
+                    );
+
+                    if ($field->getType() == FieldInterface::TYPE_DATE
+                        || $field->getType() == FieldInterface::TYPE_DATETIME) {
+                        $additionalOptions['years'] = $field->getYearRange();
+                    }
+
+                    $finalOptions = array_merge($options, $additionalOptions);
                     $builder->add(
                         sprintf('field_%s', $field->getId()),
                         $this->fieldTypes[$field->getType()],
-                        array(
-                            'label' => array(
-                                'label' => $field->getTitle(),
-                                'description' => $field->getDescription()
-                            ),
-                            'required' => $field->isRequired(),
-                        )
+                        $finalOptions
                     );
                 }
             }

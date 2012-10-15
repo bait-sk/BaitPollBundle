@@ -391,4 +391,18 @@ abstract class Field implements FieldInterface
     {
         return $this->isActive() && $this->getDeletedAt() === null;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getYearRange()
+    {
+        $begin = strtotime("-5 years", time());
+        $end = strtotime("+5 years", time());
+
+        return range(date("Y", $begin), date("Y", $end));
+
+    }
+
+
 }
