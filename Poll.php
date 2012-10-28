@@ -239,7 +239,7 @@ class Poll
                     }
                 } else {
                     if (in_array($pollType, array(PollInterface::POLL_TYPE_USER, PollInterface::POLL_TYPE_MIXED))) {
-                        throw new \Exception(sprintf('Poll type is "%s", but your Poll class doesn\'t (%s) implement Bait\PollBundle\Model\SignedPollInterface', $pollType, $this->pollClass));
+                        throw new \Exception(sprintf('Poll type is "%s", but your Poll class (%s) doesn\'t implement Bait\PollBundle\Model\SignedPollInterface', $pollType, $this->pollClass));
                     }
                 }
 
