@@ -13,7 +13,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bait_poll.poll" class="Bait\PollBundle\Poll" scope="request">
+        <service id="bait_poll.poll" class="Bait\PollBundle\Poll" scope="prototype">
             <argument type="service" id="request" />
             <argument type="service" id="templating" />
             <argument type="service" id="bait_poll.entity_manager" />
