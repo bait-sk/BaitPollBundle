@@ -11,6 +11,7 @@
 
 namespace Bait\PollBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraint;
 
 /**
@@ -88,6 +89,7 @@ abstract class Field implements FieldInterface
     public function __construct()
     {
         $this->setCreatedAt(new \DateTime());
+        $this->children = new ArrayCollection();
     }
 
     /**
@@ -107,7 +109,7 @@ abstract class Field implements FieldInterface
      */
     public function addChild(FieldInterface $child)
     {
-        if (!in_array($child, $this->children, true)) {
+        if (!$this->children->contains($child)) {
             $this->children[] = $child;
         }
 
