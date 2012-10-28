@@ -101,6 +101,8 @@ class AnswerManager extends BaseAnswerManager
 
         $results = $query->getResult();
 
+        $cleanResults = array();
+
         foreach ($results as $result) {
             $cleanResults[$titles[$result['value']]] = $result[1];
         }
