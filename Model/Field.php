@@ -121,6 +121,12 @@ abstract class Field implements FieldInterface
      */
     public function getChildren()
     {
+        foreach ($this->children as $child)
+        {
+            if (!$child->isActive() || $child->getDeletedAt() != null) {
+                $this->children->removeElement($child);
+            }
+        }
         return $this->children;
     }
 
