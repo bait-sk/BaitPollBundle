@@ -24,7 +24,7 @@ use Bait\PollBundle\Model\AnswerGroup as AnswerGroupModel;
 abstract class AnswerGroup extends AnswerGroupModel
 {
     /**
-     * @ORM\Column(name="client_ip", type="string", length="39")
+     * @ORM\Column(name="client_ip", type="string", length=39)
      */
     protected $clientIp;
 
