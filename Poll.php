@@ -199,12 +199,14 @@ class Poll
                 foreach ($data as $fieldId => $userAnswer) {
                     $fieldId = str_replace('field_', '', $fieldId);
                     $field = $this->objectManager->getReference($this->fieldClass, $fieldId);
+
                     if ($field->getType() === FieldInterface::TYPE_FILE) {
-                        $userAnswers = (array) $userAnswer->getClientOriginalName();
+                        if ($field->isRequired()) {
+                            $userAnswers = (array) $userAnswer->getClientOriginalName();
+                        }
                     } else {
                         $userAnswers = (array) $userAnswer;
                     }
-
 
                     foreach ($userAnswers as $userAnswer) {
                         $answer = $this->answerManager->create($field, $userAnswer, $answerGroup);
