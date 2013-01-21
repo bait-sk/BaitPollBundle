@@ -14,7 +14,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="bait_poll.form.default" class="Bait\PollBundle\Form\PollType">
-            <tag name="form.type" alias="bait_poll.form" />
+            <tag name="form.type" alias="bait_poll_form" />
             <argument type="service" id="bait_poll.field.manager" />
         </service>
 

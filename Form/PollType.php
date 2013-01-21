@@ -12,7 +12,7 @@
 namespace Bait\PollBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Bait\PollBundle\Model\FieldManager;
@@ -75,7 +75,7 @@ class PollType extends AbstractType
     /**
      * {@inheritDoc}
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         foreach ($this->fields as $field) {
             if ($field->isStandalone()) {
@@ -202,7 +202,7 @@ class PollType extends AbstractType
             )
         );
 
-        return array('validation_constraint' => $constraints, 'fields' => $this->fields);
+        return array('constraints' => $constraints, 'fields' => $this->fields);
     }
 
     /**
