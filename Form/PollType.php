@@ -234,6 +234,9 @@ class PollType extends AbstractType
             if ($field->isRequired()) {
                 $validationConstraints[sprintf('field_%s', $field->getId())][] = new NotBlank();
             }
+
+            //needed to clean-up the array keys to be numerical only - issue in symfony2.1
+            sort($validationConstraints[sprintf('field_%s', $field->getId())]);
         }
 
         return $validationConstraints;
