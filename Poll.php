@@ -165,7 +165,7 @@ class Poll
      * @throws NotFoundHttpException
      * @throws Exception
      */
-    public function create($id, Response &$response)
+    public function create($id, Response &$response, $options = array())
     {
         $this->id = $id;
 
@@ -246,7 +246,8 @@ class Poll
                 }
 
                 if (in_array($pollType, array(PollInterface::POLL_TYPE_ANONYMOUS, PollInterface::POLL_TYPE_MIXED))) {
-                    $cookie = new Cookie(sprintf('%sanswered_%s', $this->cookiePrefix, $id), true, time() + $this->cookieDuration);
+                    $cookieDuration = array_key_exists('cookieDuration', $options) ? (int) $options['cookieDuration'] : $this->cookieDuration;
+                    $cookie = new Cookie(sprintf('%sanswered_%s', $this->cookiePrefix, $id), true, time() + $cookieDuration);
                     $response->headers->setCookie($cookie);
 
                     $doPersist = true;
